@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +8,7 @@
 <meta name="description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
 
 <!-- Open Graph -->
+<!-- TODO Ella: og:url ergänzen, sobald die Seite live ist (z. B. https://ella-tandem.github.io/verb-cafe/) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tut-fantastisch.github.io/deutschlab/101-verben/">
 <meta property="og:title" content="☕️ Verb-Café">
@@ -67,10 +69,9 @@
     background:rgba(255,249,238,0.9);
     border-radius:6px;
     padding:6px 12px;
-    font-family:'JetBrains Mono', monospace;
+    font-family:'Kalam', cursive;
     font-weight:700;
     font-size:1rem;
-    letter-spacing:0.14em;
     text-align:center;
     line-height:1.3;
   }
@@ -286,6 +287,16 @@
     background-size:14px 100%;
     background-repeat:repeat-x;
   }
+
+  .infinitiv-center{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:4px;
+}
   .card-back{ transform:rotateY(180deg); }
   .ticket-no{
     font-family:'JetBrains Mono', monospace;
@@ -312,10 +323,11 @@
     margin-bottom:14px;
   }
   .prompt-line{
-    font-size:1.2rem;
+    font-size:1.1rem;
     color:var(--ink-soft);
-    font-weight:600;
+    font-weight:bold;
     margin-bottom:auto;
+    text-align: center;
   }
   .flip-hint{
     font-family:'JetBrains Mono', monospace;
@@ -324,7 +336,7 @@
     color:var(--ink-soft);
     opacity:0.7;
     text-align:center;
-    margin-top:14px;
+    margin-top:0.9rem;
   }
 
   .forms-grid{
@@ -417,7 +429,7 @@
   .btn{
     font-family:'Barlow Condensed', sans-serif;
     font-weight:700;
-    font-size:1rem;
+    font-size:1.2rem;
     letter-spacing:0.02em;
     border:2.5px solid var(--ink);
     border-radius:4px;
@@ -523,9 +535,9 @@
   }
   .menu-title{ margin-bottom:0; }
   .review-btn{
-    font-family:'Barlow Condensed', sans-serif;
+    font-family:'Kalam', cursive;
     font-weight:700;
-    font-size:1.3rem;
+    font-size:1.1rem;
     letter-spacing:0.02em;
     background:var(--paper-card);
     color:var(--espresso);
@@ -615,40 +627,7 @@
     justify-content:center;
   }
 
-  @media (max-width:520px){
-    .menu-tab{ min-width:130px; padding:8px 12px; }
 
-    /* Karte kompakter: weniger Höhe, engere Abstände, kleinere Schrift */
-    .card-arena{ min-height:340px; margin-bottom:14px; }
-    .card{ min-height:340px; }
-    .card-face{ min-height:340px; padding:18px 16px 14px; }
-
-    .ticket-no{ font-size:0.58rem; margin-bottom:6px; }
-    .card-eyebrow{ font-size:0.6rem; margin-bottom:6px; }
-    .infinitiv{ font-size:clamp(1.9rem, 11vw, 2.6rem); margin-bottom:8px; }
-    .prompt-line{ font-size:0.88rem; }
-    .flip-hint{ font-size:0.6rem; margin-top:8px; }
-
-    .forms-grid{ gap:6px; margin-bottom:8px; }
-    .form-row{ padding-bottom:5px; }
-    .form-row .tag{ font-size:0.56rem; min-width:56px; }
-    .form-row .val{ font-size:1.15rem; }
-
-    .example-block{ margin-bottom:6px; }
-    .example-label{ font-size:0.56rem; margin-bottom:1px; }
-    .example{ font-size:0.78rem; line-height:1.3; }
-    .spoken-note{ font-size:0.68rem; padding:4px 7px; margin-bottom:6px; }
-    .uk-line{ font-size:0.78rem; padding:5px 8px; }
-
-    .rating-row{ padding-top:6px; gap:4px; }
-    .rate-btn{ font-size:0.68rem; padding:6px 3px; }
-
-    .stain-mark{ width:24px; height:24px; bottom:6px; right:10px; }
-
-    .completion-screen{ min-height:340px; padding:24px 18px; }
-    .completion-emoji{ font-size:2.1rem; }
-    .completion-title{ font-size:1.35rem; }
-  }
 
   /* ============ DESKTOP/TABLET: Reihen als Sidebar links ============ */
   @media (min-width:860px){
@@ -714,7 +693,7 @@
 <div class="menu-board">
   <div class="menu-top-row">
     <p class="menu-title">— DIE KARTE —</p>
-    <button class="review-btn" id="reviewBtn">🔁 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
+    <button class="review-btn" id="reviewBtn">🌱 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
   </div>
   <div class="menu-tabs" id="menuTabs"></div>
   <div class="group-dots" id="groupDots"></div>
@@ -731,10 +710,12 @@
     <div class="card" id="flipCard">
       <div class="card-face card-front">
         <div class="ticket-no" id="ticketNo">BON № 001</div>
-        <div class="card-eyebrow" id="frontEyebrow">Infinitiv</div>
-        <div class="infinitiv" id="infinitivWord">—</div>
-        <p class="prompt-line" id="promptLine">Präteritum, Partizip II — wie lauten diese Formen?</p>
-        <p class="flip-hint">— tippen zum Umdrehen · wischen zum Weiterblättern —</p>
+        <div class="infinitiv-center">
+          <div class="card-eyebrow" id="frontEyebrow">Infinitiv</div>
+          <div class="infinitiv" id="infinitivWord">—</div>
+        </div>
+        <p class="prompt-line" id="promptLine">Wie heißen die Grundformen - Präteritum und Partizip 2?</p>
+        <p class="flip-hint">Tippen = Umdrehen ✪ Wischen = Horizontal scrollen</p>
       </div>
       <div class="card-face card-back card-back-face">
         <div class="card-eyebrow">Bist du mit diesen Verbformen vertraut?</div>
