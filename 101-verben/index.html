@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verb-Café — Deutsch-Training mit Ella</title>
+<meta name="description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tut-fantastisch.github.io/deutschlab/101-verben/">
+<meta property="og:title" content="Verb-Café — Deutsch-Training mit Ella">
+<meta property="og:description" content="101 starke (unregelmäßige) deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="uk_UA">
+<meta property="og:site_name" content="Deutsch-Training mit Ella">
+
+<!-- Twitter Card (Summary ohne Bild) -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Verb-Café — Deutsch-Training mit Ella">
+<meta name="twitter:description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Nunito+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:       #F3E9D6;
+    --paper-card:  #FFF9EE;
+    --ink:         #2B2015;
+    --ink-soft:    #5B4A3B;
+    --espresso:    #6B3E26;
+    --crema:       #D79A44;
+    --crema-light: #EFC077;
+    --stain:       #B5651D;
+    --green:       #5C6B2E;
+    --red:         #A23B2E;
+    --line-w: 3px;
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 8% 18%, rgba(107,62,38,0.05) 0, transparent 40%),
+      radial-gradient(circle at 92% 82%, rgba(107,62,38,0.05) 0, transparent 40%);
+    color:var(--ink);
+    font-family:'Nunito Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ margin:0; font-family:'Barlow Condensed', sans-serif; letter-spacing:0.02em; }
+  :focus-visible{ outline:3px solid var(--espresso); outline-offset:3px; }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    padding:64px 24px 40px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .stamp{
+    position:absolute;
+    top:22px; right:20px;
+    transform:rotate(8deg);
+    border:3px solid var(--espresso);
+    color:var(--espresso);
+    background:rgba(255,249,238,0.9);
+    border-radius:6px;
+    padding:6px 12px;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    text-align:center;
+    line-height:1.3;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--espresso);
+    color:var(--paper-card);
+    border-radius:20px;
+    padding:6px 16px;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+  }
+  .badge .bean{ font-size:0.9em; }
+  .hero h1{
+    font-size:clamp(3rem, 10vw, 5.5rem);
+    line-height:0.95;
+    margin:18px 0 6px;
+    color:var(--espresso);
+    text-shadow:2px 2px 0 rgba(215,154,68,0.4);
+  }
+  .hero .sub{
+    max-width:520px;
+    margin:0 auto;
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--ink-soft);
+  }
+  .hero .sub em{
+    font-family:'Caveat', cursive;
+    font-style:normal;
+    font-weight:700;
+    color:var(--stain);
+    font-size:1.15em;
+  }
+
+  /* ================= MENÜKARTE (Gruppen-Reiter) ================= */
+  .menu-board{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--paper);
+    padding:14px 0 10px;
+    box-shadow:0 4px 10px -6px rgba(43,32,21,0.35);
+  }
+  .menu-board::after{
+    /* fade hint that the row scrolls */
+    content:'';
+    position:absolute;
+    top:0; right:0; bottom:0;
+    width:36px;
+    background:linear-gradient(to right, transparent, var(--paper) 80%);
+    pointer-events:none;
+  }
+  .menu-title{
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.18em;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .menu-tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    padding:2px 20px 8px;
+    scrollbar-width:thin;
+    scrollbar-color:var(--crema) transparent;
+    -webkit-overflow-scrolling:touch;
+  }
+  .menu-tabs::-webkit-scrollbar{ height:5px; }
+  .menu-tabs::-webkit-scrollbar-thumb{ background:var(--crema); border-radius:3px; }
+  .menu-tab{
+    scroll-snap-align:start;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    background:var(--paper-card);
+    border:2.5px solid var(--ink);
+    border-radius:6px;
+    padding:8px 14px;
+    cursor:pointer;
+    font-family:'Barlow Condensed', sans-serif;
+    box-shadow:3px 3px 0 rgba(43,32,21,0.25);
+    transition:transform 0.12s ease;
+    min-width:128px;
+  }
+  .menu-tab:hover{ transform:translateY(-2px); }
+  .menu-tab .pattern{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    font-weight:700;
+    letter-spacing:0.05em;
+    color:var(--stain);
+  }
+  .menu-tab .name{
+    font-size:1.1rem;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .menu-tab .count{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.62rem;
+    color:var(--ink-soft);
+    letter-spacing:0.08em;
+  }
+  .menu-tab.active{
+    background:var(--espresso);
+    border-color:var(--espresso);
+  }
+  .menu-tab.active .pattern{ color:var(--crema-light); }
+  .menu-tab.active .name{ color:var(--paper-card); }
+  .menu-tab.active .count{ color:#E5D3B8; }
+
+  /* dot-pager: quick jump between groups without opening the scroller */
+  .group-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:2px;
+  }
+  .group-dots .dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    background:rgba(43,32,21,0.2);
+    cursor:pointer;
+    border:none;
+    padding:0;
+  }
+  .group-dots .dot.active{ background:var(--espresso); width:18px; border-radius:4px; }
+
+  /* ================= BESTELL-BEREICH ================= */
+  .order-area{
+    max-width:520px;
+    margin:36px auto 0;
+    padding:0 20px 80px;
+  }
+  .order-header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:14px;
+    padding:0 4px;
+  }
+  .order-header .group-name{
+    font-size:1.6rem;
+    color:var(--espresso);
+    font-weight:700;
+  }
+  .order-header .group-pattern{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    color:var(--stain);
+    font-weight:700;
+  }
+  .progress-wrap{
+    height:4px;
+    background:rgba(107,62,38,0.15);
+    border-radius:2px;
+    margin-bottom:24px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--crema);
+    transition:width 0.35s ease;
+  }
+
+  /* ── BON-KARTE (Flipcard) ── */
+  .card-arena{
+    perspective:1400px;
+    width:100%;
+    min-height:400px;
+    cursor:pointer;
+    touch-action:pan-y;
+    user-select:none;
+    margin-bottom:20px;
+  }
+  .card{
+    width:100%; height:100%; min-height:400px;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform 0.55s cubic-bezier(.4,0,.2,1);
+  }
+  .card.flipped{ transform:rotateY(180deg); }
+  .card-face{
+    position:absolute; inset:0; min-height:400px;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    background:
+      radial-gradient(circle at 82% 20%, rgba(181,101,29,0.16) 0, transparent 12%),
+      var(--paper-card);
+    border:2.5px solid var(--ink);
+    border-radius:4px;
+    box-shadow:5px 5px 0 rgba(43,32,21,0.3);
+    padding:26px 24px 20px;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-face::before{
+    /* Perforation top edge */
+    content:'';
+    position:absolute;
+    top:-1px; left:14px; right:14px; height:2px;
+    background-image:radial-gradient(circle, var(--paper) 2.5px, transparent 2.6px);
+    background-size:14px 100%;
+    background-repeat:repeat-x;
+  }
+  .card-back{ transform:rotateY(180deg); }
+  .ticket-no{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .card-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--stain);
+    margin-bottom:10px;
+  }
+  .infinitiv{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.2rem, 9vw, 3.2rem);
+    color:var(--ink);
+    line-height:1;
+    margin-bottom:14px;
+  }
+  .prompt-line{
+    font-size:1rem;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin-bottom:auto;
+  }
+  .flip-hint{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    opacity:0.7;
+    text-align:center;
+    margin-top:14px;
+  }
+
+  .forms-grid{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .form-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1.5px dashed rgba(43,32,21,0.25);
+    padding-bottom:8px;
+  }
+  .form-row .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.6rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    min-width:64px;
+  }
+  .form-row .val{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:1.4rem;
+    color:var(--espresso);
+  }
+  .form-row .val .vowel{ color:var(--stain); }
+  .example-block{ margin-bottom:10px; }
+  .example-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.6rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--stain);
+    margin:0 0 2px;
+  }
+  .example-label .reg{
+    font-family:'Nunito Sans', sans-serif;
+    font-weight:500;
+    text-transform:none;
+    letter-spacing:0;
+    color:var(--ink-soft);
+  }
+  .example{
+    font-size:0.86rem;
+    color:var(--ink);
+    line-height:1.4;
+    font-style:italic;
+    margin:0;
+  }
+  .spoken-note{
+    font-size:0.74rem;
+    color:var(--ink-soft);
+    background:rgba(181,101,29,0.08);
+    border-left:3px solid var(--stain);
+    padding:5px 8px;
+    margin:0 0 8px;
+    font-style:normal;
+    display:none;
+  }
+  .spoken-note.visible{ display:block; }
+  .uk-line{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    background:rgba(215,154,68,0.15);
+    border-left:3px solid var(--crema);
+    padding:6px 10px;
+    margin-top:auto;
+  }
+  .stain-mark{
+    position:absolute;
+    bottom:10px; right:14px;
+    width:34px; height:34px;
+    border-radius:50%;
+    border:2px solid rgba(181,101,29,0.35);
+    opacity:0.5;
+  }
+
+  /* ── STEUERUNG ── */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .btn{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.02em;
+    border:2.5px solid var(--ink);
+    border-radius:4px;
+    padding:10px 18px;
+    background:var(--paper-card);
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(43,32,21,0.25);
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn.primary{
+    background:var(--espresso);
+    color:var(--paper-card);
+    border-color:var(--espresso);
+  }
+  .counter-text{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+  }
+
+  .prefix-tip{
+    background:var(--paper-card);
+    border:2.5px solid var(--espresso);
+    border-radius:6px;
+    padding:16px 18px 14px;
+    margin:26px auto 0;
+    max-width:480px;
+    box-shadow:4px 4px 0 rgba(43,32,21,0.2);
+  }
+  .prefix-tip .tip-title{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:1.35rem;
+    color:var(--espresso);
+    margin:0 0 8px;
+  }
+  .prefix-tip p{
+    font-size:0.88rem;
+    line-height:1.5;
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .prefix-tip p:last-child{ margin-bottom:0; }
+  .prefix-tip .tip-uk{
+    background:rgba(215,154,68,0.15);
+    border-left:3px solid var(--crema);
+    padding:8px 10px;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    margin-top:20px;
+    background:var(--espresso);
+    color:var(--paper);
+    text-align:center;
+    padding:34px 24px 26px;
+  }
+  footer .line{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    color:var(--crema-light);
+    margin-bottom:6px;
+  }
+  footer p{ margin:0; font-size:0.82rem; color:#E9D9C0; }
+  .social-links{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin:16px 0 18px;
+  }
+  .social-links a{
+    color:var(--paper);
+    text-decoration:none;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    letter-spacing:0.03em;
+    border:2px solid rgba(243,233,214,0.35);
+    border-radius:20px;
+    padding:6px 16px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .social-links a:hover{
+    border-color:var(--crema-light);
+    background:rgba(215,154,68,0.12);
+  }
+  .social-links a.tg{ color:#5FB3E8; }
+  .social-links a.tg:hover{ border-color:#5FB3E8; background:rgba(95,179,232,0.12); }
+  .social-links a.ig{ color:#E88AB0; }
+  .social-links a.ig:hover{ border-color:#E88AB0; background:rgba(232,138,176,0.12); }
+
+  .menu-top-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .menu-title{ margin-bottom:0; }
+  .review-btn{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+    background:var(--paper-card);
+    color:var(--espresso);
+    border:2px solid var(--espresso);
+    border-radius:20px;
+    padding:5px 14px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    opacity:0.45;
+    transition:opacity 0.15s ease, transform 0.12s ease;
+  }
+  .review-btn.has-due{
+    opacity:1;
+    background:var(--espresso);
+    color:var(--paper-card);
+    box-shadow:2px 2px 0 rgba(43,32,21,0.3);
+  }
+  .review-btn.has-due:hover{ transform:translateY(-1px); }
+  .review-btn:disabled{ cursor:default; }
+  .due-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    background:rgba(0,0,0,0.12);
+    border-radius:10px;
+    padding:1px 7px;
+  }
+
+  .rating-row{
+    display:flex;
+    gap:6px;
+    margin-top:auto;
+    padding-top:10px;
+  }
+  .rate-btn{
+    flex:1;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:0.78rem;
+    border-radius:5px;
+    padding:8px 4px;
+    cursor:pointer;
+    border:2px solid var(--ink);
+    background:var(--paper-card);
+    color:var(--ink);
+  }
+  .rate-btn.again{ border-color:var(--red); color:var(--red); }
+  .rate-btn.again:hover{ background:rgba(162,59,46,0.1); }
+  .rate-btn.good{ border-color:var(--crema); color:var(--espresso); }
+  .rate-btn.good:hover{ background:rgba(215,154,68,0.15); }
+  .rate-btn.easy{ border-color:var(--green); color:var(--green); }
+  .rate-btn.easy:hover{ background:rgba(92,107,46,0.1); }
+
+  .completion-screen{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    min-height:400px;
+    justify-content:center;
+    gap:8px;
+    background:var(--paper-card);
+    border:2.5px solid var(--espresso);
+    border-radius:6px;
+    box-shadow:5px 5px 0 rgba(43,32,21,0.3);
+    padding:32px 24px;
+    margin-bottom:20px;
+  }
+  .completion-emoji{ font-size:2.6rem; margin:0; }
+  .completion-title{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    font-size:1.6rem;
+    color:var(--espresso);
+    margin:4px 0 0;
+  }
+  .completion-sub{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  .completion-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  @media (max-width:520px){
+    .menu-tab{ min-width:130px; padding:8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="stamp">Starke<br>Verben</div>
+  <span class="badge"><span class="bean">☕</span>101 VERBEN · DEUTSCH-UA</span>
+  <h1>Verb-Café</h1>
+  <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em> – wähl dir das Set, dreh die Karten um, wiederhol, bis es sich gemütlich anfühlt.</p>
+</section>
+
+<div class="menu-board">
+  <div class="menu-top-row">
+    <p class="menu-title">— DIE KARTE —</p>
+    <button class="review-btn" id="reviewBtn">🔁 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
+  </div>
+  <div class="menu-tabs" id="menuTabs"></div>
+  <div class="group-dots" id="groupDots"></div>
+</div>
+
+<div class="order-area">
+  <div class="order-header">
+    <span class="group-name" id="groupName">—</span>
+    <span class="group-pattern" id="groupPattern">—</span>
+  </div>
+  <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+  <div class="card-arena" id="cardArena">
+    <div class="card" id="flipCard">
+      <div class="card-face card-front">
+        <div class="ticket-no" id="ticketNo">BON № 001</div>
+        <div class="card-eyebrow" id="frontEyebrow">Infinitiv</div>
+        <div class="infinitiv" id="infinitivWord">—</div>
+        <p class="prompt-line" id="promptLine">Präteritum, Partizip II — und wie sagt man's im Gespräch?</p>
+        <p class="flip-hint">— tippen zum Umdrehen · wischen zum Weiterblättern —</p>
+      </div>
+      <div class="card-face card-back card-back-face">
+        <div class="card-eyebrow">Auf der Rückseite — und danach kurz bewerten</div>
+        <div class="forms-grid" id="formsGrid"></div>
+        <div class="example-block">
+          <p class="example-label">Präteritum <span class="reg">· Erzählform, eher schriftlich</span></p>
+          <p class="example" id="exampleSentence">—</p>
+        </div>
+        <div class="example-block">
+          <p class="example-label">Perfekt <span class="reg">· so sagt man's im Gespräch</span></p>
+          <p class="example" id="perfektSentence">—</p>
+        </div>
+        <p class="spoken-note" id="spokenNote"></p>
+        <p class="uk-line" id="ukLine">—</p>
+        <div class="rating-row">
+          <button class="rate-btn again" data-rating="again">🔁 Nochmal</button>
+          <button class="rate-btn good" data-rating="good">🙂 Okay</button>
+          <button class="rate-btn easy" data-rating="easy">😎 Leicht</button>
+        </div>
+        <div class="stain-mark"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="completion-screen" id="completionScreen">
+    <p class="completion-emoji">🎉</p>
+    <p class="completion-title" id="completionTitle">Reihe geschafft!</p>
+    <p class="completion-sub" id="completionSub">Alle Verben dieser Reihe durch.</p>
+    <div class="completion-actions">
+      <button class="btn" id="completionRepeatBtn">Nochmal von vorn</button>
+      <button class="btn primary" id="completionNextBtn">Nächste Reihe →</button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="prevBtn">← Zurück</button>
+    <span class="counter-text" id="counterText">1 / 1</span>
+    <button class="btn primary" id="nextBtn">Nächste →</button>
+  </div>
+
+  <div class="prefix-tip">
+    <p class="tip-title">☕ Tipp: Verben mit Präfix</p>
+    <p><strong>Untrennbares Präfix</strong> (be-, ent-, er-, ge-, ver-, zer-, emp-, miss-) → <strong>kein</strong> zusätzliches ge-, der Vokalwechsel bleibt wie beim Grundverb: scheiden → geschieden, aber entscheiden → entschieden.</p>
+    <p><strong>Trennbares Präfix</strong> → ge- wandert zwischen Präfix und Stamm: stehen → gestanden, aber aufstehen → (bin) aufgestanden.</p>
+    <p class="tip-uk">Що робити, якщо додається префікс? Дивись на корінь — принцип залишається: scheiden → geschieden, а entscheiden → entschieden. Якщо префікс відокремлюваний — ge- стає між префіксом і коренем: aufstehen → (bin) aufgestanden. Якщо префікс невідокремлюваний — ge- зникає зовсім: bestehen → (habe) bestanden.</p>
+  </div>
+</div>
+
+<footer>
+  <p class="line">DEUTSCH-TRAINING MIT ELLA</p>
+  <!-- TODO Ella: echte Links eintragen -->
+  <div class="social-links">
+    <a href="https://t.me/deutsch_lab_space" class="tg" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://instagram.com/tut_fantastisch" class="ig" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://threads.net/@tut_fantastisch" target="_blank" rel="noopener">Threads</a>
+  </div>
+  <p>© 2026 Verb-Café</p>
+</footer>
+
+<script>
+// ===== DATENSTRUKTUR — volle klassische Tabelle, nach Ablautreihen =====
+// "part" enthält bereits das Hilfsverb (hat/ist), da manche Verben mit
+// sein, andere mit haben stehen. Die Gruppen-Muster sind Merkhilfen für
+// die Mehrheit der Verben einer Reihe — einzelne Mitglieder können in der
+// Partizip-Bildung leicht abweichen (z. B. schwimmen → geschwommen), die
+// Formen pro Karte sind aber jeweils die korrekten.
+const GROUPS = [
+  {
+    "id": "ei-i-ie",
+    "name": "Bleiben-Reihe",
+    "pattern": "ei → i / ie",
+    "verbs": [
+      {
+        "inf": "bleiben",
+        "pret": "blieb",
+        "part": "ist geblieben",
+        "example": "Er blieb den ganzen Sommer in Odesa.",
+        "uk": "залишатися — залишився",
+        "perfekt": "Er ist den ganzen Sommer in Odesa geblieben."
+      },
+      {
+        "inf": "schreiben",
+        "pret": "schrieb",
+        "part": "hat geschrieben",
+        "example": "Sie schrieb ihm jeden Tag eine Nachricht.",
+        "uk": "писати — написав",
+        "perfekt": "Sie hat ihm jeden Tag eine Nachricht geschrieben."
+      },
+      {
+        "inf": "treiben",
+        "pret": "trieb",
+        "part": "hat getrieben",
+        "example": "Er trieb regelmäßig Sport.",
+        "uk": "займатися (спортом) — займався",
+        "perfekt": "Er hat regelmäßig Sport getrieben."
+      },
+      {
+        "inf": "reiben",
+        "pret": "rieb",
+        "part": "hat gerieben",
+        "example": "Sie rieb sich die müden Augen.",
+        "uk": "терти — потер",
+        "perfekt": "Sie hat sich die müden Augen gerieben."
+      },
+      {
+        "inf": "leihen",
+        "pret": "lieh",
+        "part": "hat geliehen",
+        "example": "Ich lieh ihm mein Fahrrad.",
+        "uk": "позичати — позичив",
+        "perfekt": "Ich habe ihm mein Fahrrad geliehen."
+      },
+      {
+        "inf": "meiden",
+        "pret": "mied",
+        "part": "hat gemieden",
+        "example": "Sie mied das Thema die ganze Zeit.",
+        "uk": "уникати — уникав",
+        "perfekt": "Sie hat das Thema die ganze Zeit gemieden."
+      },
+      {
+        "inf": "entscheiden",
+        "pret": "entschied",
+        "part": "hat entschieden",
+        "example": "Sie entschied sich für den neuen Job.",
+        "uk": "вирішувати — вирішив",
+        "perfekt": "Sie hat sich für den neuen Job entschieden."
+      },
+      {
+        "inf": "verzeihen",
+        "pret": "verzieh",
+        "part": "hat verziehen",
+        "example": "Sie verzieh ihm den Fehler sofort.",
+        "uk": "прощати — пробачив",
+        "perfekt": "Sie hat ihm den Fehler sofort verziehen."
+      },
+      {
+        "inf": "schweigen",
+        "pret": "schwieg",
+        "part": "hat geschwiegen",
+        "example": "Er schwieg während der ganzen Diskussion.",
+        "uk": "мовчати — мовчав",
+        "perfekt": "Er hat während der ganzen Diskussion geschwiegen."
+      },
+      {
+        "inf": "steigen",
+        "pret": "stieg",
+        "part": "ist gestiegen",
+        "example": "Die Preise stiegen im letzten Jahr stark.",
+        "uk": "підійматися / зростати — зріс",
+        "perfekt": "Die Preise sind im letzten Jahr stark gestiegen."
+      },
+      {
+        "inf": "schreien",
+        "pret": "schrie",
+        "part": "hat geschrien",
+        "example": "Das Baby schrie die ganze Nacht.",
+        "uk": "кричати — кричав",
+        "perfekt": "Das Baby hat die ganze Nacht geschrien."
+      },
+      {
+        "inf": "hinweisen",
+        "pret": "wies hin",
+        "part": "hat hingewiesen",
+        "example": "Er wies uns rechtzeitig auf das Problem hin.",
+        "uk": "вказувати (на щось) — вказав",
+        "perfekt": "Er hat uns rechtzeitig auf das Problem hingewiesen."
+      },
+      {
+        "inf": "greifen",
+        "pret": "griff",
+        "part": "hat gegriffen",
+        "example": "Sie griff schnell nach der Tasse.",
+        "uk": "хапати — схопив",
+        "perfekt": "Sie hat schnell nach der Tasse gegriffen."
+      },
+      {
+        "inf": "pfeifen",
+        "pret": "pfiff",
+        "part": "hat gepfiffen",
+        "example": "Der Schiedsrichter pfiff laut.",
+        "uk": "свистіти — свиснув",
+        "perfekt": "Der Schiedsrichter hat laut gepfiffen."
+      },
+      {
+        "inf": "streiten",
+        "pret": "stritt",
+        "part": "hat gestritten",
+        "example": "Die Geschwister stritten sich um das Spielzeug.",
+        "uk": "сваритися — посварився",
+        "perfekt": "Die Geschwister haben sich um das Spielzeug gestritten."
+      },
+      {
+        "inf": "reiten",
+        "pret": "ritt",
+        "part": "ist geritten",
+        "example": "Sie ritt jeden Samstag im Wald.",
+        "uk": "їздити верхи — їздив верхи",
+        "perfekt": "Sie ist jeden Samstag im Wald geritten."
+      },
+      {
+        "inf": "schneiden",
+        "pret": "schnitt",
+        "part": "hat geschnitten",
+        "example": "Er schnitt das Brot in Scheiben.",
+        "uk": "різати — нарізав",
+        "perfekt": "Er hat das Brot in Scheiben geschnitten."
+      },
+      {
+        "inf": "leiden",
+        "pret": "litt",
+        "part": "hat gelitten",
+        "example": "Sie litt lange unter der Kälte.",
+        "uk": "страждати — страждав",
+        "perfekt": "Sie hat lange unter der Kälte gelitten."
+      },
+      {
+        "inf": "gleiten",
+        "pret": "glitt",
+        "part": "ist geglitten",
+        "example": "Der Finger glitt von oben nach unten über das Weinglas.",
+        "uk": "ковзати — ковзнув",
+        "perfekt": "Der Finger ist von oben nach unten über das Weinglas geglitten."
+      },
+      {
+        "inf": "beißen",
+        "pret": "biss",
+        "part": "hat gebissen",
+        "example": "Der Hund biss aus Angst.",
+        "uk": "кусати — вкусив",
+        "perfekt": "Der Hund hat aus Angst gebissen."
+      }
+    ]
+  },
+  {
+    "id": "ie-o",
+    "name": "Fliegen-Reihe",
+    "pattern": "ie/i → o",
+    "verbs": [
+      {
+        "inf": "fliegen",
+        "pret": "flog",
+        "part": "ist geflogen",
+        "example": "Wir flogen letztes Jahr nach Berlin.",
+        "uk": "летіти — прилетів",
+        "perfekt": "Wir sind letztes Jahr nach Berlin geflogen."
+      },
+      {
+        "inf": "verlieren",
+        "pret": "verlor",
+        "part": "hat verloren",
+        "example": "Ich verlor meinen Schlüssel.",
+        "uk": "втрачати — втратив",
+        "perfekt": "Ich habe meinen Schlüssel verloren."
+      },
+      {
+        "inf": "biegen",
+        "pret": "bog",
+        "part": "hat gebogen",
+        "example": "Er bog den Draht zu einem Ring.",
+        "uk": "гнути — зігнув",
+        "perfekt": "Er hat den Draht zu einem Ring gebogen."
+      },
+      {
+        "inf": "fliehen",
+        "pret": "floh",
+        "part": "ist geflohen",
+        "example": "Viele Menschen flohen vor dem Krieg.",
+        "uk": "тікати — втік",
+        "perfekt": "Viele Menschen sind vor dem Krieg geflohen."
+      },
+      {
+        "inf": "frieren",
+        "pret": "fror",
+        "part": "hat gefroren",
+        "example": "Ich fror in der dünnen Jacke.",
+        "uk": "мерзнути — змерз",
+        "perfekt": "Ich habe in der dünnen Jacke gefroren."
+      },
+      {
+        "inf": "gießen",
+        "pret": "goss",
+        "part": "hat gegossen",
+        "example": "Sie goss die Blumen jeden Abend.",
+        "uk": "поливати — полив",
+        "perfekt": "Sie hat die Blumen jeden Abend gegossen."
+      },
+      {
+        "inf": "genießen",
+        "pret": "genoss",
+        "part": "hat genossen",
+        "example": "Wir genossen den freien Tag in vollen Zügen.",
+        "uk": "насолоджуватися — насолодився",
+        "perfekt": "Wir haben den freien Tag in vollen Zügen genossen."
+      },
+      {
+        "inf": "schließen",
+        "pret": "schloss",
+        "part": "hat geschlossen",
+        "example": "Er schloss die Tür ganz leise.",
+        "uk": "закривати — закрив",
+        "perfekt": "Er hat die Tür ganz leise geschlossen."
+      },
+      {
+        "inf": "kriechen",
+        "pret": "kroch",
+        "part": "ist gekrochen",
+        "example": "Die Katze kroch unter das Sofa.",
+        "uk": "повзти — заповз",
+        "perfekt": "Die Katze ist unter das Sofa gekrochen."
+      },
+      {
+        "inf": "riechen",
+        "pret": "roch",
+        "part": "hat gerochen",
+        "example": "Es roch nach frischem Brot.",
+        "uk": "пахнути — пахло",
+        "perfekt": "Es hat nach frischem Brot gerochen."
+      },
+      {
+        "inf": "wiegen",
+        "pret": "wog",
+        "part": "hat gewogen",
+        "example": "Das Paket wog fast fünf Kilo.",
+        "uk": "важити — важив",
+        "perfekt": "Das Paket hat fast fünf Kilo gewogen."
+      },
+      {
+        "inf": "ziehen",
+        "pret": "zog",
+        "part": "hat gezogen",
+        "example": "Er zog kräftig an der Leine.",
+        "uk": "тягнути — потягнув",
+        "perfekt": "Er hat kräftig an der Leine gezogen."
+      },
+      {
+        "inf": "schieben",
+        "pret": "schob",
+        "part": "hat geschoben",
+        "example": "Sie schob den Wagen zur Kasse.",
+        "uk": "штовхати — штовхнув",
+        "perfekt": "Sie hat den Wagen zur Kasse geschoben."
+      },
+      {
+        "inf": "fließen",
+        "pret": "floss",
+        "part": "ist geflossen",
+        "example": "Der Fluss floss ruhig durch die Stadt.",
+        "uk": "текти — тек",
+        "perfekt": "Der Fluss ist ruhig durch die Stadt geflossen."
+      },
+      {
+        "inf": "verbieten",
+        "pret": "verbot",
+        "part": "hat verboten",
+        "example": "Der Arzt verbot ihm das Rauchen.",
+        "uk": "забороняти — заборонив",
+        "perfekt": "Der Arzt hat ihm das Rauchen verboten."
+      },
+      {
+        "inf": "anbieten",
+        "pret": "bot an",
+        "part": "hat angeboten",
+        "example": "Sie bot mir sofort ihre Hilfe an.",
+        "uk": "пропонувати — запропонував",
+        "perfekt": "Sie hat mir sofort ihre Hilfe angeboten."
+      },
+      {
+        "inf": "bieten",
+        "pret": "bot",
+        "part": "hat geboten",
+        "example": "Die Stadt bot viele Möglichkeiten.",
+        "uk": "пропонувати — пропонувала",
+        "perfekt": "Die Stadt hat viele Möglichkeiten geboten."
+      },
+      {
+        "inf": "schießen",
+        "pret": "schoss",
+        "part": "hat geschossen",
+        "example": "Der Spieler schoss das entscheidende Tor.",
+        "uk": "стріляти / забивати — забив",
+        "perfekt": "Der Spieler hat das entscheidende Tor geschossen."
+      }
+    ]
+  },
+  {
+    "id": "i-a-u",
+    "name": "Singen-Reihe",
+    "pattern": "i → a → u",
+    "verbs": [
+      {
+        "inf": "singen",
+        "pret": "sang",
+        "part": "hat gesungen",
+        "example": "Sie sang ein altes Volkslied.",
+        "uk": "співати — заспівав",
+        "perfekt": "Sie hat ein altes Volkslied gesungen."
+      },
+      {
+        "inf": "trinken",
+        "pret": "trank",
+        "part": "hat getrunken",
+        "example": "Wir tranken Kaffee auf dem Balkon.",
+        "uk": "пити — випив",
+        "perfekt": "Wir haben Kaffee auf dem Balkon getrunken."
+      },
+      {
+        "inf": "finden",
+        "pret": "fand",
+        "part": "hat gefunden",
+        "example": "Ich fand den Fehler sofort.",
+        "uk": "знаходити — знайшов",
+        "perfekt": "Ich habe den Fehler sofort gefunden."
+      },
+      {
+        "inf": "springen",
+        "pret": "sprang",
+        "part": "ist gesprungen",
+        "example": "Das Kind sprang vor Freude in die Luft.",
+        "uk": "стрибати — стрибнув",
+        "perfekt": "Das Kind ist vor Freude in die Luft gesprungen."
+      },
+      {
+        "inf": "klingen",
+        "pret": "klang",
+        "part": "hat geklungen",
+        "example": "Ihre Stimme klang sehr müde.",
+        "uk": "звучати — звучав",
+        "perfekt": "Ihre Stimme hat sehr müde geklungen."
+      },
+      {
+        "inf": "sinken",
+        "pret": "sank",
+        "part": "ist gesunken",
+        "example": "Die Temperatur sank in der Nacht stark.",
+        "uk": "падати / тонути — впав",
+        "perfekt": "Die Temperatur ist in der Nacht stark gesunken."
+      },
+      {
+        "inf": "zwingen",
+        "pret": "zwang",
+        "part": "hat gezwungen",
+        "example": "Niemand zwang sie zu dieser Entscheidung.",
+        "uk": "примушувати — примусив",
+        "perfekt": "Niemand hat sie zu dieser Entscheidung gezwungen."
+      },
+      {
+        "inf": "binden",
+        "pret": "band",
+        "part": "hat gebunden",
+        "example": "Sie band die Schnur fest.",
+        "uk": "зав'язувати — зав'язав",
+        "perfekt": "Sie hat die Schnur fest gebunden."
+      },
+      {
+        "inf": "verschwinden",
+        "pret": "verschwand",
+        "part": "ist verschwunden",
+        "example": "Das Geld verschwand spurlos aus der Kasse.",
+        "uk": "зникати — зник",
+        "perfekt": "Das Geld ist spurlos aus der Kasse verschwunden."
+      },
+      {
+        "inf": "stinken",
+        "pret": "stank",
+        "part": "hat gestunken",
+        "example": "Der Müll stank schon von Weitem.",
+        "uk": "смердіти — смердів",
+        "perfekt": "Der Müll hat schon von Weitem gestunken."
+      },
+      {
+        "inf": "gelingen",
+        "pret": "gelang",
+        "part": "ist gelungen",
+        "example": "Der Kuchen gelang ihr besonders gut.",
+        "uk": "вдаватися — вдалося",
+        "perfekt": "Der Kuchen ist ihr besonders gut gelungen."
+      }
+    ]
+  },
+  {
+    "id": "i-a-o",
+    "name": "Schwimmen-Reihe",
+    "pattern": "i → a → o",
+    "verbs": [
+      {
+        "inf": "schwimmen",
+        "pret": "schwamm",
+        "part": "ist geschwommen",
+        "example": "Er schwamm jeden Morgen im See.",
+        "uk": "плавати — плавав",
+        "perfekt": "Er ist jeden Morgen im See geschwommen."
+      },
+      {
+        "inf": "beginnen",
+        "pret": "begann",
+        "part": "hat begonnen",
+        "example": "Der Unterricht begann um acht Uhr.",
+        "uk": "починатися — почався",
+        "perfekt": "Der Unterricht hat um acht Uhr begonnen."
+      },
+      {
+        "inf": "gewinnen",
+        "pret": "gewann",
+        "part": "hat gewonnen",
+        "example": "Unsere Mannschaft gewann das letzte Spiel.",
+        "uk": "вигравати — виграв",
+        "perfekt": "Unsere Mannschaft hat das letzte Spiel gewonnen."
+      }
+    ]
+  },
+  {
+    "id": "e-a-o",
+    "name": "Helfen-Reihe",
+    "pattern": "e → a → o",
+    "verbs": [
+      {
+        "inf": "helfen",
+        "pret": "half",
+        "part": "hat geholfen",
+        "example": "Er half seiner Nachbarin beim Umzug.",
+        "uk": "допомагати — допоміг",
+        "perfekt": "Er hat seiner Nachbarin beim Umzug geholfen."
+      },
+      {
+        "inf": "sprechen",
+        "pret": "sprach",
+        "part": "hat gesprochen",
+        "example": "Wir sprachen lange über die Prüfung.",
+        "uk": "говорити — сказав",
+        "perfekt": "Wir haben lange über die Prüfung gesprochen."
+      },
+      {
+        "inf": "nehmen",
+        "pret": "nahm",
+        "part": "hat genommen",
+        "example": "Sie nahm sich Zeit für die Antwort.",
+        "uk": "брати — взяв",
+        "perfekt": "Sie hat sich Zeit für die Antwort genommen."
+      },
+      {
+        "inf": "treffen",
+        "pret": "traf",
+        "part": "hat getroffen",
+        "example": "Wir trafen uns zufällig im Park.",
+        "uk": "зустрічати(ся) — зустрів",
+        "perfekt": "Wir haben uns zufällig im Park getroffen."
+      },
+      {
+        "inf": "brechen",
+        "pret": "brach",
+        "part": "hat gebrochen",
+        "example": "Er brach sich beim Skifahren das Bein.",
+        "uk": "ламати — зламав",
+        "perfekt": "Er hat sich beim Skifahren das Bein gebrochen."
+      },
+      {
+        "inf": "sterben",
+        "pret": "starb",
+        "part": "ist gestorben",
+        "example": "Ihr Großvater starb letztes Jahr.",
+        "uk": "помирати — помер",
+        "perfekt": "Ihr Großvater ist letztes Jahr gestorben."
+      },
+      {
+        "inf": "werfen",
+        "pret": "warf",
+        "part": "hat geworfen",
+        "example": "Der Junge warf den Ball ins Tor.",
+        "uk": "кидати — кинув",
+        "perfekt": "Der Junge hat den Ball ins Tor geworfen."
+      },
+      {
+        "inf": "gelten",
+        "pret": "galt",
+        "part": "hat gegolten",
+        "example": "Diese Regel galt schon immer.",
+        "uk": "діяти / бути дійсним — діяв",
+        "perfekt": "Diese Regel hat schon immer gegolten."
+      },
+      {
+        "inf": "empfehlen",
+        "pret": "empfahl",
+        "part": "hat empfohlen",
+        "example": "Der Arzt empfahl ihr mehr Bewegung.",
+        "uk": "рекомендувати — порекомендував",
+        "perfekt": "Der Arzt hat ihr mehr Bewegung empfohlen."
+      },
+      {
+        "inf": "stehlen",
+        "pret": "stahl",
+        "part": "hat gestohlen",
+        "example": "Jemand stahl ihm das Fahrrad.",
+        "uk": "красти — вкрав",
+        "perfekt": "Jemand hat ihm das Fahrrad gestohlen."
+      },
+      {
+        "inf": "befehlen",
+        "pret": "befahl",
+        "part": "hat befohlen",
+        "example": "Der Kapitän befahl den sofortigen Rückzug.",
+        "uk": "наказувати — наказав",
+        "perfekt": "Der Kapitän hat den sofortigen Rückzug befohlen."
+      }
+    ]
+  },
+  {
+    "id": "e-a-e",
+    "name": "Geben-Reihe",
+    "pattern": "e → a → e",
+    "verbs": [
+      {
+        "inf": "geben",
+        "pret": "gab",
+        "part": "hat gegeben",
+        "example": "Er gab mir sein Wort.",
+        "uk": "давати — дав",
+        "perfekt": "Er hat mir sein Wort gegeben."
+      },
+      {
+        "inf": "sehen",
+        "pret": "sah",
+        "part": "hat gesehen",
+        "example": "Ich sah sie gestern im Café.",
+        "uk": "бачити — побачив",
+        "perfekt": "Ich habe sie gestern im Café gesehen."
+      },
+      {
+        "inf": "lesen",
+        "pret": "las",
+        "part": "hat gelesen",
+        "example": "Wir lasen den Text zweimal.",
+        "uk": "читати — прочитав",
+        "perfekt": "Wir haben den Text zweimal gelesen."
+      },
+      {
+        "inf": "essen",
+        "pret": "aß",
+        "part": "hat gegessen",
+        "example": "Sie aß den Salat mit großem Appetit.",
+        "uk": "їсти — з'їв",
+        "perfekt": "Sie hat den Salat mit großem Appetit gegessen."
+      },
+      {
+        "inf": "messen",
+        "pret": "maß",
+        "part": "hat gemessen",
+        "example": "Der Arzt maß ihren Blutdruck.",
+        "uk": "вимірювати — виміряв",
+        "perfekt": "Der Arzt hat ihren Blutdruck gemessen."
+      },
+      {
+        "inf": "vergessen",
+        "pret": "vergaß",
+        "part": "hat vergessen",
+        "example": "Er vergaß seinen Regenschirm im Büro.",
+        "uk": "забувати — забув",
+        "perfekt": "Er hat seinen Regenschirm im Büro vergessen."
+      },
+      {
+        "inf": "geschehen",
+        "pret": "geschah",
+        "part": "ist geschehen",
+        "example": "Der Unfall geschah ganz plötzlich.",
+        "uk": "траплятися — трапилося",
+        "perfekt": "Der Unfall ist ganz plötzlich geschehen."
+      },
+      {
+        "inf": "liegen",
+        "pret": "lag",
+        "part": "hat gelegen",
+        "example": "Das Buch lag auf dem Tisch.",
+        "uk": "лежати — лежав",
+        "perfekt": "Das Buch hat auf dem Tisch gelegen."
+      }
+    ]
+  },
+  {
+    "id": "a-u-a",
+    "name": "Fahren-Reihe",
+    "pattern": "a → u → a",
+    "verbs": [
+      {
+        "inf": "fahren",
+        "pret": "fuhr",
+        "part": "ist gefahren",
+        "example": "Sie fuhr mit dem Zug nach Lviv.",
+        "uk": "їхати — поїхав",
+        "perfekt": "Sie ist mit dem Zug nach Lviv gefahren."
+      },
+      {
+        "inf": "tragen",
+        "pret": "trug",
+        "part": "hat getragen",
+        "example": "Er trug die Kisten allein.",
+        "uk": "нести — ніс",
+        "perfekt": "Er hat die Kisten allein getragen."
+      },
+      {
+        "inf": "wachsen",
+        "pret": "wuchs",
+        "part": "ist gewachsen",
+        "example": "Die Pflanze wuchs sehr schnell.",
+        "uk": "рости — виріс",
+        "perfekt": "Die Pflanze ist sehr schnell gewachsen."
+      },
+      {
+        "inf": "schlagen",
+        "pret": "schlug",
+        "part": "hat geschlagen",
+        "example": "Sein Herz schlug vor Aufregung schnell.",
+        "uk": "битися / бити — бив",
+        "perfekt": "Sein Herz hat vor Aufregung schnell geschlagen."
+      },
+      {
+        "inf": "waschen",
+        "pret": "wusch",
+        "part": "hat gewaschen",
+        "example": "Sie wusch die Wäsche am Sonntag.",
+        "uk": "прати / мити — виправ",
+        "perfekt": "Sie hat die Wäsche am Sonntag gewaschen."
+      },
+      {
+        "inf": "laden",
+        "pret": "lud",
+        "part": "hat geladen",
+        "example": "Er lud die Kisten auf den Wagen.",
+        "uk": "завантажувати — завантажив",
+        "perfekt": "Er hat die Kisten auf den Wagen geladen."
+      },
+      {
+        "inf": "graben",
+        "pret": "grub",
+        "part": "hat gegraben",
+        "example": "Der Hund grub ein tiefes Loch.",
+        "uk": "копати — викопав",
+        "perfekt": "Der Hund hat ein tiefes Loch gegraben."
+      }
+    ]
+  },
+  {
+    "id": "a-ie-a",
+    "name": "Fallen-Reihe",
+    "pattern": "a → ie / i → a",
+    "verbs": [
+      {
+        "inf": "fallen",
+        "pret": "fiel",
+        "part": "ist gefallen",
+        "example": "Das Glas fiel vom Tisch und zerbrach.",
+        "uk": "падати — впав",
+        "perfekt": "Das Glas ist vom Tisch gefallen und zerbrochen."
+      },
+      {
+        "inf": "halten",
+        "pret": "hielt",
+        "part": "hat gehalten",
+        "example": "Er hielt ihre Hand fest.",
+        "uk": "тримати — тримав",
+        "perfekt": "Er hat ihre Hand fest gehalten."
+      },
+      {
+        "inf": "lassen",
+        "pret": "ließ",
+        "part": "hat gelassen",
+        "example": "Sie ließ das Fenster die ganze Nacht offen.",
+        "uk": "залишати / дозволяти — залишив",
+        "perfekt": "Sie hat das Fenster die ganze Nacht offen gelassen."
+      },
+      {
+        "inf": "schlafen",
+        "pret": "schlief",
+        "part": "hat geschlafen",
+        "example": "Das Baby schlief endlich ruhig.",
+        "uk": "спати — спав",
+        "perfekt": "Das Baby hat endlich ruhig geschlafen."
+      },
+      {
+        "inf": "raten",
+        "pret": "riet",
+        "part": "hat geraten",
+        "example": "Der Lehrer riet ihm zu mehr Übung.",
+        "uk": "радити — порадив",
+        "perfekt": "Der Lehrer hat ihm zu mehr Übung geraten."
+      },
+      {
+        "inf": "braten",
+        "pret": "briet",
+        "part": "hat gebraten",
+        "example": "Sie briet das Fleisch in der Pfanne.",
+        "uk": "смажити — засмажив",
+        "perfekt": "Sie hat das Fleisch in der Pfanne gebraten."
+      },
+      {
+        "inf": "fangen",
+        "pret": "fing",
+        "part": "hat gefangen",
+        "example": "Der Torwart fing den Ball sicher.",
+        "uk": "ловити — впіймав",
+        "perfekt": "Der Torwart hat den Ball sicher gefangen."
+      },
+      {
+        "inf": "hängen",
+        "pret": "hing",
+        "part": "hat gehangen",
+        "example": "Das Bild hing schief an der Wand.",
+        "uk": "висіти — висів",
+        "perfekt": "Das Bild hat schief an der Wand gehangen."
+      }
+    ]
+  },
+  {
+    "id": "mischverben",
+    "name": "Mischverben & Sonderfälle",
+    "pattern": "e/i → a → a + eigene Muster",
+    "verbs": [
+      {
+        "inf": "bringen",
+        "pret": "brachte",
+        "part": "hat gebracht",
+        "example": "Er brachte ihr Blumen.",
+        "uk": "приносити — приніс",
+        "perfekt": "Er hat ihr Blumen gebracht."
+      },
+      {
+        "inf": "denken",
+        "pret": "dachte",
+        "part": "hat gedacht",
+        "example": "Ich dachte lange darüber.",
+        "uk": "думати — подумав",
+        "perfekt": "Ich habe lange darüber gedacht."
+      },
+      {
+        "inf": "kennen",
+        "pret": "kannte",
+        "part": "hat gekannt",
+        "example": "Wir kannten uns schon aus der Schule.",
+        "uk": "знати (когось) — знав",
+        "perfekt": "Wir haben uns schon aus der Schule gekannt."
+      },
+      {
+        "inf": "nennen",
+        "pret": "nannte",
+        "part": "hat genannt",
+        "example": "Sie nannte ihm einen guten Grund.",
+        "uk": "називати — назвав",
+        "perfekt": "Sie hat ihm einen guten Grund genannt."
+      },
+      {
+        "inf": "rennen",
+        "pret": "rannte",
+        "part": "ist gerannt",
+        "example": "Er rannte schnell zum Bus.",
+        "uk": "бігти — побіг",
+        "perfekt": "Er ist schnell zum Bus gerannt."
+      },
+      {
+        "inf": "senden",
+        "pret": "sandte",
+        "part": "hat gesandt",
+        "example": "Sie sandte ihm ein wichtiges Dokument.",
+        "uk": "надсилати — надіслав",
+        "perfekt": "Sie hat ihm ein wichtiges Dokument gesandt.",
+        "note": "Nebenform schwach: sendete – gesendet (v. a. bei Rundfunk/TV: „Das wurde live gesendet.“). Für Alltägliches wie einen Brief oder eine Nachricht sagt man meist schicken (schickte – geschickt)."
+      },
+      {
+        "inf": "wenden",
+        "pret": "wandte",
+        "part": "hat gewandt",
+        "example": "Er wandte sich an den Kundendienst.",
+        "uk": "звертатися — звернувся",
+        "perfekt": "Er hat sich an den Kundendienst gewandt.",
+        "note": "Nebenform schwach: wendete – gewendet, z. B. beim Auto wenden oder beim Kochen (den Pfannkuchen wenden). Bei sich an jemanden wenden ist die starke Form üblich: wandte – gewandt."
+      },
+      {
+        "inf": "brennen",
+        "pret": "brannte",
+        "part": "hat gebrannt",
+        "example": "Das Feuer brannte die ganze Nacht.",
+        "uk": "горіти — горів",
+        "perfekt": "Das Feuer hat die ganze Nacht gebrannt."
+      },
+      {
+        "inf": "wissen",
+        "pret": "wusste",
+        "part": "hat gewusst",
+        "example": "Ich wusste die Antwort sofort.",
+        "uk": "знати (факт) — знав",
+        "perfekt": "Ich habe die Antwort sofort gewusst."
+      },
+      {
+        "inf": "haben",
+        "pret": "hatte",
+        "part": "hat gehabt",
+        "example": "Sie hatte gestern viel Arbeit.",
+        "uk": "мати — мав",
+        "perfekt": "Sie hat gestern viel Arbeit gehabt.",
+        "note": "Bei haben, sein, werden bleibt im Gespräch meist das Präteritum üblich — das Perfekt klingt hier eher schriftlich."
+      },
+      {
+        "inf": "sein",
+        "pret": "war",
+        "part": "ist gewesen",
+        "example": "Er war letztes Jahr in Kyjiw.",
+        "uk": "бути — був",
+        "perfekt": "Er ist letztes Jahr in Kyjiw gewesen.",
+        "note": "Bei haben, sein, werden bleibt im Gespräch meist das Präteritum üblich — das Perfekt klingt hier eher schriftlich."
+      },
+      {
+        "inf": "werden",
+        "pret": "wurde",
+        "part": "ist geworden",
+        "example": "Es wurde langsam dunkel.",
+        "uk": "ставати — став",
+        "perfekt": "Es ist langsam dunkel geworden.",
+        "note": "Bei haben, sein, werden bleibt im Gespräch meist das Präteritum üblich — das Perfekt klingt hier eher schriftlich."
+      },
+      {
+        "inf": "gehen",
+        "pret": "ging",
+        "part": "ist gegangen",
+        "example": "Wir gingen gemeinsam nach Hause.",
+        "uk": "йти — пішов",
+        "perfekt": "Wir sind gemeinsam nach Hause gegangen."
+      },
+      {
+        "inf": "stehen",
+        "pret": "stand",
+        "part": "hat gestanden",
+        "example": "Das Auto stand direkt vor der Tür.",
+        "uk": "стояти — стояв",
+        "perfekt": "Das Auto hat direkt vor der Tür gestanden."
+      },
+      {
+        "inf": "tun",
+        "pret": "tat",
+        "part": "hat getan",
+        "example": "Sie tat ihr Bestes für das Projekt.",
+        "uk": "робити — зробив",
+        "perfekt": "Sie hat ihr Bestes für das Projekt getan."
+      }
+    ]
+  }
+];
+
+// ===== Fortschritt & Spaced Repetition (Leitner, lokal im Browser) =====
+// Jede bewertete Karte bekommt eine Box (1–5) und ein Fälligkeitsdatum.
+// "Nochmal" wirft auf Box 1 zurück, "Okay" +1 Box, "Leicht" +2 Boxen.
+// Gespeichert wird pro Gerät/Browser in localStorage — kein Server nötig,
+// aber auch kein Sync zwischen Geräten.
+const SRS_KEY = "verbcafe_srs_v1";
+const INTERVALS_DAYS = [1, 2, 4, 8, 16]; // Tage bis zur nächsten Fälligkeit, Index = Box-1
+
+function loadSRS(){
+  try { return JSON.parse(localStorage.getItem(SRS_KEY) || "{}"); }
+  catch (e) { return {}; }
+}
+function saveSRS(data){
+  try { localStorage.setItem(SRS_KEY, JSON.stringify(data)); }
+  catch (e) { /* localStorage evtl. blockiert — Fortschritt geht dann nicht verloren, wird nur nicht gespeichert */ }
+}
+function todayISO(){
+  const d = new Date(); d.setHours(0,0,0,0);
+  return d.toISOString().slice(0,10);
+}
+function addDays(iso, days){
+  const d = new Date(iso + "T00:00:00"); d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0,10);
+}
+function rateVerb(inf, rating){
+  const srs = loadSRS();
+  let box = (srs[inf] && srs[inf].box) || 0;
+  if (rating === "again") box = 1;
+  else if (rating === "good") box = Math.max(1, Math.min(box + 1, 5));
+  else if (rating === "easy") box = Math.max(2, Math.min(box + 2, 5));
+  srs[inf] = { box, next: addDays(todayISO(), INTERVALS_DAYS[box - 1]) };
+  saveSRS(srs);
+}
+
+// Flache Liste aller Karten (für Wiederholung gruppenübergreifend)
+const FLAT_VERBS = [];
+GROUPS.forEach((g, gi) => g.verbs.forEach(v => FLAT_VERBS.push({ ...v, groupIndex: gi, groupName: g.name, groupPattern: g.pattern })));
+
+function getDueVerbs(){
+  const srs = loadSRS();
+  const today = todayISO();
+  return FLAT_VERBS.filter(v => srs[v.inf] && srs[v.inf].next <= today);
+}
+
+let mode = "browse"; // "browse" | "review"
+let currentGroupIndex = 0;
+let currentCardIndex = 0;
+let reviewDeck = [];
+let reviewIndex = 0;
+let showingCompletion = false;
+
+const menuTabs = document.getElementById("menuTabs");
+const groupDots = document.getElementById("groupDots");
+const groupName = document.getElementById("groupName");
+const groupPattern = document.getElementById("groupPattern");
+const progressFill = document.getElementById("progressFill");
+const flipCard = document.getElementById("flipCard");
+const cardArena = document.getElementById("cardArena");
+const controlsBar = document.querySelector(".controls");
+const ticketNo = document.getElementById("ticketNo");
+const infinitivWord = document.getElementById("infinitivWord");
+const formsGrid = document.getElementById("formsGrid");
+const exampleSentence = document.getElementById("exampleSentence");
+const perfektSentence = document.getElementById("perfektSentence");
+const spokenNote = document.getElementById("spokenNote");
+const ukLine = document.getElementById("ukLine");
+const counterText = document.getElementById("counterText");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const reviewBtn = document.getElementById("reviewBtn");
+const dueCountEl = document.getElementById("dueCount");
+const completionScreen = document.getElementById("completionScreen");
+const completionTitle = document.getElementById("completionTitle");
+const completionSub = document.getElementById("completionSub");
+const completionRepeatBtn = document.getElementById("completionRepeatBtn");
+const completionNextBtn = document.getElementById("completionNextBtn");
+
+function buildTabs(){
+  menuTabs.innerHTML = "";
+  GROUPS.forEach((g, i) => {
+    const tab = document.createElement("button");
+    tab.className = "menu-tab" + (i === currentGroupIndex ? " active" : "");
+    tab.innerHTML = `<span class="pattern">${g.pattern}</span><span class="name">${g.name}</span><span class="count">${g.verbs.length} Verben</span>`;
+    tab.addEventListener("click", () => selectGroup(i));
+    menuTabs.appendChild(tab);
+  });
+}
+
+function buildDots(){
+  groupDots.innerHTML = "";
+  GROUPS.forEach((g, i) => {
+    const dot = document.createElement("button");
+    dot.className = "dot" + (i === currentGroupIndex ? " active" : "");
+    dot.setAttribute("aria-label", g.name);
+    dot.addEventListener("click", () => selectGroup(i));
+    groupDots.appendChild(dot);
+  });
+}
+
+function updateDueBadge(){
+  const n = getDueVerbs().length;
+  dueCountEl.textContent = n;
+  reviewBtn.classList.toggle("has-due", n > 0);
+}
+
+function selectGroup(i, cardIndex){
+  mode = "browse";
+  hideCompletion();
+  currentGroupIndex = (i + GROUPS.length) % GROUPS.length;
+  currentCardIndex = cardIndex === undefined ? 0 : cardIndex;
+  render();
+  const activeTab = menuTabs.children[currentGroupIndex];
+  if (activeTab) activeTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+}
+
+function startReview(){
+  const due = getDueVerbs();
+  if (due.length === 0) return;
+  mode = "review";
+  reviewDeck = due;
+  reviewIndex = 0;
+  hideCompletion();
+  render();
+}
+
+function exitReview(){
+  mode = "browse";
+  render();
+}
+
+function getCurrentVerb(){
+  if (mode === "review") return reviewDeck[reviewIndex] || null;
+  const group = GROUPS[currentGroupIndex];
+  return group ? group.verbs[currentCardIndex] : null;
+}
+
+function fillCardFields(verb){
+  const [aux, ...partWords] = verb.part.split(" ");
+  formsGrid.innerHTML = `
+    <div class="form-row"><span class="tag">PRÄTERITUM</span><span class="val">${verb.pret}</span></div>
+    <div class="form-row"><span class="tag">PARTIZIP II</span><span class="val">${partWords.join(" ")} <span style="font-size:0.65em; color:var(--ink-soft); font-weight:600;">(${aux})</span></span></div>
+  `;
+  exampleSentence.textContent = verb.example;
+  perfektSentence.textContent = verb.perfekt;
+  if (verb.note) {
+    spokenNote.textContent = verb.note;
+    spokenNote.classList.add("visible");
+  } else {
+    spokenNote.textContent = "";
+    spokenNote.classList.remove("visible");
+  }
+  ukLine.textContent = verb.uk;
+}
+
+function render(){
+  if (mode === "review") { renderReview(); return; }
+  renderBrowse();
+}
+
+function renderBrowse(){
+  const group = GROUPS[currentGroupIndex];
+  const verb = group.verbs[currentCardIndex];
+
+  [...menuTabs.children].forEach((el, i) => el.classList.toggle("active", i === currentGroupIndex));
+  [...groupDots.children].forEach((el, i) => el.classList.toggle("active", i === currentGroupIndex));
+
+  groupName.textContent = group.name;
+  groupPattern.textContent = group.pattern;
+  progressFill.style.width = `${((currentCardIndex + 1) / group.verbs.length) * 100}%`;
+
+  flipCard.classList.remove("flipped");
+  ticketNo.textContent = `BON № ${String(currentCardIndex + 1).padStart(3, "0")}`;
+  infinitivWord.textContent = verb.inf;
+  fillCardFields(verb);
+
+  counterText.textContent = `${currentCardIndex + 1} / ${group.verbs.length}`;
+  prevBtn.textContent = currentCardIndex === 0 ? "← Vorige Reihe" : "← Zurück";
+  nextBtn.textContent = currentCardIndex === group.verbs.length - 1 ? "Nächste Reihe →" : "Nächste →";
+}
+
+function renderReview(){
+  const verb = reviewDeck[reviewIndex];
+  if (!verb) { showReviewCompletion(); return; }
+
+  [...menuTabs.children].forEach(el => el.classList.remove("active"));
+  [...groupDots.children].forEach(el => el.classList.remove("active"));
+
+  groupName.textContent = "🔁 Wiederholung";
+  groupPattern.textContent = `${verb.groupPattern} · ${verb.groupName}`;
+  progressFill.style.width = `${((reviewIndex + 1) / reviewDeck.length) * 100}%`;
+
+  flipCard.classList.remove("flipped");
+  ticketNo.textContent = `WIEDERHOLUNG № ${String(reviewIndex + 1).padStart(3, "0")}`;
+  infinitivWord.textContent = verb.inf;
+  fillCardFields(verb);
+
+  counterText.textContent = `${reviewIndex + 1} / ${reviewDeck.length}`;
+  prevBtn.textContent = reviewIndex === 0 ? "← Verlassen" : "← Zurück";
+  nextBtn.textContent = reviewIndex === reviewDeck.length - 1 ? "Fertig →" : "Nächste →";
+}
+
+function showGroupCompletion(){
+  showingCompletion = true;
+  cardArena.style.display = "none";
+  controlsBar.style.display = "none";
+  const group = GROUPS[currentGroupIndex];
+  completionTitle.textContent = `🎉 ${group.name} geschafft!`;
+  completionSub.textContent = `Alle ${group.verbs.length} Verben dieser Reihe durch.`;
+  completionRepeatBtn.style.display = "";
+  completionRepeatBtn.textContent = "Nochmal von vorn";
+  completionRepeatBtn.onclick = () => { hideCompletion(); currentCardIndex = 0; render(); };
+  completionNextBtn.textContent = "Nächste Reihe →";
+  completionNextBtn.onclick = () => { hideCompletion(); selectGroup(currentGroupIndex + 1, 0); };
+  completionScreen.style.display = "flex";
+}
+
+function showReviewCompletion(){
+  showingCompletion = true;
+  cardArena.style.display = "none";
+  controlsBar.style.display = "none";
+  completionTitle.textContent = "🔁 Wiederholung fertig!";
+  completionSub.textContent = "Für heute keine fälligen Karten mehr.";
+  completionRepeatBtn.style.display = "none";
+  completionNextBtn.textContent = "Zurück zur Karte";
+  completionNextBtn.onclick = () => { hideCompletion(); exitReview(); };
+  completionScreen.style.display = "flex";
+}
+
+function hideCompletion(){
+  showingCompletion = false;
+  completionScreen.style.display = "none";
+  cardArena.style.display = "";
+  controlsBar.style.display = "";
+}
+
+function goPrev(){
+  if (showingCompletion) return;
+  if (mode === "review") {
+    if (reviewIndex === 0) { exitReview(); }
+    else { reviewIndex--; render(); }
+    return;
+  }
+  const group = GROUPS[currentGroupIndex];
+  if (currentCardIndex === 0) {
+    const prevGroup = GROUPS[(currentGroupIndex - 1 + GROUPS.length) % GROUPS.length];
+    selectGroup(currentGroupIndex - 1, prevGroup.verbs.length - 1);
+  } else {
+    currentCardIndex--;
+    render();
+  }
+}
+
+function goNext(){
+  if (showingCompletion) return;
+  if (mode === "review") {
+    if (reviewIndex === reviewDeck.length - 1) { showReviewCompletion(); }
+    else { reviewIndex++; render(); }
+    return;
+  }
+  const group = GROUPS[currentGroupIndex];
+  if (currentCardIndex === group.verbs.length - 1) { showGroupCompletion(); }
+  else { currentCardIndex++; render(); }
+}
+
+cardArena.addEventListener("click", () => {
+  flipCard.classList.toggle("flipped");
+});
+
+document.querySelectorAll(".rate-btn").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const verb = getCurrentVerb();
+    if (!verb) return;
+    rateVerb(verb.inf, btn.dataset.rating);
+    updateDueBadge();
+    goNext();
+  });
+});
+
+reviewBtn.addEventListener("click", () => startReview());
+
+prevBtn.addEventListener("click", (e) => { e.stopPropagation(); goPrev(); });
+nextBtn.addEventListener("click", (e) => { e.stopPropagation(); goNext(); });
+
+// Tastatur: ← / → blättern, Leertaste / Enter dreht die Karte um,
+// 1/2/3 bewerten (nur wenn die Karte gerade umgedreht ist)
+document.addEventListener("keydown", (e) => {
+  if (showingCompletion) return;
+  if (flipCard.classList.contains("flipped") && ["1","2","3"].includes(e.key)) {
+    const map = { "1": "again", "2": "good", "3": "easy" };
+    const verb = getCurrentVerb();
+    if (verb) { rateVerb(verb.inf, map[e.key]); updateDueBadge(); goNext(); }
+    return;
+  }
+  if (e.key === "ArrowLeft") { goPrev(); }
+  else if (e.key === "ArrowRight") { goNext(); }
+  else if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    flipCard.classList.toggle("flipped");
+  }
+});
+
+// Wischen auf der Karte: links/rechts blättert weiter
+let touchStartX = null;
+let touchStartY = null;
+cardArena.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+cardArena.addEventListener("touchend", (e) => {
+  if (touchStartX === null) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+    dx < 0 ? goNext() : goPrev();
+  }
+  touchStartX = null;
+  touchStartY = null;
+});
+
+buildTabs();
+buildDots();
+updateDueBadge();
+render();
+</script>
+</body>
+</html>
