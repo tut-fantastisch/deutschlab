@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-
+<!--
+  © 2026 Ella D. — Deutsch-Training mit Ella / Verb-Café
+  Alle Rechte vorbehalten. Weitergabe, Kopie, Weiterverkauf oder Veränderung
+  von Design, Inhalt und Code ohne ausdrückliche Erlaubnis nicht gestattet.
+  Усі права захищені. Копіювання, поширення, перепродаж чи зміна дизайну,
+  контенту та коду без дозволу заборонені.
+-->
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verb-Café — Deutsch-Training mit Ella</title>
 <meta name="description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="theme-color" content="#6B3E26">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -21,8 +31,89 @@
 <meta name="twitter:title" content="Verb-Café — Deutsch-Training mit Ella">
 <meta name="twitter:description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Nunito+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<!-- Selbst gehostete Schriften statt Google-Fonts-CDN (Datenschutz: keine IP-Übertragung an Google) -->
+<style>
+  @font-face{
+    font-family:'Barlow Condensed';
+    src:url('./fonts/BarlowCondensed-Medium.woff2') format('woff2');
+    font-weight:500; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Barlow Condensed';
+    src:url('./fonts/BarlowCondensed-SemiBold.woff2') format('woff2');
+    font-weight:600; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Barlow Condensed';
+    src:url('./fonts/BarlowCondensed-Bold.woff2') format('woff2');
+    font-weight:700; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Barlow Condensed';
+    src:url('./fonts/BarlowCondensed-ExtraBold.woff2') format('woff2');
+    font-weight:800; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Nunito Sans';
+    src:url('./fonts/NunitoSans-Regular.woff2') format('woff2');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Nunito Sans';
+    src:url('./fonts/NunitoSans-Italic.woff2') format('woff2');
+    font-weight:400; font-style:italic; font-display:swap;
+  }
+  @font-face{
+    font-family:'Nunito Sans';
+    src:url('./fonts/NunitoSans-Medium.woff2') format('woff2');
+    font-weight:500; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Nunito Sans';
+    src:url('./fonts/NunitoSans-SemiBold.woff2') format('woff2');
+    font-weight:600; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Nunito Sans';
+    src:url('./fonts/NunitoSans-Bold.woff2') format('woff2');
+    font-weight:700; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Caveat';
+    src:url('./fonts/Caveat-SemiBold.woff2') format('woff2');
+    font-weight:600; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Caveat';
+    src:url('./fonts/Caveat-Bold.woff2') format('woff2');
+    font-weight:700; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'JetBrains Mono';
+    src:url('./fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'JetBrains Mono';
+    src:url('./fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+    font-weight:600; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'JetBrains Mono';
+    src:url('./fonts/JetBrainsMono-Bold.woff2') format('woff2');
+    font-weight:700; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Kalam';
+    src:url('./fonts/Kalam-Regular.woff2') format('woff2');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Kalam';
+    src:url('./fonts/Kalam-Bold.woff2') format('woff2');
+    font-weight:700; font-style:normal; font-display:swap;
+  }
+</style>
 <style>
   :root{
     --paper:       #F3E9D6;
@@ -61,18 +152,19 @@
   }
   .stamp{
     position:absolute;
-    top:22px; right:20px;
+    top:clamp(10px, 3vw, 22px); right:clamp(10px, 3vw, 20px);
     transform:rotate(8deg);
-    border:3px solid var(--espresso);
+    border:2px solid var(--espresso);
     color:var(--espresso);
     background:rgba(255,249,238,0.9);
     border-radius:6px;
-    padding:6px 12px;
+    padding:0.35em 0.8em;
     font-family:'Kalam', cursive;
     font-weight:700;
-    font-size:1rem;
+    font-size:clamp(0.62rem, 3.4vw, 1rem);
     text-align:center;
     line-height:1.3;
+    white-space:nowrap;
   }
   .badge{
     display:inline-flex;
@@ -98,7 +190,7 @@
   .hero .sub{
     max-width:520px;
     margin:0 auto;
-    font-size:1.3rem;
+    font-size:1.1rem;
     font-weight:600;
     color:var(--ink-soft);
   }
@@ -108,6 +200,20 @@
     font-weight:700;
     color:var(--stain);
     font-size:1.15em;
+  }
+  .speak-hint{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin:14px auto 0;
+    background:var(--paper-card);
+    border:2px solid var(--stain);
+    border-radius:20px;
+    padding:6px 16px;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--espresso);
   }
 
   /* ================= MENÜKARTE (Gruppen-Reiter) ================= */
@@ -257,14 +363,21 @@
     margin-bottom:20px;
   }
   .card{
-    width:100%; height:100%; min-height:400px;
+    width:100%;
+    min-height:400px;
+    display:grid;
     position:relative;
     transform-style:preserve-3d;
     transition:transform 0.55s cubic-bezier(.4,0,.2,1);
   }
   .card.flipped{ transform:rotateY(180deg); }
   .card-face{
-    position:absolute; inset:0; min-height:400px;
+    grid-column:1;
+    grid-row:1;
+    position:relative;
+    width:100%;
+    min-height:400px;
+    height:100%;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
     background:
@@ -276,6 +389,7 @@
     padding:26px 24px 20px;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
   }
   .card-face::before{
     /* Perforation top edge */
@@ -295,14 +409,52 @@
   justify-content:center;
   text-align:center;
   gap:4px;
+  width:100%;
+  min-width:0;
 }
   .card-back{ transform:rotateY(180deg); }
+  .card-back-face{ overflow-y:auto; }
   .ticket-no{
     font-family:'JetBrains Mono', monospace;
     font-size:0.85rem;
     letter-spacing:0.1em;
     color:var(--ink-soft);
     margin-bottom:10px;
+    flex-shrink:0;
+  }
+  .audio-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:2.5px solid var(--espresso);
+    background:var(--paper-card);
+    color:var(--espresso);
+    font-size:1.15rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:2px 2px 0 rgba(43,32,21,0.25);
+    transition:transform 0.12s ease, background 0.15s ease;
+    flex-shrink:0;
+  }
+  .audio-btn:hover{ transform:translateY(-1px); }
+  .audio-btn:active{ transform:translateY(0); }
+  .audio-btn.speaking{
+    background:var(--espresso);
+    color:var(--crema-light);
+  }
+  .audio-hint{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    opacity:0.75;
+    margin-top:6px;
   }
   .card-eyebrow{
     font-family:'JetBrains Mono', monospace;
@@ -316,10 +468,15 @@
   .infinitiv{
     font-family:'Barlow Condensed', sans-serif;
     font-weight:800;
-    font-size:5rem;
+    font-size:clamp(2.1rem, 11vw, 5rem);
     color:var(--ink);
     line-height:1;
     margin-bottom:14px;
+    max-width:100%;
+    word-break:break-word;
+    overflow-wrap:anywhere;
+    hyphens:auto;
+    padding:0 4px;
   }
   .prompt-line{
     font-size:1.1rem;
@@ -336,6 +493,7 @@
     opacity:0.7;
     text-align:center;
     margin-top:0.9rem;
+    flex-shrink:0;
   }
 
   .forms-grid{
@@ -343,6 +501,7 @@
     flex-direction:column;
     gap:10px;
     margin-bottom:14px;
+    flex-shrink:0;
   }
   .form-row{
     display:flex;
@@ -350,6 +509,7 @@
     gap:10px;
     border-bottom:1.5px dashed rgba(43,32,21,0.25);
     padding-bottom:8px;
+    flex-wrap:wrap;
   }
   .form-row .tag{
     font-family:'JetBrains Mono', monospace;
@@ -364,9 +524,10 @@
     font-weight:700;
     font-size:1.4rem;
     color:var(--espresso);
+    word-break:break-word;
   }
   .form-row .val .vowel{ color:var(--stain); }
-  .example-block{ margin-bottom:10px; }
+  .example-block{ margin-bottom:10px; flex-shrink:0; }
   .example-label{
     font-family:'JetBrains Mono', monospace;
     font-size:0.75rem;
@@ -399,6 +560,7 @@
     margin:0 0 8px;
     font-style:normal;
     display:none;
+    flex-shrink:0;
   }
   .spoken-note.visible{ display:block; }
   .uk-line{
@@ -408,6 +570,7 @@
     border-left:3px solid var(--crema);
     padding:6px 10px;
     margin-top:auto;
+    flex-shrink:0;
   }
   .stain-mark{
     position:absolute;
@@ -416,6 +579,7 @@
     border-radius:50%;
     border:2px solid rgba(181,101,29,0.35);
     opacity:0.5;
+    pointer-events:none;
   }
 
   /* ── STEUERUNG ── */
@@ -558,6 +722,17 @@
   }
   .review-btn.has-due:hover{ transform:translateY(-1px); }
   .review-btn:disabled{ cursor:default; }
+  .test-mode-btn{
+    opacity:1;
+    border-color:var(--stain);
+    color:var(--stain);
+  }
+  .test-mode-btn:hover{ transform:translateY(-1px); background:rgba(181,101,29,0.1); }
+  .test-mode-btn.active{
+    background:var(--stain);
+    color:var(--paper-card);
+    box-shadow:2px 2px 0 rgba(43,32,21,0.3);
+  }
   .due-badge{
     font-family:'JetBrains Mono', monospace;
     font-size:0.96rem;
@@ -571,6 +746,7 @@
     gap:6px;
     margin-top:auto;
     padding-top:10px;
+    flex-shrink:0;
   }
   .rate-btn{
     flex:1;
@@ -626,6 +802,102 @@
     justify-content:center;
   }
 
+  /* ── TESTMODUS: Vokalwechsel-Muster erraten ── */
+  .test-panel{
+    background:
+      radial-gradient(circle at 82% 20%, rgba(181,101,29,0.16) 0, transparent 12%),
+      var(--paper-card);
+    border:2.5px solid var(--ink);
+    border-radius:4px;
+    box-shadow:5px 5px 0 rgba(43,32,21,0.3);
+    padding:26px 24px 24px;
+    min-height:400px;
+    display:flex;
+    flex-direction:column;
+  }
+  .test-panel .ticket-no{ display:flex; align-items:center; justify-content:space-between; }
+  .test-score{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--stain);
+  }
+  .test-infinitiv-block{
+    flex:0 0 auto;
+    text-align:center;
+    padding:8px 0 18px;
+  }
+  .test-prompt{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    font-weight:bold;
+    text-align:center;
+    margin:0 0 18px;
+  }
+  .test-options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .test-option{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:0.03em;
+    text-align:center;
+    border:2.5px solid var(--ink);
+    border-radius:5px;
+    padding:14px 10px;
+    background:var(--paper);
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(43,32,21,0.2);
+    transition:transform 0.1s ease, background 0.15s ease;
+  }
+  .test-option:hover:not(:disabled){ transform:translateY(-1px); }
+  .test-option:disabled{ cursor:default; }
+  .test-option.correct{
+    background:var(--green);
+    border-color:var(--green);
+    color:var(--paper-card);
+    box-shadow:3px 3px 0 rgba(43,32,21,0.3);
+  }
+  .test-option.wrong{
+    background:var(--stain);
+    border-color:var(--stain);
+    color:var(--paper-card);
+    box-shadow:3px 3px 0 rgba(43,32,21,0.3);
+  }
+  .test-option.dim{ opacity:0.45; }
+  .test-feedback{
+    text-align:center;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    min-height:1.6em;
+    margin-bottom:10px;
+  }
+  .test-feedback.correct{ color:var(--green); }
+  .test-feedback.wrong{ color:var(--stain); }
+  .test-forms{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    text-align:center;
+    background:rgba(215,154,68,0.12);
+    border-left:3px solid var(--crema);
+    padding:8px 12px;
+    margin:0 0 10px;
+  }
+  .test-forms strong{ color:var(--espresso); font-weight:700; }
+  .test-next-wrap{
+    margin-top:auto;
+    display:flex;
+    justify-content:center;
+  }
+
 
 
   /* ============ DESKTOP/TABLET: Reihen als Sidebar links ============ */
@@ -677,6 +949,15 @@
       padding:0;
     }
   }
+
+  /* ============ KLEINE SCREENS: Karte kompakter ============ */
+  @media (max-width:400px){
+    .card-face{ padding:20px 16px 16px; }
+    .audio-btn{ top:14px; right:14px; width:36px; height:36px; font-size:1rem; }
+    .rate-btn{ font-size:0.86rem; padding:6px 2px; }
+    .test-panel{ padding:20px 16px 16px; }
+    .test-option{ font-size:1rem; padding:12px 8px; }
+  }
 </style>
 </head>
 <body>
@@ -685,7 +966,8 @@
   <div class="stamp">Starke<br>Verben</div>
   <span class="badge"><span class="bean">☕</span>101 VERBEN · DE/UA</span>
   <h1>Verb-Café</h1>
-  <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em> – wähl dir das Set, dreh die Karten um, wiederhol, bis es sich gemütlich anfühlt.</p>
+  <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em><br>Wähl dir das Set → dreh die Karten um → wiederhol → automatisier.</p>
+  <p class="speak-hint">🗣️ Am besten laut üben — deine eigene Stimme trainiert mit!</p>
 </section>
 
 <div class="content-layout">
@@ -693,6 +975,7 @@
   <div class="menu-top-row">
     <p class="menu-title">— DIE KARTE —</p>
     <button class="review-btn" id="reviewBtn">🌱 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
+    <button class="review-btn test-mode-btn" id="testBtn">🎯 Testmodus</button>
   </div>
   <div class="menu-tabs" id="menuTabs"></div>
   <div class="group-dots" id="groupDots"></div>
@@ -708,13 +991,15 @@
   <div class="card-arena" id="cardArena">
     <div class="card" id="flipCard">
       <div class="card-face card-front">
+        <button class="audio-btn" id="audioBtn" type="button" aria-label="Alle 3 Formen anhören" title="Alle 3 Formen anhören">🔊</button>
         <div class="ticket-no" id="ticketNo">BON № 001</div>
         <div class="infinitiv-center">
           <div class="card-eyebrow" id="frontEyebrow">Infinitiv</div>
           <div class="infinitiv" id="infinitivWord">—</div>
+          <div class="audio-hint">🔊 = Hören + Am besten gleich laut nachsprechen!</div>
         </div>
-        <p class="prompt-line" id="promptLine">Wie heißen die Grundformen - Präteritum und Partizip 2?</p>
-        <p class="flip-hint">Tippen = Umdrehen ✪ Wischen = Horizontal scrollen</p>
+        <p class="prompt-line" id="promptLine">Wie heißen Präteritum und Partizip 2?</p>
+        <p class="flip-hint">Tippen = Umdrehen</p>
       </div>
       <div class="card-face card-back card-back-face">
         <div class="card-eyebrow">Bist du mit diesen Verbformen vertraut?</div>
@@ -739,6 +1024,24 @@
     </div>
   </div>
 
+  <div class="test-panel" id="testPanel" style="display:none;">
+    <div class="ticket-no">
+      <span id="testTicketNo">TEST № 001</span>
+      <span class="test-score" id="testScoreLine">✓ 0 / 0</span>
+    </div>
+    <div class="test-infinitiv-block">
+      <div class="card-eyebrow">Infinitiv</div>
+      <div class="infinitiv" id="testInfinitivWord">—</div>
+    </div>
+    <p class="test-prompt">Welches Vokalwechsel-Muster passt zu diesem Verb?</p>
+    <div class="test-options" id="testOptions"></div>
+    <p class="test-feedback" id="testFeedback"></p>
+    <p class="test-forms" id="testForms" style="display:none;"></p>
+    <div class="test-next-wrap">
+      <button class="btn primary" id="testNextBtn" style="display:none;">Weiter →</button>
+    </div>
+  </div>
+
   <div class="completion-screen" id="completionScreen">
     <p class="completion-emoji">🙌</p>
     <p class="completion-title" id="completionTitle">Serie geschafft!</p>
@@ -755,7 +1058,7 @@
     <button class="btn primary" id="nextBtn">Nächste →</button>
   </div>
 
-  <div class="prefix-tip">
+  <div class="prefix-tip" id="prefixTip">
     <p class="tip-title">☕ Tipp: Verben mit Präfix</p>
     <p><strong>Untrennbares Präfix</strong> (be-, ent-, er-, ge-, ver-, zer-, emp-, miss-) → <strong>kein</strong> zusätzliches ge-, der Vokalwechsel bleibt wie beim Grundverb: scheiden → geschieden, aber entscheiden → entschieden.</p>
     <p><strong>Trennbares Präfix</strong> → ge- wandert zwischen Präfix und Stamm: stehen → gestanden, aber aufstehen → (bin) aufgestanden.</p>
@@ -772,7 +1075,8 @@
     <a href="https://instagram.com/tut_fantastisch" class="ig" target="_blank" rel="noopener">Instagram</a>
     <a href="https://threads.net/@tut_fantastisch" target="_blank" rel="noopener">Threads</a>
   </div>
-  <p>© 2026 Verb-Café</p>
+  <p>© 2026 Ella D. · Deutsch-Training mit Ella · Verb-Café — Alle Rechte vorbehalten / Усі права захищені</p>
+  <p><a href="./datenschutz.html" style="color:var(--paper); text-decoration:underline;">Datenschutz / Конфіденційність</a></p>
 </footer>
 
 <script>
@@ -781,7 +1085,7 @@ const GROUPS = [
   {
     "id": "ei-i-ie",
     "name": "Bleiben-Serie",
-    "pattern": "ei → i/ie → i",
+    "pattern": "ei → i/ie → i/ie",
     "verbs": [
       {
         "inf": "bleiben",
@@ -1320,7 +1624,7 @@ const GROUPS = [
   {
     "id": "e-a-e",
     "name": "Geben-Serie",
-    "pattern": "e → a → e",
+    "pattern": "e/ie → a → e",
     "verbs": [
       {
         "inf": "geben",
@@ -1454,7 +1758,7 @@ const GROUPS = [
   {
     "id": "a-ie-a",
     "name": "Fallen-Serie",
-    "pattern": "a → ie/i → a",
+    "pattern": "a/ä → ie/i → a",
     "verbs": [
       {
         "inf": "fallen",
@@ -1732,6 +2036,17 @@ const completionTitle = document.getElementById("completionTitle");
 const completionSub = document.getElementById("completionSub");
 const completionRepeatBtn = document.getElementById("completionRepeatBtn");
 const completionNextBtn = document.getElementById("completionNextBtn");
+const audioBtn = document.getElementById("audioBtn");
+const testBtn = document.getElementById("testBtn");
+const testPanel = document.getElementById("testPanel");
+const testTicketNo = document.getElementById("testTicketNo");
+const testScoreLine = document.getElementById("testScoreLine");
+const testInfinitivWord = document.getElementById("testInfinitivWord");
+const testOptions = document.getElementById("testOptions");
+const testFeedback = document.getElementById("testFeedback");
+const testForms = document.getElementById("testForms");
+const testNextBtn = document.getElementById("testNextBtn");
+const prefixTip = document.getElementById("prefixTip");
 
 function buildTabs(){
   menuTabs.innerHTML = "";
@@ -1763,6 +2078,7 @@ function updateDueBadge(){
 
 function selectGroup(i, cardIndex){
   mode = "browse";
+  leaveTestUI();
   hideCompletion();
   currentGroupIndex = (i + GROUPS.length) % GROUPS.length;
   currentCardIndex = cardIndex === undefined ? 0 : cardIndex;
@@ -1775,6 +2091,7 @@ function startReview(){
   const due = getDueVerbs();
   if (due.length === 0) return;
   mode = "review";
+  leaveTestUI();
   reviewDeck = due;
   reviewIndex = 0;
   hideCompletion();
@@ -1940,10 +2257,57 @@ reviewBtn.addEventListener("click", () => startReview());
 prevBtn.addEventListener("click", (e) => { e.stopPropagation(); goPrev(); });
 nextBtn.addEventListener("click", (e) => { e.stopPropagation(); goNext(); });
 
+// ===== Aussprache: Infinitiv, Präteritum & Partizip II nacheinander vorlesen =====
+let speakToken = 0;
+function speakVerbForms(verb){
+  if (!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const myToken = ++speakToken;
+  audioBtn.classList.add("speaking");
+
+  const [, ...partWords] = verb.part.split(" ");
+  const partizip = partWords.join(" ");
+  const forms = [verb.inf, verb.pret, partizip];
+
+  let i = 0;
+  function speakNext(){
+    if (myToken !== speakToken) return; // wurde von einer neuen Anfrage überholt
+    if (i >= forms.length) { audioBtn.classList.remove("speaking"); return; }
+    const utter = new SpeechSynthesisUtterance(forms[i]);
+    utter.lang = "de-DE";
+    utter.rate = 0.85;
+    utter.onend = () => { i++; setTimeout(speakNext, 220); };
+    utter.onerror = () => { audioBtn.classList.remove("speaking"); };
+    window.speechSynthesis.speak(utter);
+  }
+  speakNext();
+}
+
+audioBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const verb = getCurrentVerb();
+  if (verb) speakVerbForms(verb);
+});
+
 // Tastatur: ← / → blättern, Leertaste / Enter dreht die Karte um,
 // 1/2/3 bewerten (nur wenn die Karte gerade umgedreht ist)
 document.addEventListener("keydown", (e) => {
   if (showingCompletion) return;
+
+  if (mode === "test") {
+    if (!testAnswered && ["1","2","3"].includes(e.key)) {
+      const idx = Number(e.key) - 1;
+      const btn = testOptions.children[idx];
+      if (btn) btn.click();
+      return;
+    }
+    if (testAnswered && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      nextTestQuestion();
+    }
+    return; // im Testmodus keine Flip-Card-Tasten
+  }
+
   if (flipCard.classList.contains("flipped") && ["1","2","3"].includes(e.key)) {
     const map = { "1": "again", "2": "good", "3": "easy" };
     const verb = getCurrentVerb();
@@ -1976,10 +2340,256 @@ cardArena.addEventListener("touchend", (e) => {
   touchStartY = null;
 });
 
+// ===== Testmodus: Infinitiv sehen, passendes Vokalwechsel-Muster wählen =====
+// Alle 101 Verben sind dabei. Die "Mischverben & Sonderfälle"-Gruppe ist
+// selbst nochmal zweigeteilt: echte Mischverben mit -te/-t-Endung
+// (bringen, denken, kennen, nennen, rennen, senden, wenden, brennen,
+// wissen, haben) vs. komplett eigenwillige starke Verben ohne -te-Endung
+// und ohne -t-Partizip (sein, werden, gehen, stehen, tun — z.B. gewesen,
+// geworden, gegangen enden auf -en, nicht auf -t). Deshalb zwei ehrliche
+// Antwortkategorien statt eines gemeinsamen, unpassenden Labels.
+const MISCHVERBEN_TEST_LABEL = "Gemischt (-te/-t)";
+const SONDERFALL_TEST_LABEL = "Sonderfall (ganz unregelmäßig)";
+const SONDERFALL_VERBS = new Set(["sein", "werden", "gehen", "stehen", "tun"]);
+
+function testPatternFor(groupId, inf){
+  if (groupId !== "mischverben") return null; // wird vom Aufrufer mit g.pattern befüllt
+  return SONDERFALL_VERBS.has(inf) ? SONDERFALL_TEST_LABEL : MISCHVERBEN_TEST_LABEL;
+}
+
+const TEST_GROUPS = GROUPS;
+const TEST_POOL = [];
+TEST_GROUPS.forEach(g => g.verbs.forEach(v => TEST_POOL.push({
+  inf: v.inf,
+  pattern: testPatternFor(g.id, v.inf) ?? g.pattern,
+  pret: v.pret,
+  part: v.part
+})));
+const ALL_PATTERNS = [...new Set(TEST_POOL.map(v => v.pattern))];
+
+function shuffleArr(arr){
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let testDeck = [];
+let testIndex = 0;
+let testScore = 0;
+let testAnswered = false;
+const TEST_ROUND_SIZE = 10;
+
+// Cycle-Queue: alle Verben des Pools werden einmal komplett "verbraucht",
+// bevor sich beim nächsten Durchlauf etwas wiederholt.
+let testCycleQueue = [];
+let testCycleTotal = 0;
+let testRoundSizes = []; // ausgeglichene Rundengrößen für den aktuellen Durchlauf (keine Mini-Restrunde)
+let testRoundPointer = 0;
+let testRoundNumber = 0; // Runden seit Seitenaufruf, für die Pause-Nachricht alle 3 Runden
+
+// Verteilt eine Gesamtmenge auf Runden nahe der Zielgröße, ohne eine
+// mickrige Restrunde übrig zu lassen (z.B. 101 Verben, Ziel 10 -> nicht
+// 10×10 + 1, sondern 9 Runden à 9 und 2 Runden à 10).
+function computeRoundSizes(total, target){
+  const numRounds = Math.max(1, Math.ceil(total / target));
+  const base = Math.floor(total / numRounds);
+  const remainder = total % numRounds;
+  const sizes = [];
+  for (let i = 0; i < numRounds; i++) {
+    sizes.push(base + (i < remainder ? 1 : 0));
+  }
+  return sizes;
+}
+
+function newCycle(){
+  testCycleQueue = shuffleArr(TEST_POOL);
+  testCycleTotal = testCycleQueue.length;
+  testRoundSizes = computeRoundSizes(testCycleTotal, TEST_ROUND_SIZE);
+  testRoundPointer = 0;
+}
+
+function leaveTestUI(){
+  testPanel.style.display = "none";
+  testBtn.classList.remove("active");
+  prefixTip.style.display = "";
+}
+
+function startTest(){
+  mode = "test";
+  if (testCycleQueue.length === 0) newCycle(); // frischer Durchlauf, falls noch keiner läuft oder der letzte komplett durch ist
+  hideCompletion();
+  testBtn.classList.add("active");
+  [...menuTabs.children].forEach(el => el.classList.remove("active"));
+  [...groupDots.children].forEach(el => el.classList.remove("active"));
+  groupName.textContent = "🎯 Testmodus";
+  beginRound();
+}
+
+function beginRound(){
+  cardArena.style.display = "none";
+  controlsBar.style.display = "none";
+  prefixTip.style.display = "none";
+  testPanel.style.display = "flex";
+  const size = testRoundSizes[testRoundPointer] ?? TEST_ROUND_SIZE;
+  testRoundPointer++;
+  testDeck = testCycleQueue.splice(0, size); // entnimmt & entfernt aus der Queue — kein Verb kommt zweimal
+  testIndex = 0;
+  testScore = 0;
+  renderTestQuestion();
+}
+
+function exitTest(){
+  mode = "browse";
+  testBtn.classList.remove("active");
+  testPanel.style.display = "none";
+  cardArena.style.display = "";
+  controlsBar.style.display = "";
+  prefixTip.style.display = "";
+  render();
+}
+
+function renderTestQuestion(){
+  const item = testDeck[testIndex];
+  testAnswered = false;
+
+  const drawnBeforeThisRound = testCycleTotal - testCycleQueue.length - testDeck.length;
+  const positionInCycle = drawnBeforeThisRound + testIndex + 1;
+  progressFill.style.width = `${(positionInCycle / testCycleTotal) * 100}%`;
+  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} in diesem Durchlauf`;
+
+  testTicketNo.textContent = `TEST № ${String(testIndex + 1).padStart(3, "0")}`;
+  testScoreLine.textContent = `✓ ${testScore} / ${testIndex}`;
+  testInfinitivWord.textContent = item.inf;
+  testFeedback.textContent = "";
+  testFeedback.className = "test-feedback";
+  testForms.style.display = "none";
+  testForms.innerHTML = "";
+  testNextBtn.style.display = "none";
+
+  const distractors = shuffleArr(ALL_PATTERNS.filter(p => p !== item.pattern)).slice(0, 2);
+  const optionPatterns = shuffleArr([item.pattern, ...distractors]);
+
+  testOptions.innerHTML = "";
+  optionPatterns.forEach(pattern => {
+    const btn = document.createElement("button");
+    btn.className = "test-option";
+    btn.type = "button";
+    btn.textContent = pattern;
+    btn.addEventListener("click", () => answerTest(pattern, item, btn));
+    testOptions.appendChild(btn);
+  });
+}
+
+function answerTest(selected, item, clickedBtn){
+  if (testAnswered) return;
+  testAnswered = true;
+
+  const correctPattern = item.pattern;
+  const isCorrect = selected === correctPattern;
+  if (isCorrect) testScore++;
+
+  [...testOptions.children].forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === correctPattern) {
+      btn.classList.add("correct");
+    } else if (btn === clickedBtn) {
+      btn.classList.add("wrong");
+    } else {
+      btn.classList.add("dim");
+    }
+  });
+
+  testFeedback.textContent = isCorrect ? "🙌 Richtig!" : "Nicht ganz — richtig wäre: " + correctPattern;
+  testFeedback.classList.add(isCorrect ? "correct" : "wrong");
+  testScoreLine.textContent = `✓ ${testScore} / ${testIndex + 1}`;
+
+  const [aux, ...partWords] = item.part.split(" ");
+  const partizip = partWords.join(" ");
+  testForms.innerHTML =
+    `Infinitiv: <strong>${item.inf}</strong> · ` +
+    `Präteritum: <strong>${item.pret}</strong> · ` +
+    `Partizip II: <strong>${partizip}</strong> <span style="opacity:0.7;">(${aux})</span>`;
+  testForms.style.display = "block";
+  testNextBtn.style.display = "";
+}
+
+function nextTestQuestion(){
+  if (testIndex >= testDeck.length - 1) { finishRound(); return; }
+  testIndex++;
+  renderTestQuestion();
+}
+
+function finishRound(){
+  showingCompletion = true;
+  testPanel.style.display = "none";
+  testRoundNumber++;
+
+  const pct = Math.round((testScore / testDeck.length) * 100);
+  const cycleExhausted = testCycleQueue.length === 0;
+  const isPauseRound = !cycleExhausted && (testRoundNumber % 3 === 0);
+
+  if (cycleExhausted) {
+    completionTitle.textContent = "🎉 Du hast es wirklich geschafft!";
+    completionSub.textContent =
+      `Alle ${testCycleTotal} Verben in diesem Durchlauf getestet — letzte Runde: ${testScore} von ${testDeck.length} richtig. ` +
+      `Genieß ein paar entspannte Gespräche, ohne über Verbformen nachzudenken. 🎉`;
+    completionRepeatBtn.style.display = "";
+    completionRepeatBtn.textContent = "Neuer Durchlauf";
+    completionRepeatBtn.onclick = () => { hideCompletion(); newCycle(); beginRound(); };
+    completionNextBtn.textContent = "Zurück zu den Karten";
+    completionNextBtn.onclick = () => { hideCompletion(); exitTest(); };
+  } else if (isPauseRound) {
+    completionTitle.textContent = "🎯 Runde geschafft!";
+    completionSub.textContent =
+      `${testScore} von ${testDeck.length} richtig (${pct}%). Du machst es super! Gönnst du dir mal eine Pause?`;
+    completionRepeatBtn.style.display = "";
+    completionRepeatBtn.textContent = "Nö, weiter";
+    completionRepeatBtn.onclick = () => { hideCompletion(); beginRound(); };
+    completionNextBtn.textContent = "Gute Idee";
+    completionNextBtn.onclick = () => { showFarewell(); };
+  } else {
+    completionTitle.textContent = "🎯 Runde geschafft!";
+    completionSub.textContent = `${testScore} von ${testDeck.length} richtig (${pct}%).`;
+    completionRepeatBtn.style.display = "";
+    completionRepeatBtn.textContent = "Neue Runde";
+    completionRepeatBtn.onclick = () => { hideCompletion(); beginRound(); };
+    completionNextBtn.textContent = "Zurück zu den Karten";
+    completionNextBtn.onclick = () => { hideCompletion(); exitTest(); };
+  }
+  completionScreen.style.display = "flex";
+}
+
+function showFarewell(){
+  completionTitle.textContent = "👋 Bis bald!";
+  completionSub.textContent = "Gönn dir die Pause — die Verben laufen dir nicht weg.";
+  completionRepeatBtn.style.display = "none";
+  completionNextBtn.textContent = "Weiter zu den Karten";
+  completionNextBtn.onclick = () => { hideCompletion(); exitTest(); };
+}
+
+testBtn.addEventListener("click", () => {
+  if (mode === "test") { exitTest(); } else { startTest(); }
+});
+testNextBtn.addEventListener("click", () => nextTestQuestion());
+
 buildTabs();
 buildDots();
 updateDueBadge();
 render();
+</script>
+
+<!-- Offline-Fähigkeit: Service Worker registrieren (siehe service-worker.js) -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js").catch(() => {
+        /* Registrierung fehlgeschlagen (z.B. lokal ohne HTTPS) — Seite funktioniert trotzdem online normal weiter */
+      });
+    });
+  }
 </script>
 </body>
 </html>
