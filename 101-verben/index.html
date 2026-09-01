@@ -129,9 +129,14 @@
     --line-w: 3px;
   }
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html{ scroll-behavior:smooth; }
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
   body{
     margin:0;
+    overflow-x:hidden; /* Sicherheitsnetz: kein Element kann die Seite horizontal aufreißen */
     background:var(--paper);
     background-image:
       radial-gradient(circle at 8% 18%, rgba(107,62,38,0.05) 0, transparent 40%),
@@ -190,7 +195,7 @@
   .hero .sub{
     max-width:520px;
     margin:0 auto;
-    font-size:1.1rem;
+    font-size:1.3rem;
     font-weight:600;
     color:var(--ink-soft);
   }
@@ -688,13 +693,88 @@
   .social-links a.ig{ color:#E88AB0; }
   .social-links a.ig:hover{ border-color:#E88AB0; background:rgba(232,138,176,0.12); }
 
-  .menu-top-row{
+  /* ============ INSTALLATIONS-HINWEIS (PWA) ============ */
+  .install-banner{
+    position:fixed;
+    left:16px; right:16px; bottom:16px;
+    z-index:50;
+    max-width:520px;
+    margin:0 auto;
+    background:var(--paper-card);
+    border:2.5px solid var(--espresso);
+    border-radius:10px;
+    box-shadow:5px 5px 0 rgba(43,32,21,0.3);
+    padding:14px 16px;
     display:flex;
     align-items:center;
-    justify-content:center;
+    gap:12px;
+  }
+  .install-icon{ font-size:1.7rem; flex-shrink:0; }
+  .install-text{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .install-text strong{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--espresso);
+  }
+  .install-text span{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    line-height:1.4;
+  }
+  .install-btn{
+    flex-shrink:0;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    background:var(--espresso);
+    color:var(--paper-card);
+    border:2px solid var(--espresso);
+    border-radius:6px;
+    padding:8px 14px;
+    cursor:pointer;
+  }
+  .install-btn:hover{ transform:translateY(-1px); }
+  .install-close{
+    flex-shrink:0;
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    font-size:1.1rem;
+    line-height:1;
+    cursor:pointer;
+    padding:4px;
+    align-self:flex-start;
+  }
+  @media (max-width:480px){
+    .install-banner{ flex-wrap:wrap; }
+    .install-text{ order:2; flex-basis:100%; }
+    .install-btn{ order:3; margin-left:auto; }
+    .install-close{ order:1; margin-left:auto; }
+  }
+
+  .menu-top-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
     gap:14px;
     margin-bottom:10px;
+    padding:0 20px;
     flex-wrap:wrap;
+  }
+  .menu-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+    min-width:0;
+    max-width:100%;
   }
   .menu-title{ margin-bottom:0; }
   .review-btn{
@@ -925,8 +1005,10 @@
       align-items:stretch;
       gap:10px;
       margin-bottom:16px;
+      padding:0;
     }
     .menu-title{ text-align:left; }
+    .menu-actions{ align-items:stretch; }
     .review-btn{ justify-content:center; }
     .menu-tabs{
       flex-direction:column;
@@ -950,6 +1032,25 @@
     }
   }
 
+  /* ============ GROSSE SCREENS: mehr Fläche nutzen statt alles mittig ============ */
+  @media (min-width:1400px){
+    body{
+      background-image:
+        radial-gradient(circle at 6% 12%, rgba(107,62,38,0.07) 0, transparent 32%),
+        radial-gradient(circle at 94% 8%, rgba(181,101,29,0.06) 0, transparent 28%),
+        radial-gradient(circle at 4% 88%, rgba(181,101,29,0.06) 0, transparent 30%),
+        radial-gradient(circle at 96% 90%, rgba(107,62,38,0.07) 0, transparent 32%);
+    }
+    .content-layout{
+      max-width:1280px;
+      gap:48px;
+    }
+    .menu-board{ flex-basis:280px; }
+    .order-area{ max-width:660px; }
+    .infinitiv{ font-size:clamp(2.1rem, 6vw, 6rem); }
+    .hero .sub{ max-width:600px; }
+  }
+
   /* ============ KLEINE SCREENS: Karte kompakter ============ */
   @media (max-width:400px){
     .card-face{ padding:20px 16px 16px; }
@@ -957,6 +1058,7 @@
     .rate-btn{ font-size:0.86rem; padding:6px 2px; }
     .test-panel{ padding:20px 16px 16px; }
     .test-option{ font-size:1rem; padding:12px 8px; }
+    .review-btn{ font-size:0.95rem; padding:5px 10px; }
   }
 </style>
 </head>
@@ -966,16 +1068,18 @@
   <div class="stamp">Starke<br>Verben</div>
   <span class="badge"><span class="bean">☕</span>101 VERBEN · DE/UA</span>
   <h1>Verb-Café</h1>
-  <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em><br>Wähl dir das Set → dreh die Karten um → wiederhol → automatisier.</p>
-  <p class="speak-hint">🗣️ Am besten laut üben — deine eigene Stimme trainiert mit!</p>
+  <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em><br>automatisieren → sicher sprechen</p>
+  <p class="speak-hint">🎙️ Am besten laut üben — deine eigene Stimme trainiert mit!</p>
 </section>
 
 <div class="content-layout">
 <div class="menu-board">
   <div class="menu-top-row">
     <p class="menu-title">— DIE KARTE —</p>
-    <button class="review-btn" id="reviewBtn">🌱 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
-    <button class="review-btn test-mode-btn" id="testBtn">🎯 Testmodus</button>
+    <div class="menu-actions">
+      <button class="review-btn" id="reviewBtn">🌱 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
+      <button class="review-btn test-mode-btn" id="testBtn">🎯 Testmodus</button>
+    </div>
   </div>
   <div class="menu-tabs" id="menuTabs"></div>
   <div class="group-dots" id="groupDots"></div>
@@ -996,10 +1100,10 @@
         <div class="infinitiv-center">
           <div class="card-eyebrow" id="frontEyebrow">Infinitiv</div>
           <div class="infinitiv" id="infinitivWord">—</div>
-          <div class="audio-hint">🔊 = Hören + Am besten gleich laut nachsprechen!</div>
+          <div class="audio-hint">🔊 Antippen zum Hören — am besten gleich laut nachsprechen!</div>
         </div>
-        <p class="prompt-line" id="promptLine">Wie heißen Präteritum und Partizip 2?</p>
-        <p class="flip-hint">Tippen = Umdrehen</p>
+        <p class="prompt-line" id="promptLine">Wie heißen die Grundformen - Präteritum und Partizip 2?</p>
+        <p class="flip-hint">Tippen = Umdrehen ✪ Wischen = Horizontal scrollen</p>
       </div>
       <div class="card-face card-back card-back-face">
         <div class="card-eyebrow">Bist du mit diesen Verbformen vertraut?</div>
@@ -1067,11 +1171,21 @@
 </div>
 </div>
 
+<div class="install-banner" id="installBanner" style="display:none;">
+  <span class="install-icon">📲</span>
+  <div class="install-text">
+    <strong id="installTitle">Als App installieren</strong>
+    <span id="installSub">Für schnelleren Zugriff & Offline-Nutzung — direkt auf deinem Homescreen.</span>
+  </div>
+  <button class="install-btn" id="installActionBtn" style="display:none;">Installieren</button>
+  <button class="install-close" id="installCloseBtn" aria-label="Hinweis schließen">✕</button>
+</div>
+
 <footer>
   <p class="line">Deutsch-Training mit Ella D.</p>
-  
+  <!-- TODO Ella: echte Links eintragen -->
   <div class="social-links">
-    <a href="https://t.me/+_r0zgXrkbPZkNjAy" class="tg" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://t.me/deutsch_lab_space" class="tg" target="_blank" rel="noopener">Telegram</a>
     <a href="https://instagram.com/tut_fantastisch" class="ig" target="_blank" rel="noopener">Instagram</a>
     <a href="https://threads.net/@tut_fantastisch" target="_blank" rel="noopener">Threads</a>
   </div>
@@ -1091,9 +1205,9 @@ const GROUPS = [
         "inf": "bleiben",
         "pret": "blieb",
         "part": "ist geblieben",
-        "example": "Er blieb den ganzen Sommer in Amsterdam.",
+        "example": "Er blieb den ganzen Sommer in Los Angeles.",
         "uk": "залишатися — залишився",
-        "perfekt": "Er ist den ganzen Sommer in Amsterdam geblieben."
+        "perfekt": "Er ist den ganzen Sommer in Los Angeles geblieben."
       },
       {
         "inf": "schreiben",
@@ -1963,8 +2077,8 @@ const GROUPS = [
 // ===== Fortschritt & Spaced Repetition (Leitner, lokal im Browser) =====
 // Jede bewertete Karte bekommt eine Box (1–5) und ein Fälligkeitsdatum.
 // "Nochmal" wirft auf Box 1 zurück, "Okay" +1 Box, "Leicht" +2 Boxen.
-// Gespeichert wird pro Gerät/Browser in localStorage,
-// kein Sync zwischen Geräten.
+// Gespeichert wird pro Gerät/Browser in localStorage — kein Server nötig,
+// aber auch kein Sync zwischen Geräten.
 const SRS_KEY = "verbcafe_srs_v1";
 const INTERVALS_DAYS = [1, 2, 4, 8, 16]; // Tage bis zur nächsten Fälligkeit, Index = Box-1
 
@@ -2590,6 +2704,67 @@ render();
       });
     });
   }
+</script>
+
+<!-- Installations-Hinweis (PWA): Android/Chrome bekommt einen echten Installieren-Button,
+     iOS Safari (kein beforeinstallprompt) eine kurze Anleitung. Wird einmal geschlossen,
+     merkt sich der Browser das lokal und zeigt den Hinweis nicht mehr erneut. -->
+<script>
+(function(){
+  const DISMISS_KEY = "verbcafe_install_dismissed";
+  const banner = document.getElementById("installBanner");
+  const titleEl = document.getElementById("installTitle");
+  const subEl = document.getElementById("installSub");
+  const actionBtn = document.getElementById("installActionBtn");
+  const closeBtn = document.getElementById("installCloseBtn");
+
+  function isStandalone(){
+    return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  }
+  function isDismissed(){
+    try { return localStorage.getItem(DISMISS_KEY) === "1"; } catch (e) { return false; }
+  }
+  function dismiss(){
+    try { localStorage.setItem(DISMISS_KEY, "1"); } catch (e) { /* ignorieren */ }
+    banner.style.display = "none";
+  }
+
+  if (isStandalone() || isDismissed()) return; // schon installiert oder schon weggeklickt
+
+  closeBtn.addEventListener("click", dismiss);
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (isIOS) {
+    // iOS unterstützt keine automatische Installation — nur die manuelle Anleitung anzeigen
+    titleEl.textContent = "Als App installieren";
+    subEl.textContent = "Tippe unten auf ⎋ Teilen und dann auf „Zum Home-Bildschirm“.";
+    actionBtn.style.display = "none";
+    banner.style.display = "flex";
+    return;
+  }
+
+  // Android/Chrome & andere Browser mit nativer Installations-Unterstützung
+  let deferredPrompt = null;
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    titleEl.textContent = "Als App installieren";
+    subEl.textContent = "Für schnelleren Zugriff & Offline-Nutzung — direkt auf deinem Homescreen.";
+    actionBtn.style.display = "";
+    banner.style.display = "flex";
+  });
+
+  actionBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    dismiss();
+  });
+
+  window.addEventListener("appinstalled", dismiss);
+})();
 </script>
 </body>
 </html>
