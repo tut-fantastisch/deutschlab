@@ -125,7 +125,9 @@
     --crema-light: #EFC077;
     --stain:       #B5651D;
     --green:       #5C6B2E;
+    --greenlight: #7b8f3d;
     --red:         #A23B2E;
+    --blue: #513d8f;
     --line-w: 3px;
   }
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -778,12 +780,12 @@
   }
   .menu-title{ margin-bottom:0; }
   .review-btn{
-    font-family:'Kalam', cursive;
+    font-family:'Kalam', sans-serif;
     font-weight:700;
-    font-size:1.1rem;
+    font-size:1.2rem;
     letter-spacing:0.02em;
-    background:var(--paper-card);
-    color:var(--espresso);
+    background:var(--greenlight);
+    color:var(--crema-light);
     border:2px solid var(--espresso);
     border-radius:20px;
     padding:5px 14px;
@@ -796,7 +798,7 @@
   }
   .review-btn.has-due{
     opacity:1;
-    background:var(--espresso);
+    background:var(--blue);
     color:var(--paper-card);
     box-shadow:2px 2px 0 rgba(43,32,21,0.3);
   }
@@ -804,8 +806,8 @@
   .review-btn:disabled{ cursor:default; }
   .test-mode-btn{
     opacity:1;
-    border-color:var(--stain);
-    color:var(--stain);
+    border-color:var(--green);
+    color:var(--paper-card);
   }
   .test-mode-btn:hover{ transform:translateY(-1px); background:rgba(181,101,29,0.1); }
   .test-mode-btn.active{
@@ -1077,8 +1079,8 @@
   <div class="menu-top-row">
     <p class="menu-title">— DIE KARTE —</p>
     <div class="menu-actions">
-      <button class="review-btn" id="reviewBtn">🌱 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
       <button class="review-btn test-mode-btn" id="testBtn">🎯 Testmodus</button>
+      <button class="review-btn" id="reviewBtn">🌱 Wiederholung <span class="due-badge" id="dueCount">0</span></button>
     </div>
   </div>
   <div class="menu-tabs" id="menuTabs"></div>
@@ -2572,7 +2574,7 @@ function renderTestQuestion(){
   const drawnBeforeThisRound = testCycleTotal - testCycleQueue.length - testDeck.length;
   const positionInCycle = drawnBeforeThisRound + testIndex + 1;
   progressFill.style.width = `${(positionInCycle / testCycleTotal) * 100}%`;
-  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} aktuell`;
+  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} in diesem Durchlauf`;
 
   testTicketNo.textContent = `TEST № ${String(testIndex + 1).padStart(3, "0")}`;
   testScoreLine.textContent = `✓ ${testScore} / ${testIndex}`;
