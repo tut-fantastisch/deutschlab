@@ -2572,7 +2572,7 @@ function renderTestQuestion(){
   const drawnBeforeThisRound = testCycleTotal - testCycleQueue.length - testDeck.length;
   const positionInCycle = drawnBeforeThisRound + testIndex + 1;
   progressFill.style.width = `${(positionInCycle / testCycleTotal) * 100}%`;
-  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} in diesem Durchlauf`;
+  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} aktuell`;
 
   testTicketNo.textContent = `TEST № ${String(testIndex + 1).padStart(3, "0")}`;
   testScoreLine.textContent = `✓ ${testScore} / ${testIndex}`;
