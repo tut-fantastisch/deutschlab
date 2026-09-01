@@ -809,7 +809,7 @@
     border-color:var(--green);
     color:var(--paper-card);
   }
-  .test-mode-btn:hover{ transform:translateY(-1px); background:rgba(181,101,29,0.1); }
+  .test-mode-btn:hover{ transform:translateY(-1px); background:rgba(181,101,29,0.1); color: var(--espresso)}
   .test-mode-btn.active{
     background:var(--stain);
     color:var(--paper-card);
@@ -1071,7 +1071,7 @@
   <span class="badge"><span class="bean">☕</span>101 VERBEN · DE/UA</span>
   <h1>Verb-Café</h1>
   <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em><br>automatisieren → sicher sprechen</p>
-  <p class="speak-hint">🎙️ Am besten laut üben — deine eigene Stimme trainiert mit!</p>
+  <p class="speak-hint">🎙️ Am besten laut üben — deine Stimme trainiert mit!</p>
 </section>
 
 <div class="content-layout">
@@ -1102,13 +1102,13 @@
         <div class="infinitiv-center">
           <div class="card-eyebrow" id="frontEyebrow">Infinitiv</div>
           <div class="infinitiv" id="infinitivWord">—</div>
-          <div class="audio-hint">🔊 Antippen zum Hören — am besten gleich laut nachsprechen!</div>
+          <div class="audio-hint">🔊 = Hören | Nachsprechen → automatisieren</div>
         </div>
-        <p class="prompt-line" id="promptLine">Wie heißen die Grundformen - Präteritum und Partizip 2?</p>
-        <p class="flip-hint">Tippen = Umdrehen ✪ Wischen = Horizontal scrollen</p>
+        <p class="prompt-line" id="promptLine">Wie heißen Präteritum und Partizip 2?</p>
+        <p class="flip-hint">Tipp = Umdrehen ↪️</p>
       </div>
       <div class="card-face card-back card-back-face">
-        <div class="card-eyebrow">Bist du mit diesen Verbformen vertraut?</div>
+        <div class="card-eyebrow">Kennst du das?</div>
         <div class="forms-grid" id="formsGrid"></div>
         <div class="example-block">
           <p class="example-label">Präteritum <span class="reg">· Erzählform, eher schriftlich</span></p>
@@ -1149,7 +1149,7 @@
   </div>
 
   <div class="completion-screen" id="completionScreen">
-    <p class="completion-emoji">🙌</p>
+    <p class="completion-emoji">✅</p>
     <p class="completion-title" id="completionTitle">Serie geschafft!</p>
     <p class="completion-sub" id="completionSub">Alle Verben dieser Serie durch.</p>
     <div class="completion-actions">
@@ -1191,7 +1191,7 @@
     <a href="https://instagram.com/tut_fantastisch" class="ig" target="_blank" rel="noopener">Instagram</a>
     <a href="https://threads.net/@tut_fantastisch" target="_blank" rel="noopener">Threads</a>
   </div>
-  <p>© 2026 Ella D. · Deutsch-Training mit Ella · Verb-Café — Alle Rechte vorbehalten / Усі права захищені</p>
+  <p>© 2026 Ella D. · Verb-Café · Interaktives Training — Alle Rechte vorbehalten / Усі права захищені</p>
   <p><a href="./datenschutz.html" style="color:var(--paper); text-decoration:underline;">Datenschutz / Конфіденційність</a></p>
 </footer>
 
@@ -1351,9 +1351,9 @@ const GROUPS = [
         "inf": "gleiten",
         "pret": "glitt",
         "part": "ist geglitten",
-        "example": "Der Finger glitt von oben nach unten über das Weinglas.",
+        "example": "Der Finger glitt von oben nach unten über das Glas.",
         "uk": "ковзати — ковзнув",
-        "perfekt": "Der Finger ist von oben nach unten über das Weinglas geglitten."
+        "perfekt": "Der Finger ist von oben nach unten über das Glas geglitten."
       },
       {
         "inf": "beißen",
@@ -1390,9 +1390,9 @@ const GROUPS = [
         "inf": "biegen",
         "pret": "bog",
         "part": "hat gebogen",
-        "example": "Er bog den Draht zu einem Ring.",
+        "example": "Der Witz war so gut, wir bogen uns vor Lachen.",
         "uk": "гнути — зігнув",
-        "perfekt": "Er hat den Draht zu einem Ring gebogen."
+        "perfekt": "Der Witz war so gut, wir haben uns vor Lachen gebogen."
       },
       {
         "inf": "fliehen",
@@ -1462,9 +1462,9 @@ const GROUPS = [
         "inf": "ziehen",
         "pret": "zog",
         "part": "hat gezogen",
-        "example": "Er zog kräftig an der Leine.",
+        "example": "Der Hund zog kräftig an der Leine.",
         "uk": "тягнути — потягнув",
-        "perfekt": "Er hat kräftig an der Leine gezogen."
+        "perfekt": "Der Hund hat kräftig an der Leine gezogen."
       },
       {
         "inf": "schieben",
@@ -1525,9 +1525,9 @@ const GROUPS = [
         "inf": "singen",
         "pret": "sang",
         "part": "hat gesungen",
-        "example": "Sie sang ein altes Volkslied.",
+        "example": "Sie sang 'Oops!... I Did It Again'.",
         "uk": "співати — заспівав",
-        "perfekt": "Sie hat ein altes Volkslied gesungen."
+        "perfekt": "Sie hat 'Oops!... I Did It Again' gesungen."
       },
       {
         "inf": "trinken",
@@ -1581,9 +1581,9 @@ const GROUPS = [
         "inf": "binden",
         "pret": "band",
         "part": "hat gebunden",
-        "example": "Sie band die Schnur fest.",
+        "example": "Sie band sich die Haare.",
         "uk": "зав'язувати — зав'язав",
-        "perfekt": "Sie hat die Schnur fest gebunden."
+        "perfekt": "Sie hat sich die Haare gebunden."
       },
       {
         "inf": "verschwinden",
@@ -1699,9 +1699,9 @@ const GROUPS = [
         "inf": "werfen",
         "pret": "warf",
         "part": "hat geworfen",
-        "example": "Der Junge warf den Ball ins Tor.",
+        "example": "Der Junge warf den Müll in die Tonne.",
         "uk": "кидати — кинув",
-        "perfekt": "Der Junge hat den Ball ins Tor geworfen."
+        "perfekt": "Der Junge hat den Müll in die Tonne geworfen."
       },
       {
         "inf": "gelten",
@@ -1731,9 +1731,9 @@ const GROUPS = [
         "inf": "befehlen",
         "pret": "befahl",
         "part": "hat befohlen",
-        "example": "Der Kapitän befahl den sofortigen Rückzug.",
+        "example": "Der Polizist befahl dem Fahrer anzuhalten.",
         "uk": "наказувати — наказав",
-        "perfekt": "Der Kapitän hat den sofortigen Rückzug befohlen."
+        "perfekt": "Der Polizist hat dem Fahrer befohlen, anzuhalten."
       }
     ]
   },
@@ -1754,17 +1754,17 @@ const GROUPS = [
         "inf": "sehen",
         "pret": "sah",
         "part": "hat gesehen",
-        "example": "Ich sah sie gestern im Café.",
+        "example": "Ich sah Anna gestern im Café.",
         "uk": "бачити — побачив",
-        "perfekt": "Ich habe sie gestern im Café gesehen."
+        "perfekt": "Ich habe Anna gestern im Café gesehen."
       },
       {
         "inf": "lesen",
         "pret": "las",
         "part": "hat gelesen",
-        "example": "Wir lasen den Text zweimal.",
+        "example": "Wir lasen das Buch zweimal.",
         "uk": "читати — прочитав",
-        "perfekt": "Wir haben den Text zweimal gelesen."
+        "perfekt": "Wir haben das Buch zweimal gelesen."
       },
       {
         "inf": "essen",
@@ -1817,9 +1817,9 @@ const GROUPS = [
         "inf": "fahren",
         "pret": "fuhr",
         "part": "ist gefahren",
-        "example": "Sie fuhr mit dem Zug nach Lviv.",
+        "example": "Sie fuhr mit dem Zug nach Paris.",
         "uk": "їхати — поїхав",
-        "perfekt": "Sie ist mit dem Zug nach Lviv gefahren."
+        "perfekt": "Sie ist mit dem Zug nach Paris gefahren."
       },
       {
         "inf": "tragen",
@@ -1833,7 +1833,7 @@ const GROUPS = [
         "inf": "wachsen",
         "pret": "wuchs",
         "part": "ist gewachsen",
-        "example": "Die Pflanze wuchs sehr schnell.",
+        "example": "Die Pflanze 🪴 wuchs sehr schnell.",
         "uk": "рости — виріс",
         "perfekt": "Die Pflanze ist sehr schnell gewachsen."
       },
@@ -1880,17 +1880,17 @@ const GROUPS = [
         "inf": "fallen",
         "pret": "fiel",
         "part": "ist gefallen",
-        "example": "Das Glas fiel vom Tisch und zerbrach.",
+        "example": "Das Buch fiel vom Regal.",
         "uk": "падати — впав",
-        "perfekt": "Das Glas ist vom Tisch gefallen und zerbrochen."
+        "perfekt": "Das Buch ist vom Regal gefallen."
       },
       {
         "inf": "halten",
         "pret": "hielt",
         "part": "hat gehalten",
-        "example": "Er hielt ihre Hand fest.",
+        "example": "Er hielt die Tasse am Henkel.",
         "uk": "тримати — тримав",
-        "perfekt": "Er hat ihre Hand fest gehalten."
+        "perfekt": "Er hat die Tasse am Henkel gehalten."
       },
       {
         "inf": "lassen",
@@ -1912,9 +1912,9 @@ const GROUPS = [
         "inf": "raten",
         "pret": "riet",
         "part": "hat geraten",
-        "example": "Der Lehrer riet ihm zu mehr Übung.",
+        "example": "Der Arzt riet uns, weniger Kaffee zu trinken.",
         "uk": "радити — порадив",
-        "perfekt": "Der Lehrer hat ihm zu mehr Übung geraten."
+        "perfekt": "Der Arzt hat uns geraten, weniger Kaffee zu trinken."
       },
       {
         "inf": "braten",
@@ -1928,9 +1928,9 @@ const GROUPS = [
         "inf": "fangen",
         "pret": "fing",
         "part": "hat gefangen",
-        "example": "Der Torwart fing den Ball sicher.",
+        "example": "'Harry Potter fing den Schnatz mit dem Mund.'",
         "uk": "ловити — впіймав",
-        "perfekt": "Der Torwart hat den Ball sicher gefangen."
+        "perfekt": "'Harry Potter hat den Schnatz mit dem Mund gefangen.'"
       },
       {
         "inf": "hängen",
@@ -1959,9 +1959,9 @@ const GROUPS = [
         "inf": "denken",
         "pret": "dachte",
         "part": "hat gedacht",
-        "example": "Ich dachte lange darüber.",
+        "example": "Ich dachte lange an das Treffen.",
         "uk": "думати — подумав",
-        "perfekt": "Ich habe lange darüber gedacht."
+        "perfekt": "Ich habe lange daran gedacht."
       },
       {
         "inf": "kennen",
@@ -1994,7 +1994,7 @@ const GROUPS = [
         "example": "Sie sandte ihm ein wichtiges Dokument.",
         "uk": "надсилати — надіслав",
         "perfekt": "Sie hat ihm ein wichtiges Dokument gesandt.",
-        "note": "Nebenform schwach: sendete – gesendet (v. a. bei Rundfunk/TV: „Das wurde live gesendet.“). Für Alltägliches wie einen Brief oder eine Nachricht sagt man meist schicken (schickte – geschickt)."
+        "note": "Nebenform schwach: sendete – gesendet. Im Alltag sagt man oft schicken (schickte – geschickt)."
       },
       {
         "inf": "wenden",
@@ -2003,7 +2003,7 @@ const GROUPS = [
         "example": "Er wandte sich an den Kundendienst.",
         "uk": "звертатися — звернувся",
         "perfekt": "Er hat sich an den Kundendienst gewandt.",
-        "note": "Nebenform schwach: wendete – gewendet, z. B. beim Auto wenden oder beim Kochen (den Pfannkuchen wenden). Bei sich an jemanden wenden ist die starke Form üblich: wandte – gewandt."
+        "note": "Nebenform schwach: wendete – gewendet."
       },
       {
         "inf": "brennen",
@@ -2028,16 +2028,16 @@ const GROUPS = [
         "example": "Sie hatte gestern viel Arbeit.",
         "uk": "мати — мав",
         "perfekt": "Sie hat gestern viel Arbeit gehabt.",
-        "note": "Bei haben, sein, werden bleibt im Gespräch meist das Präteritum üblich — das Perfekt klingt hier eher schriftlich."
+        "note": "🟢 Bei [haben, sein, werden] bleibt im Gespräch meist das Präteritum üblich."
       },
       {
         "inf": "sein",
         "pret": "war",
         "part": "ist gewesen",
-        "example": "Er war letztes Jahr in Kyjiw.",
+        "example": "Er war letztes Jahr in San Francisco.",
         "uk": "бути — був",
-        "perfekt": "Er ist letztes Jahr in Kyjiw gewesen.",
-        "note": "Bei haben, sein, werden bleibt im Gespräch meist das Präteritum üblich — das Perfekt klingt hier eher schriftlich."
+        "perfekt": "Er ist letztes Jahr in San Francisco gewesen.",
+        "note": "🟢 Bei [haben, sein, werden] bleibt im Gespräch meist das Präteritum okay."
       },
       {
         "inf": "werden",
@@ -2046,7 +2046,7 @@ const GROUPS = [
         "example": "Es wurde langsam dunkel.",
         "uk": "ставати — став",
         "perfekt": "Es ist langsam dunkel geworden.",
-        "note": "Bei haben, sein, werden bleibt im Gespräch meist das Präteritum üblich — das Perfekt klingt hier eher schriftlich."
+        "note": "🟢 Bei [haben, sein, werden] bleibt im Gespräch meist das Präteritum üblich."
       },
       {
         "inf": "gehen",
@@ -2295,7 +2295,7 @@ function showGroupCompletion(){
   cardArena.style.display = "none";
   controlsBar.style.display = "none";
   const group = GROUPS[currentGroupIndex];
-  completionTitle.textContent = `🎉 ${group.name} geschafft!`;
+  completionTitle.textContent = `🔥 ${group.name} geschafft!`;
   completionSub.textContent = `Alle ${group.verbs.length} Verben dieser Serie durch.`;
   completionRepeatBtn.style.display = "";
   completionRepeatBtn.textContent = "Nochmal von vorn";
@@ -2574,7 +2574,7 @@ function renderTestQuestion(){
   const drawnBeforeThisRound = testCycleTotal - testCycleQueue.length - testDeck.length;
   const positionInCycle = drawnBeforeThisRound + testIndex + 1;
   progressFill.style.width = `${(positionInCycle / testCycleTotal) * 100}%`;
-  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} in diesem Durchlauf`;
+  groupPattern.textContent = `Verb ${positionInCycle} / ${testCycleTotal} aktuell`;
 
   testTicketNo.textContent = `TEST № ${String(testIndex + 1).padStart(3, "0")}`;
   testScoreLine.textContent = `✓ ${testScore} / ${testIndex}`;
@@ -2648,7 +2648,7 @@ function finishRound(){
   const isPauseRound = !cycleExhausted && (testRoundNumber % 3 === 0);
 
   if (cycleExhausted) {
-    completionTitle.textContent = "🎉 Du hast es wirklich geschafft!";
+    completionTitle.textContent = "🏆 Du hast es wirklich geschafft!";
     completionSub.textContent =
       `Alle ${testCycleTotal} Verben in diesem Durchlauf getestet — letzte Runde: ${testScore} von ${testDeck.length} richtig. ` +
       `Genieß ein paar entspannte Gespräche, ohne über Verbformen nachzudenken. 🎉`;
