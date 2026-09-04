@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verb-Café — Deutsch-Training mit Ella</title>
-<meta name="description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+<meta name="description" content="121 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -21,7 +21,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tut-fantastisch.github.io/deutschlab/101-verben/">
 <meta property="og:title" content="☕️ Verb-Café">
-<meta property="og:description" content="101 starke (unregelmäßige) deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten. Неправильні дієслова у німецькій короче 🤓">
+<meta property="og:description" content="121 starke (unregelmäßige) deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten. Неправильні дієслова у німецькій короче 🤓">
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta property="og:site_name" content="Deutsch-Training mit Ella">
@@ -29,7 +29,7 @@
 <!-- Twitter Card (Summary ohne Bild) -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Verb-Café — Deutsch-Training mit Ella">
-<meta name="twitter:description" content="101 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+<meta name="twitter:description" content="121 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
 
 <!-- Selbst gehostete Schriften statt Google-Fonts-CDN (Datenschutz: keine IP-Übertragung an Google) -->
 <style>
@@ -675,6 +675,9 @@
     margin:16px 0 18px;
   }
   .social-links a{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
     color:var(--paper);
     text-decoration:none;
     font-family:'Barlow Condensed', sans-serif;
@@ -685,6 +688,11 @@
     border-radius:20px;
     padding:6px 16px;
     transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .social-links a svg{
+    width:16px;
+    height:16px;
+    flex-shrink:0;
   }
   .social-links a:hover{
     border-color:var(--crema-light);
@@ -1068,7 +1076,7 @@
 
 <section class="hero">
   <div class="stamp">Starke<br>Verben</div>
-  <span class="badge"><span class="bean">☕</span>101 VERBEN · DE/UA</span>
+  <span class="badge"><span class="bean">☕</span>121 VERBEN · DE/UA</span>
   <h1>Verb-Café</h1>
   <p class="sub">Starke Verben, serviert nach <em>Vokalwechsel</em><br>automatisieren → sicher sprechen</p>
   <p class="speak-hint">🎙️ Am besten laut üben — deine Stimme trainiert mit!</p>
@@ -1187,9 +1195,26 @@
   <p class="line">Deutsch-Training mit Ella D.</p>
   <!-- TODO Ella: echte Links eintragen -->
   <div class="social-links">
-    <a href="https://t.me/+_r0zgXrkbPZkNjAy" class="tg" target="_blank" rel="noopener">Telegram</a>
-    <a href="https://instagram.com/tut_fantastisch" class="ig" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://threads.net/@tut_fantastisch" target="_blank" rel="noopener">Threads</a>
+    <a href="https://t.me/+_r0zgXrkbPZkNjAy" class="tg" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 4 3 11.5l6 2M21 4l-3.2 16-8.8-6.5M21 4 9.2 13.5"/>
+      </svg>
+      Telegram
+    </a>
+    <a href="https://instagram.com/tut_fantastisch" class="ig" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+      </svg>
+      Instagram
+    </a>
+    <a href="https://threads.net/@tut_fantastisch" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 3.5c-4.5 0-7.5 3-7.5 8.5s3 8.5 7.5 8.5c3.8 0 6-2 6-4.8 0-2.3-1.6-3.7-4.3-3.7-2 0-3.3 1-3.3 2.5 0 1.1.9 1.8 2 1.8"/>
+      </svg>
+      Threads
+    </a>
   </div>
   <p>© 2026 Ella D. · Verb-Café · Interaktives Training — Alle Rechte vorbehalten / Усі права захищені</p>
   <p><a href="./datenschutz.html" style="color:var(--paper); text-decoration:underline;">Datenschutz / Конфіденційність</a></p>
@@ -1362,6 +1387,46 @@ const GROUPS = [
         "example": "Der Hund biss aus Angst.",
         "uk": "кусати — вкусив",
         "perfekt": "Der Hund hat aus Angst gebissen."
+      },
+      {
+        "inf": "scheinen",
+        "pret": "schien",
+        "part": "hat geschienen",
+        "example": "Die Sonne schien den ganzen Tag.",
+        "uk": "світити / здаватися — світило",
+        "perfekt": "Die Sonne hat den ganzen Tag geschienen."
+      },
+      {
+        "inf": "streichen",
+        "pret": "strich",
+        "part": "hat gestrichen",
+        "example": "Er strich die Wand weiß.",
+        "uk": "фарбувати / закреслювати — пофарбував",
+        "perfekt": "Er hat die Wand weiß gestrichen."
+      },
+      {
+        "inf": "scheiden",
+        "pret": "schied",
+        "part": "ist geschieden",
+        "example": "Ihre Wege schieden sich nach dem Streit.",
+        "uk": "розходитися (шляхи) — розійшлися",
+        "perfekt": "Ihre Wege sind nach dem Streit geschieden."
+      },
+      {
+        "inf": "vergleichen",
+        "pret": "verglich",
+        "part": "hat verglichen",
+        "example": "Er verglich die beiden Angebote genau.",
+        "uk": "порівнювати — порівняв",
+        "perfekt": "Er hat die beiden Angebote genau verglichen."
+      },
+      {
+        "inf": "schreiten",
+        "pret": "schritt",
+        "part": "ist geschritten",
+        "example": "Er schritt langsam durch den Saal.",
+        "uk": "крокувати (урочисто) — крокував",
+        "perfekt": "Er ist langsam durch den Saal geschritten."
       }
     ]
   },
@@ -1734,6 +1799,23 @@ const GROUPS = [
         "example": "Der Polizist befahl dem Fahrer anzuhalten.",
         "uk": "наказувати — наказав",
         "perfekt": "Der Polizist hat dem Fahrer befohlen, anzuhalten."
+      },
+      {
+        "inf": "werben",
+        "pret": "warb",
+        "part": "hat geworben",
+        "example": "Die Firma warb neue Mitarbeiter.",
+        "uk": "залучати / рекламувати — залучив",
+        "perfekt": "Die Firma hat neue Mitarbeiter geworben."
+      },
+      {
+        "inf": "erschrecken",
+        "pret": "erschrak",
+        "part": "ist erschrocken",
+        "example": "Sie erschrak, als das Telefon klingelte.",
+        "uk": "лякатися — злякалася",
+        "perfekt": "Sie ist erschrocken, als das Telefon klingelte.",
+        "note": "Achtung, zwei Verben: das starke erschrecken (erschrak – ist erschrocken) heißt „sich erschrecken/erschreckt werden“. Das schwache erschrecken (erschreckte – hat erschreckt) heißt „jemanden erschrecken/verängstigen“ — z. B. „Er erschreckte sie mit dem Kostüm.“"
       }
     ]
   },
@@ -1805,6 +1887,22 @@ const GROUPS = [
         "example": "Das Buch lag auf dem Tisch.",
         "uk": "лежати — лежав",
         "perfekt": "Das Buch hat auf dem Tisch gelegen."
+      },
+      {
+        "inf": "fressen",
+        "pret": "fraß",
+        "part": "hat gefressen",
+        "example": "Die Katze fraß ihr Futter schnell.",
+        "uk": "їсти (про тварин) — з'їв",
+        "perfekt": "Die Katze hat ihr Futter schnell gefressen."
+      },
+      {
+        "inf": "treten",
+        "pret": "trat",
+        "part": "ist getreten",
+        "example": "Sie trat vorsichtig auf das Eis.",
+        "uk": "ступати — ступила",
+        "perfekt": "Sie ist vorsichtig auf das Eis getreten."
       }
     ]
   },
@@ -1874,7 +1972,7 @@ const GROUPS = [
   {
     "id": "a-ie-a",
     "name": "Fallen-Serie",
-    "pattern": "a/ä → ie/i → a",
+    "pattern": "a/ä/au → ie/i → a/au",
     "verbs": [
       {
         "inf": "fallen",
@@ -1939,13 +2037,29 @@ const GROUPS = [
         "example": "Das Bild hing schief an der Wand.",
         "uk": "висіти — висів",
         "perfekt": "Das Bild hat schief an der Wand gehangen."
+      },
+      {
+        "inf": "blasen",
+        "pret": "blies",
+        "part": "hat geblasen",
+        "example": "Der Wind blies stark.",
+        "uk": "дути — дув",
+        "perfekt": "Der Wind hat stark geblasen."
+      },
+      {
+        "inf": "laufen",
+        "pret": "lief",
+        "part": "ist gelaufen",
+        "example": "Sie lief jeden Morgen im Park.",
+        "uk": "бігати / йти — бігав",
+        "perfekt": "Sie ist jeden Morgen im Park gelaufen."
       }
     ]
   },
   {
-    "id": "mischverben",
-    "name": "Mischverben & Sonderfälle",
-    "pattern": "🌱",
+    "id": "gemischt",
+    "name": "Gemischte Verben",
+    "pattern": "Vokalwechsel + -te/-t",
     "verbs": [
       {
         "inf": "bringen",
@@ -2029,7 +2143,14 @@ const GROUPS = [
         "uk": "мати — мав",
         "perfekt": "Sie hat gestern viel Arbeit gehabt.",
         "note": "🟢 Bei [haben, sein, werden] bleibt im Gespräch meist das Präteritum üblich."
-      },
+      }
+    ]
+  },
+  {
+    "id": "sonderfaelle",
+    "name": "Sonderfälle",
+    "pattern": "🃏",
+    "verbs": [
       {
         "inf": "sein",
         "pret": "war",
@@ -2071,6 +2192,79 @@ const GROUPS = [
         "example": "Sie tat ihr Bestes für das Projekt.",
         "uk": "робити — зробив",
         "perfekt": "Sie hat ihr Bestes für das Projekt getan."
+      },
+      {
+        "inf": "verstehen",
+        "pret": "verstand",
+        "part": "hat verstanden",
+        "example": "Er verstand die Frage nicht.",
+        "uk": "розуміти — зрозумів",
+        "perfekt": "Er hat die Frage nicht verstanden."
+      },
+      {
+        "inf": "heben",
+        "pret": "hob",
+        "part": "hat gehoben",
+        "example": "Er hob die schwere Kiste vom Boden.",
+        "uk": "піднімати — підняв",
+        "perfekt": "Er hat die schwere Kiste vom Boden gehoben."
+      },
+      {
+        "inf": "kommen",
+        "pret": "kam",
+        "part": "ist gekommen",
+        "example": "Sie kam gestern spät nach Hause.",
+        "uk": "приходити — прийшов",
+        "perfekt": "Sie ist gestern spät nach Hause gekommen."
+      },
+      {
+        "inf": "rufen",
+        "pret": "rief",
+        "part": "hat gerufen",
+        "example": "Er rief laut ihren Namen.",
+        "uk": "кликати — покликав",
+        "perfekt": "Er hat laut ihren Namen gerufen."
+      },
+      {
+        "inf": "lügen",
+        "pret": "log",
+        "part": "hat gelogen",
+        "example": "Er log, um Ärger zu vermeiden.",
+        "uk": "брехати — збрехав",
+        "perfekt": "Er hat gelogen, um Ärger zu vermeiden."
+      },
+      {
+        "inf": "betrügen",
+        "pret": "betrog",
+        "part": "hat betrogen",
+        "example": "Er betrog seinen Geschäftspartner.",
+        "uk": "обманювати — обманув",
+        "perfekt": "Er hat seinen Geschäftspartner betrogen."
+      },
+      {
+        "inf": "bitten",
+        "pret": "bat",
+        "part": "hat gebeten",
+        "example": "Sie bat ihn um Hilfe.",
+        "uk": "просити — попросив",
+        "perfekt": "Sie hat ihn um Hilfe gebeten."
+      },
+      {
+        "inf": "sitzen",
+        "pret": "saß",
+        "part": "hat gesessen",
+        "example": "Er saß den ganzen Abend im Café.",
+        "uk": "сидіти — сидів",
+        "perfekt": "Er hat den ganzen Abend im Café gesessen."
+      },
+      {
+        "inf": "heißen",
+        "pret": "hieß",
+        "part": "hat geheißen",
+        "example": "Sie hieß mit Nachnamen Schmidt.",
+        "uk": "називатися — називався",
+        "perfekt": "Sie hat mit Nachnamen Schmidt geheißen.",
+        "note": "Sonderfall: Das Partizip II kehrt zum ei-Laut des Infinitivs zurück (geheißen), nicht zum ie-Laut des Präteritums (hieß) — anders als bei bleiben, schreiben & Co. in der Bleiben-Serie."
       }
     ]
   }
@@ -2169,7 +2363,7 @@ function buildTabs(){
   GROUPS.forEach((g, i) => {
     const tab = document.createElement("button");
     tab.className = "menu-tab" + (i === currentGroupIndex ? " active" : "");
-    tab.innerHTML = `<span class="pattern">${g.pattern}</span><span class="name">${g.name}</span><span class="count">${g.verbs.length} Verben</span>`;
+    tab.innerHTML = `<span class="pattern">${g.pattern}</span><span class="name">${g.name}</span><span class="count">${g.verbs.length} ${g.verbs.length === 1 ? "Verb" : "Verben"}</span>`;
     tab.addEventListener("click", () => selectGroup(i));
     menuTabs.appendChild(tab);
   });
@@ -2296,7 +2490,7 @@ function showGroupCompletion(){
   controlsBar.style.display = "none";
   const group = GROUPS[currentGroupIndex];
   completionTitle.textContent = `🔥 ${group.name} geschafft!`;
-  completionSub.textContent = `Alle ${group.verbs.length} Verben dieser Serie durch.`;
+  completionSub.textContent = `Alle ${group.verbs.length} ${group.verbs.length === 1 ? "Verb" : "Verben"} dieser Serie durch.`;
   completionRepeatBtn.style.display = "";
   completionRepeatBtn.textContent = "Nochmal von vorn";
   completionRepeatBtn.onclick = () => { hideCompletion(); currentCardIndex = 0; render(); };
@@ -2457,27 +2651,25 @@ cardArena.addEventListener("touchend", (e) => {
 });
 
 // ===== Testmodus: Infinitiv sehen, passendes Vokalwechsel-Muster wählen =====
-// Alle 101 Verben sind dabei. Die "Mischverben & Sonderfälle"-Gruppe ist
-// selbst nochmal zweigeteilt: echte Mischverben mit -te/-t-Endung
-// (bringen, denken, kennen, nennen, rennen, senden, wenden, brennen,
-// wissen, haben) vs. komplett eigenwillige starke Verben ohne -te-Endung
-// und ohne -t-Partizip (sein, werden, gehen, stehen, tun — z.B. gewesen,
-// geworden, gegangen enden auf -en, nicht auf -t). Deshalb zwei ehrliche
-// Antwortkategorien statt eines gemeinsamen, unpassenden Labels.
+// Alle 121 Verben sind dabei. "Gemischte Verben" (Vokalwechsel + -te/-t,
+// z.B. bringen–brachte–gebracht) und "Sonderfälle" (komplett eigenwillige
+// Formen ohne -te-Endung und ohne -t-Partizip, z.B. sein–war–gewesen)
+// sind seit Kurzem auch als eigene Browse-Gruppen getrennt — die
+// Testkategorie übernimmt einfach deren Gruppennamen als Antwort-Label.
 const MISCHVERBEN_TEST_LABEL = "Gemischt (-te/-t)";
 const SONDERFALL_TEST_LABEL = "Sonderfall (ganz unregelmäßig)";
-const SONDERFALL_VERBS = new Set(["sein", "werden", "gehen", "stehen", "tun"]);
 
-function testPatternFor(groupId, inf){
-  if (groupId !== "mischverben") return null; // wird vom Aufrufer mit g.pattern befüllt
-  return SONDERFALL_VERBS.has(inf) ? SONDERFALL_TEST_LABEL : MISCHVERBEN_TEST_LABEL;
+function testPatternFor(groupId){
+  if (groupId === "gemischt") return MISCHVERBEN_TEST_LABEL;
+  if (groupId === "sonderfaelle") return SONDERFALL_TEST_LABEL;
+  return null; // wird vom Aufrufer mit g.pattern befüllt
 }
 
 const TEST_GROUPS = GROUPS;
 const TEST_POOL = [];
 TEST_GROUPS.forEach(g => g.verbs.forEach(v => TEST_POOL.push({
   inf: v.inf,
-  pattern: testPatternFor(g.id, v.inf) ?? g.pattern,
+  pattern: testPatternFor(g.id) ?? g.pattern,
   pret: v.pret,
   part: v.part
 })));
@@ -2507,7 +2699,7 @@ let testRoundPointer = 0;
 let testRoundNumber = 0; // Runden seit Seitenaufruf, für die Pause-Nachricht alle 3 Runden
 
 // Verteilt eine Gesamtmenge auf Runden nahe der Zielgröße, ohne eine
-// mickrige Restrunde übrig zu lassen (z.B. 101 Verben, Ziel 10 -> nicht
+// mickrige Restrunde übrig zu lassen (z.B. 121 Verben, Ziel 10 -> nicht
 // 10×10 + 1, sondern 9 Runden à 9 und 2 Runden à 10).
 function computeRoundSizes(total, target){
   const numRounds = Math.max(1, Math.ceil(total / target));
