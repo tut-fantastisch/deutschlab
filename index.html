@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERST oder NUR? — Deutsch-Training mit Ella</title>
+
+<meta name="description" content="Interaktives Übungstool: erst oder nur? Zeit oder Menge — 10 Einzelsätze und 5 Kurztexte mit sofortigem Feedback. Kostenlos, für Ukrainisch sprechende Deutschlerner:innen.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="ERST oder NUR? — Deutsch-Training mit Ella">
+<meta property="og:description" content="Zeit oder Menge? Trainiere den Unterschied zwischen erst und nur mit Sätzen, Kurztexten und sofortigem Feedback. Kostenlos.">
+<meta property="og:url" content="https://tut-fantastisch.github.io/deutschlab/erst-nur/">
+<meta property="og:image" content="https://tut-fantastisch.github.io/deutschlab/erst-nur/og-image.png">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ERST oder NUR?">
+<meta name="twitter:description" content="Zeit oder Menge? Trainiere erst vs. nur — kostenloses Übungstool von Deutsch-Training mit Ella.">
+<meta name="twitter:image" content="https://tut-fantastisch.github.io/deutschlab/erst-nur/og-image.png">
+
+<!-- PWA -->
+<meta name="theme-color" content="#120D09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Erst/Nur">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:        #120D09;
+    --bg2:       #1D140D;
+    --paper:     #F3E7C9;
+    --ink:       #2B2013;
+    --erst:      #2F6B7A;
+    --erst-dk:   #17414C;
+    --nur:       #C1541F;
+    --nur-dk:    #7E3410;
+    --gold:      #D2A24C;
+    --good:      #4C7A4C;
+    --good-bg:   #DCE9D8;
+    --bad:       #B23A3A;
+    --bad-bg:    #F0D9D3;
+    --muted:     #C9BB98;
+    --f-display: 'Oswald', Arial Narrow, sans-serif;
+    --f-body:    'Lora', Georgia, serif;
+    --f-alt:     'Space Mono', 'Courier New', monospace;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(210,162,76,0.16), transparent 60%),
+      radial-gradient(ellipse 1200px 800px at 50% 120%, rgba(0,0,0,0.6), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    color: var(--paper);
+    font-family: var(--f-body);
+    padding-bottom: 50px;
+    -webkit-font-smoothing:antialiased;
+  }
+  :focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  button{ font-family:inherit; }
+  a{ color:inherit; }
+
+  /* ===== HERO ===== */
+  .hero{ text-align:center; padding: 54px 20px 20px; }
+  .hero .eyebrow{
+    font-family: var(--f-display); font-size:0.7rem; letter-spacing:0.32em; color: var(--gold); margin-bottom:14px;
+  }
+  .hero h1{
+    font-family: var(--f-display); font-weight:700; text-transform:uppercase; letter-spacing:0.02em;
+    font-size: clamp(2.2rem, 8vw, 4.2rem); line-height:1; margin:0;
+    background: linear-gradient(180deg, #F7E7BE 0%, var(--gold) 55%, #9A7229 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow: 0 3px 0 rgba(0,0,0,0.35);
+  }
+  .hero h1 .vs{ color:#8A7B58; -webkit-text-fill-color:#8A7B58; font-style:italic; }
+  .hero p{ max-width:480px; margin:16px auto 0; color: var(--muted); font-size:1.02rem; }
+  .theory-btn{
+    margin: 20px auto 0; display:inline-flex; align-items:center; gap:8px;
+    background: rgba(210,162,76,0.1); border: 1.5px solid rgba(210,162,76,0.45); color: var(--gold);
+    font-family: var(--f-display); font-size:0.82rem; letter-spacing:0.03em;
+    padding: 11px 20px; border-radius: 10px; cursor:pointer; transition: all 0.15s ease;
+  }
+  .theory-btn:hover{ background: var(--gold); color:#241A0C; }
+
+  /* ===== MODE SWITCH ===== */
+  .mode-switch{ display:flex; justify-content:center; gap:10px; margin: 26px auto 0; padding:0 16px; }
+  .mode-btn{
+    font-family: var(--f-alt); font-weight:bold; font-size:0.82rem; letter-spacing:0.04em;
+    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(210,162,76,0.3);
+    color: var(--muted); padding: 12px 20px; border-radius: 10px; cursor:pointer;
+    display:flex; align-items:center; gap:8px; transition: all 0.15s ease;
+  }
+  .mode-btn:hover{ border-color: var(--gold); color: var(--paper); }
+  .mode-btn.active{ background: var(--gold); color:#241A0C; border-color: var(--gold); box-shadow: 0 3px 0 #8A6A2C; }
+
+  /* ===== TOP ROW: tabs + score ===== */
+  .top-row{
+    max-width: 640px; margin: 20px auto 0; padding: 0 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  .tabs{ display:flex; gap:8px; flex-wrap:wrap; flex:1; }
+  .tab{
+    font-family: var(--f-alt); font-weight:bold; font-size:0.68rem; letter-spacing:0.06em;
+    background: rgba(255,255,255,0.04); border:1.5px solid rgba(210,162,76,0.3);
+    color: var(--muted); padding:7px 11px; border-radius:6px; cursor:pointer;
+    display:flex; align-items:center; gap:5px; transition: all 0.15s ease;
+  }
+  .tab:hover{ border-color: var(--gold); color: var(--paper); }
+  .tab.active{ background: var(--gold); color: #241A0C; border-color: var(--gold); box-shadow: 0 2px 0 #8A6A2C; }
+  .tab.done:not(.active)::after{ content:'✓'; color: var(--good); font-weight:bold; }
+  .tab.done:not(.active){ border-color: rgba(76,122,76,0.5); }
+  .score-pill{
+    background: rgba(0,0,0,0.35); border:1px solid rgba(210,162,76,0.4); color: var(--gold);
+    font-family: var(--f-display); font-size:0.72rem; padding: 7px 13px; border-radius: 20px;
+    white-space:nowrap;
+  }
+
+  /* ===== FILE CARD ===== */
+  .stage{ max-width: 640px; margin: 0 auto; padding: 14px 18px 0; }
+  .file-card{
+    position:relative;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 4px),
+      var(--paper);
+    color: var(--ink); border-radius: 4px; padding: 34px 30px 28px;
+    transform: rotate(-0.4deg);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.55), 0 2px 0 rgba(0,0,0,0.2);
+    animation: filein 0.4s ease;
+  }
+  @keyframes filein{ from{ opacity:0; transform: translateX(24px) rotate(-0.4deg); } to{ opacity:1; transform: translateX(0) rotate(-0.4deg); } }
+  .file-card::before{
+    content:''; position:absolute; top:-10px; left:26px; width:38px; height:22px;
+    background: linear-gradient(180deg,#9AA3AB,#6E767D); border-radius:3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4); transform: rotate(-8deg);
+  }
+  .file-title{
+    font-family: var(--f-display); font-size:0.78rem; letter-spacing:0.14em;
+    color: var(--nur-dk); margin: 0 0 16px; border-bottom: 2px solid rgba(43,32,19,0.15); padding-bottom: 10px;
+  }
+  .file-text{ font-family: var(--f-body); font-size: 1.18rem; line-height: 1.85; }
+
+  .blank{
+    display:inline-block; min-width: 76px; padding: 0 6px; text-align:center;
+    border-bottom: 3px dashed rgba(43,32,19,0.4);
+    font-family: var(--f-display); font-size:0.85em; letter-spacing:0.03em;
+    cursor:pointer; position:relative; transition: all 0.15s ease;
+  }
+  .blank.unanswered:hover{ border-color: var(--gold); }
+  .blank.focused{ border-color: var(--gold); border-bottom-style: solid; animation: pulse 1.1s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ box-shadow: 0 0 0 0 rgba(210,162,76,0.35); } 50%{ box-shadow: 0 0 0 6px rgba(210,162,76,0.12); } }
+  .blank.correct{ background: var(--good-bg); color: var(--good); border: 2px solid var(--good); border-radius:5px; animation: stampdown 0.28s ease; }
+  .blank.wrong{ background: var(--bad-bg); color: var(--bad); border: 2px solid var(--bad); border-radius:5px; animation: stampdown 0.28s ease; }
+  .blank .fix{ display:block; font-family: var(--f-body); font-weight:normal; font-style:italic; font-size:0.62rem; color: var(--ink); opacity:0.75; letter-spacing:normal; }
+  @keyframes stampdown{ 0%{ transform: scale(1.9) rotate(-8deg); opacity:0; } 60%{ transform: scale(0.92) rotate(2deg); opacity:1; } 100%{ transform: scale(1) rotate(0); } }
+
+  .translate-btn{
+    margin-top:20px; background:none; border:none; color: var(--erst-dk);
+    font-family: var(--f-display); font-size:0.72rem; letter-spacing:0.08em;
+    cursor:pointer; padding:0; text-decoration: underline dotted;
+  }
+  .translation{
+    display:none; margin-top:14px; background: #E4EEF0; border-left: 4px solid var(--erst);
+    padding: 12px 16px; font-size:0.95rem; font-style: italic; color: #1F4650; border-radius: 0 6px 6px 0;
+  }
+  .translation.show{ display:block; }
+
+  .caption{
+    margin-top: 18px; background: #FCEEA0; border: 1px solid #D8C15E; padding: 12px 16px;
+    border-radius: 3px; font-family: var(--f-display); font-size: 0.8rem;
+    color: #4A3B0F; transform: rotate(-1deg); display:none;
+  }
+  .caption.show{ display:block; animation: noteIn 0.25s ease; }
+  @keyframes noteIn{ from{ opacity:0; transform: translateY(-6px) rotate(-1deg);} to{ opacity:1; transform: translateY(0) rotate(-1deg);} }
+
+  /* stamp row — INLINE in card, no floating overlay */
+  .stamp-row{
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 2px dashed rgba(43,32,19,0.18);
+    display:flex; justify-content:center; align-items:center; gap: 20px;
+  }
+  .stamp-hint{
+    font-family: var(--f-display); font-size:0.66rem; letter-spacing:0.1em;
+    color: rgba(43,32,19,0.5); text-align:center; margin-bottom: -4px;
+  }
+  .stamp-btn{
+    position:relative; width: 108px; height: 74px; border-radius: 12px;
+    border: 3px solid rgba(0,0,0,0.12); cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+    font-family: var(--f-display); font-size:0.9rem; letter-spacing:0.05em;
+    color:#fff; transition: transform 0.08s ease; overflow:hidden;
+  }
+  .stamp-btn svg{ width:22px; height:22px; }
+  .stamp-erst{ background: linear-gradient(160deg, var(--erst), var(--erst-dk)); }
+  .stamp-nur{ background: linear-gradient(160deg, var(--nur), var(--nur-dk)); }
+  .stamp-btn:hover{ transform: translateY(-2px); }
+  .stamp-btn:active, .stamp-btn.stamping{ transform: scale(0.88) rotate(-3deg); }
+  .stamp-btn .sub{ font-family: var(--f-body); font-weight:normal; font-style:italic; font-size:0.6rem; opacity:0.85; letter-spacing:normal; }
+  .stamp-btn:disabled{ opacity:0.35; cursor:default; }
+  .stamp-btn:disabled:hover{ transform:none; }
+  .burst{ position:absolute; inset:0; border-radius:50%; background: radial-gradient(circle, rgba(255,255,255,0.65), transparent 60%); opacity:0; pointer-events:none; }
+  .stamp-btn.stamping .burst{ animation: burst 0.35s ease; }
+  @keyframes burst{ 0%{ opacity:0.9; transform:scale(0.3);} 100%{ opacity:0; transform:scale(1.6);} }
+
+  .next-wrap{ text-align:center; margin-top:22px; }
+  .next-btn{
+    background: var(--gold); color:#241A0C; border:none;
+    font-family: var(--f-display); font-size:0.9rem; letter-spacing:0.06em;
+    padding: 13px 26px; border-radius: 8px; cursor:pointer;
+    box-shadow: 0 4px 0 #8A6A2C; display:none;
+  }
+  .next-btn.show{ display:inline-block; animation: noteIn 0.3s ease; }
+  .next-btn:active{ transform: translateY(3px); box-shadow: 0 1px 0 #8A6A2C; }
+
+  /* ===== RESULT ===== */
+  .result{ display:none; text-align:center; max-width: 500px; margin: 30px auto 0; padding: 0 20px; }
+  .result.show{ display:block; }
+  .seal{
+    width:150px; height:150px; margin: 10px auto 20px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #E6C57A, var(--gold) 55%, #8A6A2C 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--f-display); font-weight:700; color:#241A0C; font-size:0.85rem; line-height:1.2;
+    text-transform:uppercase; letter-spacing:0.05em; box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+    border: 4px dashed rgba(36,26,12,0.35); animation: sealslam 0.5s cubic-bezier(.2,1.4,.4,1);
+  }
+  @keyframes sealslam{ 0%{ transform: scale(2.4) rotate(-25deg); opacity:0; } 70%{ transform: scale(0.94) rotate(4deg); opacity:1;} 100%{ transform: scale(1) rotate(0);} }
+  .result h2{ font-family: var(--f-display); font-size:1.6rem; margin:0 0 6px; color: var(--gold); }
+  .result p{ color: var(--muted); margin: 0 0 20px; }
+  .restart-btn{
+    background:none; border: 2px solid var(--gold); color: var(--gold); padding: 12px 26px;
+    border-radius: 8px; font-family: var(--f-display); font-size:0.85rem;
+    letter-spacing:0.05em; cursor:pointer;
+  }
+  .restart-btn:hover{ background: var(--gold); color:#241A0C; }
+
+  /* ===== FOOTER ===== */
+  .site-footer{ max-width: 640px; margin: 60px auto 0; padding: 0 20px; }
+  .footer-top{
+    display:flex; justify-content:flex-end; align-items:center;
+    border-top: 1px solid rgba(210,162,76,0.2); padding-top: 26px;
+  }
+  .footer-social{ display:flex; gap:10px; }
+  .social-btn{
+    width:38px; height:38px; border-radius:50%;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(210,162,76,0.3);
+    display:flex; align-items:center; justify-content:center;
+    transition: all 0.15s ease; text-decoration:none;
+  }
+  .social-btn svg{ width:17px; height:17px; fill: var(--muted); }
+  .social-btn:hover{ background: var(--gold); border-color: var(--gold); }
+  .social-btn:hover svg{ fill:#241A0C; }
+
+  .footer-bottom{
+    margin-top: 18px; padding-top:16px; margin-bottom: 26px; border-top: 1px solid rgba(210,162,76,0.12);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    font-family: var(--f-display); font-size:0.7rem; letter-spacing:0.03em; color: #6B5E45;
+    opacity: 0.86;
+  }
+  .footer-link{
+    background:none; border:none; color: #8E7A50; text-decoration: underline dotted;
+    font-family: var(--f-display); font-size:0.7rem; letter-spacing:0.03em; cursor:pointer; padding:0;
+  }
+  .footer-link:hover{ color: var(--gold); }
+
+  /* privacy modal */
+  .privacy-overlay{
+    display:none; position:fixed; inset:0; background: rgba(0,0,0,0.72); z-index: 50;
+    align-items:center; justify-content:center; padding: 20px;
+  }
+  .privacy-overlay.show{ display:flex; }
+  .privacy-box{
+    background: var(--paper); color: var(--ink); max-width: 520px; width:100%;
+    border-radius: 10px; padding: 28px 26px; position:relative; max-height: 82vh; overflow-y:auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .privacy-box h3{ font-family: var(--f-display); margin:22px 0 10px; font-size:1.05rem; color: var(--nur-dk); }
+  .privacy-box h3:first-of-type{ margin-top:0; }
+  .privacy-box p{ font-family: var(--f-body); font-size:0.92rem; line-height:1.6; margin: 0 0 10px; }
+  .privacy-box .lang-tag{
+    font-family: var(--f-display); font-size:0.65rem; letter-spacing:0.1em; color: var(--erst-dk);
+    display:block; margin-bottom:10px;
+  }
+  .privacy-close{
+    position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.2rem;
+    cursor:pointer; color: var(--ink); width:30px; height:30px; border-radius:50%;
+  }
+  .privacy-close:hover{ background: rgba(43,32,19,0.08); }
+
+  /* theory modal rule cards */
+  .theory-intro{ font-size:0.92rem; line-height:1.6; margin: 0 0 18px; color: var(--ink); }
+  .rule-card{
+    border-radius: 8px; padding: 16px 18px; margin-bottom: 14px;
+    background: rgba(0,0,0,0.03);
+  }
+  .rule-card.erst-card{ border-left: 6px solid var(--erst); }
+  .rule-card.nur-card{ border-left: 6px solid var(--nur); }
+  .rule-card .rlabel{
+    font-family: var(--f-display); font-size:0.72rem; letter-spacing:0.06em;
+    color:#fff; display:inline-block; padding: 3px 10px; border-radius: 5px; margin-bottom: 8px;
+  }
+  .erst-card .rlabel{ background: var(--erst); }
+  .nur-card .rlabel{ background: var(--nur); }
+  .rule-card .rtitle{ font-weight:bold; margin: 2px 0; }
+  .rule-card .rsub{ color:#5A4E3A; font-style:italic; font-size:0.88rem; margin-bottom: 10px; }
+  .rule-card .rex{ background: #fff; border-radius:6px; padding: 8px 12px; margin-top:8px; }
+  .rule-card .rex .de{ font-weight:bold; font-size:0.95rem; }
+  .rule-card .rex .de b{ color: var(--erst); }
+  .nur-card .rex .de b{ color: var(--nur); }
+  .rule-card .rex .ua{ color:#5A4E3A; font-size:0.88rem; font-style:italic; margin-top:2px; }
+
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">@TUT_FANTASTISCH</div>
+  <h1><span class="vs">erst</span> oder <span class="vs">nur</span>?</h1>
+  <p>Zeit oder Menge — jede Lücke braucht deinen Stempel.<br>Hab Spaß beim Üben :)</p>
+  <button class="theory-btn" id="theoryOpenBtn">📖 Kurz erklärt: erst oder nur?</button>
+</div>
+
+<div class="mode-switch" id="modeSwitch">
+  <button class="mode-btn" data-mode="sentences">📇 Einzelsätze</button>
+  <button class="mode-btn" data-mode="texts">🗂️ Kurztexte (Akten)</button>
+</div>
+
+<div class="top-row">
+  <div class="tabs" id="tabs"></div>
+  <div class="score-pill" id="scorePill">0 / 25</div>
+</div>
+
+<div class="stage">
+  <div class="file-card" id="fileCard">
+    <div class="file-title" id="fileTitle"></div>
+    <div class="file-text" id="fileText"></div>
+    <button class="translate-btn" id="translateBtn">🇺🇦 Übersetzung anzeigen</button>
+    <div class="translation" id="translation"></div>
+    <div class="caption" id="caption"></div>
+
+    <div class="stamp-row" id="stampRow">
+      <button class="stamp-btn stamp-erst" data-choice="erst">
+        <div class="burst"></div>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><path d="M12 7v5l3 2" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        ERST
+        <span class="sub">Zeit</span>
+      </button>
+      <button class="stamp-btn stamp-nur" data-choice="nur">
+        <div class="burst"></div>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z" fill="white"/></svg>
+        NUR
+        <span class="sub">Menge</span>
+      </button>
+    </div>
+
+    <div class="next-wrap"><button class="next-btn" id="nextBtn">Weiter →</button></div>
+  </div>
+</div>
+
+<div class="result" id="result">
+  <div class="seal" id="seal">FALL<br>GELÖST</div>
+  <h2 id="resultScore">0 / 25</h2>
+  <p id="resultRank"></p>
+  <button class="restart-btn" id="restartBtn">Neue Runde starten</button>
+</div>
+
+<div class="site-footer">
+  <div class="footer-top">
+    <div class="footer-social">
+      <a class="social-btn" href="#" title="https://t.me/+_r0zgXrkbPZkNjAy" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M21.94 4.6 18.6 20.18c-.25 1.1-.9 1.37-1.83.86l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.16 9.39-8.49c.41-.36-.09-.56-.63-.2L6.1 12.9 1.02 11.3c-1.1-.34-1.12-1.1.23-1.63L20.53 3.13c.92-.34 1.72.22 1.41 1.47z"/></svg>
+      </a>
+      <a class="social-btn" href="#" title="https://www.instagram.com/tut_fantastisch" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.5.5.87 1.06 1.15 1.76.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.76 4.9 4.9 0 0 1-1.76 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.76-1.15A4.9 4.9 0 0 1 2.53 18.4c-.25-.64-.42-1.37-.47-2.43C2.01 14.91 2 14.57 2 11.85s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.28-.7.65-1.26 1.15-1.76a4.9 4.9 0 0 1 1.76-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 1.8c-2.67 0-2.99.01-4.04.06-.87.04-1.34.18-1.65.3-.42.16-.71.35-1.02.66-.31.31-.5.6-.66 1.02-.12.31-.26.78-.3 1.65-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.87.18 1.34.3 1.65.16.42.35.71.66 1.02.31.31.6.5 1.02.66.31.12.78.26 1.65.3 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.87-.04 1.34-.18 1.65-.3.42-.16.71-.35 1.02-.66.31-.31.5-.6.66-1.02.12-.31.26-.78.3-1.65.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.87-.18-1.34-.3-1.65a2.75 2.75 0 0 0-.66-1.02 2.75 2.75 0 0 0-1.02-.66c-.31-.12-.78-.26-1.65-.3-1.05-.05-1.37-.06-4.04-.06zm0 3.5a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 1.8a2.9 2.9 0 1 0 0 5.8 2.9 2.9 0 0 0 0-5.8zm5.88-2a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
+      </a>
+      <a class="social-btn" href="#" title="https://threads.net/@tut_fantastisch" aria-label="Threads">
+        <svg viewBox="0 0 24 24"><path d="M16.5 11.2c-.15-2.9-1.7-4.6-4.4-4.6-1.63 0-3 .68-3.85 1.87l1.36.93c.5-.72 1.24-1.14 2.34-1.14 1.5 0 2.4.87 2.6 2.36-.7-.12-1.5-.17-2.35-.13-2.4.12-3.94 1.4-3.83 3.28.1 1.87 1.85 2.98 3.98 2.87 1.72-.09 2.9-.9 3.5-2.02.46-.86.6-1.94.55-3.06.94.42 1.63 1.03 2 1.85.55 1.2.3 3.13-1.5 4.55-1.55 1.23-3.44 1.77-5.86 1.79-2.68.02-4.75-.85-6.14-2.55C4.5 16 3.83 13.9 3.8 11.15c.03-2.75.7-4.85 2.1-6.4C7.3 3.05 9.37 2.18 12.05 2.16c2.7.02 4.75.9 6.1 2.6.68.85 1.18 1.9 1.5 3.13l-1.65.4c-.26-.98-.65-1.8-1.15-2.42-1-1.25-2.55-1.9-4.75-1.92-2.18.02-3.7.68-4.87 1.94-1.15 1.25-1.7 3.02-1.72 5.26.02 2.23.6 3.98 1.77 5.2 1.18 1.24 2.72 1.87 4.86 1.86 2.1-.02 3.6-.46 4.72-1.35 1.1-.87 1.2-1.9.95-2.46-.17-.4-.5-.72-.98-.98-.02.6-.12 1.13-.32 1.6-.4.9-1.2 1.4-2.35 1.46-1.2.06-2.05-.46-2.1-1.32-.05-.87.75-1.5 2.13-1.57.7-.03 1.4.02 2.06.15z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Deutsch-Training mit Ella ·<br>Alle Rechte vorbehalten / Усі права захищені</span>
+    <button class="footer-link" id="privacyOpenBtn">Datenschutz</button>
+  </div>
+</div>
+
+<div class="privacy-overlay" id="privacyOverlay">
+  <div class="privacy-box">
+    <button class="privacy-close" id="privacyCloseBtn" aria-label="Schließen">✕</button>
+
+    <h3>Datenschutzhinweis</h3>
+    <span class="lang-tag">DEUTSCH</span>
+    <p>Verantwortlich für dieses Angebot ist Deutsch-Training mit Ella (Kontakt: <a href="mailto:" title="ella.sprachcoach.de@gmail.com">ella.sprachcoach.de@gmail.com</a>). Diese Seite ist ein kostenloses, statisches Lerntool ohne Registrierung und ohne Erhebung personenbezogener Daten durch den Betreiber.</p>
+    <p><strong>Hosting:</strong> Die Seite wird über GitHub Pages ausgeliefert. Beim Aufruf verarbeitet GitHub automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum/Uhrzeit, aufgerufene Datei, Browsertyp), um die Seite sicher bereitzustellen. Diese Verarbeitung liegt im Verantwortungsbereich von GitHub Inc.; Details dazu im GitHub Privacy Statement.</p>
+    <p><strong>Cookies &amp; Tracking:</strong> Diese Seite selbst setzt keine Cookies und verwendet keine Analyse- oder Trackingdienste.</p>
+    <p><strong>Offline-Speicherung:</strong> Für die Installation als App speichert dein Browser (Service Worker) die statischen Seitendateien lokal zwischen. Dabei werden keine personenbezogenen oder eingegebenen Daten gespeichert.</p>
+    <p><strong>Deine Antworten im Übungstool</strong> werden ausschließlich lokal im Arbeitsspeicher deines Browsers verarbeitet und nirgends übertragen oder gespeichert.</p>
+    <p>Fragen zum Datenschutz? Schreib gern per E-Mail.</p>
+
+    <h3>Повідомлення про конфіденційність</h3>
+    <span class="lang-tag">УКРАЇНСЬКА</span>
+    <p>Відповідальна за цей ресурс — Deutsch-Training mit Ella (контакт: <a href="mailto:" title="ella.sprachcoach.de@gmail.com">ella.sprachcoach.de@gmail.com</a>). Ця сторінка — безкоштовний статичний навчальний інструмент без реєстрації та без збору персональних даних з боку власника.</p>
+    <p><strong>Хостинг:</strong> сторінка розміщена на GitHub Pages. При зверненні GitHub автоматично обробляє технічні дані доступу (IP-адресу, дату/час, запитаний файл, тип браузера) для безпечної роботи сервісу. Ця обробка відбувається в межах відповідальності GitHub Inc.; деталі — у GitHub Privacy Statement.</p>
+    <p><strong>Кукі та трекінг:</strong> сама сторінка не встановлює кукі та не використовує аналітичні чи трекінг-сервіси.</p>
+    <p><strong>Офлайн-збереження:</strong> для встановлення як застосунку браузер (Service Worker) локально кешує статичні файли сторінки. Персональні чи введені дані при цьому не зберігаються.</p>
+    <p><strong>Твої відповіді в тренажері</strong> обробляються виключно локально в оперативній пам'яті браузера і ніде не передаються та не зберігаються.</p>
+    <p>Питання щодо конфіденційності? Пиши на email.</p>
+  </div>
+</div>
+
+<div class="privacy-overlay" id="theoryOverlay">
+  <div class="privacy-box">
+    <button class="privacy-close" id="theoryCloseBtn" aria-label="Schließen">✕</button>
+    <h3 style="margin-top:0;">Erst oder nur? — die Logik in Kürze</h3>
+    <p class="theory-intro">Beide werden oft mit „лише" übersetzt — aber sie beantworten unterschiedliche Fragen. <strong>ERST</strong> fragt: <em>wann?</em> <strong>NUR</strong> fragt: <em>wie viel?</em></p>
+
+    <div class="rule-card erst-card">
+      <span class="rlabel">📍 ERST</span>
+      <div class="rtitle">Zeit und Erwartung</div>
+      <div class="rsub">„nicht früher als …" — es geht darum, wann etwas passiert.</div>
+
+      <div class="rex">
+        <div class="de">Der Vertrag ist <b>ERST</b> ab nächstem Monat gültig.</div>
+        <div class="ua">Договір діє лише з наступного місяця.</div>
+      </div>
+      <div class="rex">
+        <div class="de">Sie hat mich <b>ERST</b> um Mitternacht angerufen.</div>
+        <div class="ua">Вона подзвонила мені лише опівночі.</div>
+      </div>
+      <div class="rex">
+        <div class="de">Der Laden macht <b>ERST</b> um zehn auf.</div>
+        <div class="ua">Магазин відчиняється лише о десятій.</div>
+      </div>
+    </div>
+
+    <div class="rule-card nur-card">
+      <span class="rlabel">📍 NUR</span>
+      <div class="rtitle">Menge und Beschränkung</div>
+      <div class="rsub">„nur das und nichts weiter" — es geht um den Umfang, nicht um den Zeitpunkt.</div>
+
+      <div class="rex">
+        <div class="de">Ich habe <b>NUR</b> eine Stunde Zeit heute.</div>
+        <div class="ua">Сьогодні в мене лише одна година часу.</div>
+      </div>
+      <div class="rex">
+        <div class="de">Im Kühlschrank ist <b>NUR</b> noch ein Ei.</div>
+        <div class="ua">У холодильнику залишилось лише одне яйце.</div>
+      </div>
+      <div class="rex">
+        <div class="de">Er spricht <b>NUR</b> Englisch, kein Deutsch.</div>
+        <div class="ua">Він розмовляє лише англійською, без німецької.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:16px; font-size:0.85rem; color:#5A4E3A;"><strong>Schnelltest:</strong> Lässt sich die Lücke mit „wann?" beantworten → ERST. Lässt sie sich mit „wie viel / wie lange?" beantworten → NUR.</p>
+  </div>
+</div>
+
+
+<script>
+const deckMeta = {
+  sentences: { name: 'Sätze', unit: 'SATZ' },
+  texts:     { name: 'Akten', unit: 'AKTE' }
+};
+
+const decks = {
+  sentences: [
+    { label:"", parts:["Der Bericht wird ", 0, " am Freitag fertig."],
+      blanks:[{answer:"erst", explain:"Später als erwartet → ZEIT. ERST."}],
+      translation:"Звіт буде готовий лише у п'ятницю (очікували раніше)." },
+    { label:"", parts:["Die Analyse dauert ", 0, " bis Freitag."],
+      blanks:[{answer:"nur", explain:"Begrenzte Dauer → MENGE. NUR."}],
+      translation:"Аналіз триває лише до п'ятниці (це займе мало часу)." },
+    { label:"", parts:["Ich habe ", 0, " eine Frage an dich."],
+      blanks:[{answer:"nur", explain:"Begrenzte Anzahl → MENGE. NUR."}],
+      translation:"У мене лише одне питання до тебе." },
+    { label:"", parts:["Die Präsentation beginnt ", 0, " um 14 Uhr, nicht früher."],
+      blanks:[{answer:"erst", explain:"Nicht früher als erwartet → ZEIT. ERST."}],
+      translation:"Презентація почнеться лише о 14:00, не раніше." },
+    { label:"", parts:["Wir haben ", 0, " zehn Minuten Zeit für die Diskussion."],
+      blanks:[{answer:"nur", explain:"Begrenzte Menge an Minuten → MENGE. NUR."}],
+      translation:"У нас лише 10 хвилин на обговорення." },
+    { label:"", parts:["Er hat die Nachricht ", 0, " gestern Abend gelesen."],
+      blanks:[{answer:"erst", explain:"Später als gedacht → ZEIT. ERST."}],
+      translation:"Він прочитав повідомлення лише вчора ввечері (не раніше)." },
+    { label:"", parts:["Das Projekt ist ", 0, " zur Hälfte fertig."],
+      blanks:[{answer:"nur", explain:"Begrenzter Umfang → MENGE. NUR."}],
+      translation:"Проєкт готовий лише наполовину." },
+    { label:"", parts:["Sie kommt ", 0, " nächste Woche zurück."],
+      blanks:[{answer:"erst", explain:"Zeitpunkt liegt in der Zukunft → ZEIT. ERST."}],
+      translation:"Вона повернеться лише наступного тижня." },
+    { label:"", parts:["Ich habe ", 0, " zwei E-Mails geschrieben, den Rest schreibe ich morgen."],
+      blanks:[{answer:"nur", explain:"Begrenzte Anzahl → MENGE. NUR."}],
+      translation:"Я написав лише два листи, решту напишу завтра." },
+    { label:"", parts:["Die Ergebnisse liegen uns ", 0, " Montag vor."],
+      blanks:[{answer:"erst", explain:"Später als gewünscht → ZEIT. ERST."}],
+      translation:"Результати будуть у нас лише в понеділок." }
+  ],
+  texts: [
+    { label: "BÜROALLTAG",
+      parts: ["Die Präsentation sollte um neun beginnen, aber sie startet ", 0, " um halb zehn. Wir haben ", 1, " fünf Folien vorbereitet — für den Rest fehlt noch die Freigabe. Das komplette Konzept steht ", 2, " nächste Woche."],
+      blanks: [
+        {answer:"erst", explain:"Später als geplant → das ist ZEIT. ERST."},
+        {answer:"nur", explain:"Eine begrenzte Anzahl an Folien → das ist MENGE. NUR."},
+        {answer:"erst", explain:"Der Zeitpunkt der Fertigstellung liegt in der Zukunft → ERST."}
+      ],
+      translation: "Презентація мала початися о дев'ятій, але вона почнеться лише о пів на десяту. Ми підготували лише п'ять слайдів — на решту ще потрібне узгодження. Повна концепція буде готова лише наступного тижня." },
+    { label: "ERSTES DATE",
+      parts: ["Wir hatten unser erstes Date, aber ich habe ihn ", 0, " eine Stunde gesehen, weil er zur Arbeit musste. Er hat mir ", 1, " am nächsten Tag geschrieben, nicht sofort. Ehrlich gesagt, ich mag ", 2, " Männer mit Humor."],
+      blanks: [
+        {answer:"nur", explain:"Begrenzte Dauer — nur eine Stunde → MENGE. NUR."},
+        {answer:"erst", explain:"Später geschrieben als erwartet → ZEIT. ERST."},
+        {answer:"nur", explain:"Beschränkung auf einen bestimmten Typ → MENGE. NUR."}
+      ],
+      translation: "У нас було перше побачення, але я бачила його лише годину, бо йому треба було на роботу. Він написав мені лише наступного дня, а не одразу. Чесно кажучи, мені подобаються лише чоловіки з почуттям гумору." },
+    { label: "FLUGCHAOS",
+      parts: ["Der Flug sollte um 14 Uhr starten, aber wir heben ", 0, " um 17 Uhr ab. Im Koffer hatte ich ", 1, " ein T-Shirt und eine Jacke dabei — den Rest musste ich vor Ort kaufen. Die Reise beginnt für mich also ", 2, " jetzt richtig."],
+      blanks: [
+        {answer:"erst", explain:"Der Abflug verschiebt sich zeitlich nach hinten → ERST."},
+        {answer:"nur", explain:"Nur zwei Kleidungsstücke — begrenzte Menge → NUR."},
+        {answer:"erst", explain:"Der eigentliche Beginn liegt später als gedacht → ERST."}
+      ],
+      translation: "Рейс мав вилетіти о 14:00, але ми злітаємо лише о 17:00. У валізі в мене було лише футболка та куртка — решту довелося купити на місці. Тож моя подорож насправді почалася лише зараз." },
+    { label: "UMZUG",
+      parts: ["Wir sind schon im neuen Zimmer, aber die Küche wird ", 0, " nächsten Monat fertig. Für die Übergangszeit haben wir ", 1, " eine Kochplatte und einen Wasserkocher. Die Möbel liefern sie uns ", 2, " am Freitag."],
+      blanks: [
+        {answer:"erst", explain:"Zeitpunkt der Fertigstellung liegt in der Zukunft → ERST."},
+        {answer:"nur", explain:"Begrenzte Anzahl an Geräten → NUR."},
+        {answer:"erst", explain:"Lieferung erst zu einem späteren Zeitpunkt → ERST."}
+      ],
+      translation: "Ми вже в новій кімнаті, але кухня буде готова лише наступного місяця. На перехідний період у нас лише плитка та чайник. Меблі нам привезуть лише в п'ятницю." },
+    { label: "FREIBERUFLICH",
+      parts: ["Der Auftrag klang groß, aber am Ende hatte der Kunde ", 0, " ein kleines Budget. Die Rechnung kann ich ", 1, " nach der Abnahme stellen. Für dieses Projekt habe ich ", 2, " zwei Wochen Zeit eingeplant."],
+      blanks: [
+        {answer:"nur", explain:"Begrenztes Budget → MENGE. NUR."},
+        {answer:"erst", explain:"Die Rechnung folgt erst nach einem bestimmten Zeitpunkt → ERST."},
+        {answer:"nur", explain:"Begrenzter Zeitraum von zwei Wochen → MENGE. NUR."}
+      ],
+      translation: "Замовлення звучало масштабно, але зрештою в клієнта був лише невеликий бюджет. Рахунок я можу виставити лише після прийняття роботи. На цей проєкт я запланувала лише два тижні." }
+  ]
+};
+
+const state = {
+  sentences: decks.sentences.map(f => ({ answers: new Array(f.blanks.length).fill(null) })),
+  texts: decks.texts.map(f => ({ answers: new Array(f.blanks.length).fill(null) }))
+};
+const currentIndex = { sentences: 0, texts: 0 };
+let activeDeck = 'sentences';
+let activeBlank = -1;
+
+const tabsEl = document.getElementById('tabs');
+const fileTitle = document.getElementById('fileTitle');
+const fileText = document.getElementById('fileText');
+const translateBtn = document.getElementById('translateBtn');
+const translationEl = document.getElementById('translation');
+const captionEl = document.getElementById('caption');
+const nextBtn = document.getElementById('nextBtn');
+const scorePill = document.getElementById('scorePill');
+const stampRow = document.getElementById('stampRow');
+const resultEl = document.getElementById('result');
+const stage = document.querySelector('.stage');
+const topRow = document.querySelector('.top-row');
+const modeSwitch = document.getElementById('modeSwitch');
+
+const totalBlanksAll =
+  decks.sentences.reduce((s,f)=>s+f.blanks.length,0) +
+  decks.texts.reduce((s,f)=>s+f.blanks.length,0);
+
+function deckScore(key){
+  return state[key].reduce((sum, fs) => sum + fs.answers.filter(a => a && a.correct).length, 0);
+}
+function totalScoreAll(){ return deckScore('sentences') + deckScore('texts'); }
+function isDeckComplete(key){ return state[key].every(fs => fs.answers.every(a => a !== null)); }
+
+function buildTabs(){
+  tabsEl.innerHTML = '';
+  const deck = decks[activeDeck];
+  const meta = deckMeta[activeDeck];
+  deck.forEach((f, i) => {
+    const b = document.createElement('button');
+    b.className = 'tab';
+    b.textContent = meta.unit + ' ' + String(i+1).padStart(2,'0');
+    b.addEventListener('click', () => { currentIndex[activeDeck] = i; renderFile(); });
+    tabsEl.appendChild(b);
+  });
+  updateTabs();
+}
+
+function updateTabs(){
+  [...tabsEl.children].forEach((tab, i) => {
+    tab.classList.toggle('active', i === currentIndex[activeDeck]);
+    const done = state[activeDeck][i].answers.every(a => a !== null);
+    tab.classList.toggle('done', done);
+  });
+}
+
+function updateModeButtons(){
+  [...modeSwitch.children].forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === activeDeck);
+  });
+}
+
+function setMode(mode){
+  activeDeck = mode;
+  updateModeButtons();
+  buildTabs();
+  renderFile();
+}
+
+function renderFile(){
+  const deck = decks[activeDeck];
+  const meta = deckMeta[activeDeck];
+  const idx = currentIndex[activeDeck];
+  const f = deck[idx];
+  const fs = state[activeDeck][idx];
+
+  fileTitle.textContent = meta.unit + ' ' + String(idx+1).padStart(2,'0') + (f.label ? ' — ' + f.label : '');
+
+  let html = '';
+  f.parts.forEach(part => {
+    if (typeof part === 'string'){
+      html += part;
+    } else {
+      const bIdx = part;
+      const ans = fs.answers[bIdx];
+      if (ans){
+        const cls = ans.correct ? 'correct' : 'wrong';
+        const fix = ans.correct ? '' : `<span class="fix">richtig: ${f.blanks[bIdx].answer}</span>`;
+        html += `<span class="blank ${cls}" data-idx="${bIdx}">${ans.choice.toUpperCase()}${fix}</span>`;
+      } else {
+        html += `<span class="blank unanswered" data-idx="${bIdx}">&nbsp;&nbsp;&nbsp;</span>`;
+      }
+    }
+  });
+  fileText.innerHTML = html;
+
+  activeBlank = fs.answers.findIndex(a => a === null);
+  [...fileText.querySelectorAll('.blank')].forEach(span => {
+    const bIdx = Number(span.dataset.idx);
+    span.classList.toggle('focused', bIdx === activeBlank);
+    span.addEventListener('click', () => onBlankClick(bIdx));
+  });
+
+  translationEl.classList.remove('show');
+  translateBtn.textContent = '🇺🇦 Übersetzung anzeigen';
+  translationEl.textContent = f.translation;
+  captionEl.classList.remove('show');
+  captionEl.textContent = '';
+
+  const thisFileDone = fs.answers.every(a => a !== null);
+  const isLastInDeck = idx === deck.length - 1;
+  const otherDeck = activeDeck === 'sentences' ? 'texts' : 'sentences';
+
+  document.querySelectorAll('.stamp-btn').forEach(btn => { btn.disabled = thisFileDone; });
+
+  if (thisFileDone && isLastInDeck && isDeckComplete(otherDeck)){
+    nextBtn.textContent = 'Gesamtergebnis anzeigen →';
+  } else if (thisFileDone && isLastInDeck){
+    nextBtn.textContent = 'Weiter zu ' + deckMeta[otherDeck].name + ' →';
+  } else {
+    nextBtn.textContent = (activeDeck === 'sentences' ? 'Nächster Satz →' : 'Nächste Akte →');
+  }
+  nextBtn.classList.toggle('show', thisFileDone);
+
+  updateTabs();
+  scorePill.textContent = totalScoreAll() + ' / ' + totalBlanksAll;
+}
+
+function onBlankClick(idx){
+  const fs = state[activeDeck][currentIndex[activeDeck]];
+  const f = decks[activeDeck][currentIndex[activeDeck]];
+  if (fs.answers[idx] !== null){
+    captionEl.textContent = f.blanks[idx].explain;
+    captionEl.classList.add('show');
+    return;
+  }
+  activeBlank = idx;
+  [...fileText.querySelectorAll('.blank')].forEach(span => {
+    span.classList.toggle('focused', Number(span.dataset.idx) === idx);
+  });
+}
+
+function onStamp(choice, btnEl){
+  const idx = currentIndex[activeDeck];
+  const fs = state[activeDeck][idx];
+  const f = decks[activeDeck][idx];
+  if (activeBlank === -1) return;
+  const blank = f.blanks[activeBlank];
+  const correct = choice === blank.answer;
+  fs.answers[activeBlank] = { choice, correct };
+
+  btnEl.classList.add('stamping');
+  setTimeout(() => btnEl.classList.remove('stamping'), 350);
+
+  captionEl.textContent = blank.explain;
+  captionEl.classList.add('show');
+
+  renderFile();
+}
+
+document.querySelectorAll('.stamp-btn').forEach(btn => {
+  btn.addEventListener('click', () => onStamp(btn.dataset.choice, btn));
+});
+
+modeSwitch.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => setMode(btn.dataset.mode));
+});
+
+translateBtn.addEventListener('click', () => {
+  const show = translationEl.classList.toggle('show');
+  translateBtn.textContent = show ? '🇺🇦 Übersetzung verbergen' : '🇺🇦 Übersetzung anzeigen';
+});
+
+nextBtn.addEventListener('click', () => {
+  const deck = decks[activeDeck];
+  const idx = currentIndex[activeDeck];
+  const isLastInDeck = idx === deck.length - 1;
+  const otherDeck = activeDeck === 'sentences' ? 'texts' : 'sentences';
+
+  if (isLastInDeck && isDeckComplete(otherDeck)){
+    showResult();
+  } else if (isLastInDeck){
+    setMode(otherDeck);
+  } else {
+    currentIndex[activeDeck]++;
+    renderFile();
+  }
+});
+
+function showResult(){
+  stage.style.display = 'none';
+  modeSwitch.style.display = 'none';
+  topRow.style.display = 'none';
+  resultEl.classList.add('show');
+  const score = totalScoreAll();
+  document.getElementById('resultScore').textContent = score + ' / ' + totalBlanksAll;
+  let rank;
+  if (score === totalBlanksAll) rank = "Chef-Ermittler:in — perfekte Quote. Erst/Nur läuft jetzt automatisch.";
+  else if (score >= totalBlanksAll * 0.75) rank = "Erfahrene Kontrolleurin — die Logik sitzt, nur Feinschliff fehlt noch.";
+  else if (score >= totalBlanksAll * 0.5) rank = "Kontrolleurin in Ausbildung — die Fälle oben nochmal genau lesen.";
+  else rank = "Zurück zur Schulung — kein Drama, einfach nochmal durch die Fälle.";
+  document.getElementById('resultRank').textContent = rank;
+}
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  state.sentences.forEach(fs => fs.answers.fill(null));
+  state.texts.forEach(fs => fs.answers.fill(null));
+  currentIndex.sentences = 0;
+  currentIndex.texts = 0;
+  activeDeck = 'sentences';
+  stage.style.display = 'block';
+  modeSwitch.style.display = 'flex';
+  topRow.style.display = 'flex';
+  resultEl.classList.remove('show');
+  updateModeButtons();
+  buildTabs();
+  renderFile();
+});
+
+/* privacy modal */
+const privacyOverlay = document.getElementById('privacyOverlay');
+document.getElementById('privacyOpenBtn').addEventListener('click', () => privacyOverlay.classList.add('show'));
+document.getElementById('privacyCloseBtn').addEventListener('click', () => privacyOverlay.classList.remove('show'));
+privacyOverlay.addEventListener('click', (e) => { if (e.target === privacyOverlay) privacyOverlay.classList.remove('show'); });
+
+/* theory modal */
+const theoryOverlay = document.getElementById('theoryOverlay');
+document.getElementById('theoryOpenBtn').addEventListener('click', () => theoryOverlay.classList.add('show'));
+document.getElementById('theoryCloseBtn').addEventListener('click', () => theoryOverlay.classList.remove('show'));
+theoryOverlay.addEventListener('click', (e) => { if (e.target === theoryOverlay) theoryOverlay.classList.remove('show'); });
+
+/* PWA: register service worker (only works over https / localhost, silently no-ops otherwise) */
+if ('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').catch(() => { /* not available e.g. file:// */ });
+  });
+}
+
+updateModeButtons();
+buildTabs();
+renderFile();
+</script>
+
+</body>
+</html>

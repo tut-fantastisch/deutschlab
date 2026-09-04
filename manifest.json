@@ -1,0 +1,19 @@
+{
+  "name": "Grenzkontrolle: Erst oder Nur — Deutsch-Training mit Ella",
+  "short_name": "Erst/Nur",
+  "description": "Übungstool: erst oder nur? Zeit oder Menge — Einzelsätze und Kurztexte mit sofortigem Feedback.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "erst-nur-grenzkontrolle",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#120D09",
+  "theme_color": "#120D09",
+  "lang": "de",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
