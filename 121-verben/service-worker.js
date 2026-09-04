@@ -1,7 +1,7 @@
 // ============================================================
 // Verb-Café — Service Worker für Offline-Verfügbarkeit
 // ============================================================
-const CACHE_NAME = "verbcafe-v8";
+const CACHE_NAME = "verbcafe-v16";
 
 const URLS_TO_CACHE = [
   "./",
@@ -27,16 +27,22 @@ const URLS_TO_CACHE = [
   "./fonts/Kalam-Bold.woff2"
 ];
 
-// Erstinstallation: alle Kern-Dateien in den Cache legen
+// Erstinstallation: jede Datei einzeln cachen — fehlt eine (z.B. weil der
+// fonts/-Ordner noch nicht komplett hochgeladen wurde), scheitert nur DIE
+// eine, der Rest (index.html, manifest, icons, übrige Fonts) wird trotzdem
+// gecacht. Das alte cache.addAll() war alles-oder-nichts: eine einzige
+// fehlende Datei hat den KOMPLETTEN Cache leer bleiben lassen.
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.addAll(URLS_TO_CACHE))
-      .catch(() => {
-        // z.B. wenn Google Fonts beim Install-Zeitpunkt nicht erreichbar ist —
-        // Rest wird trotzdem versucht; fetch-Handler cacht später nach.
-      })
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        URLS_TO_CACHE.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn("[SW] Konnte nicht gecacht werden (Datei fehlt online?):", url, err);
+          })
+        )
+      )
+    )
   );
   self.skipWaiting(); // neue Version sofort aktiv, sobald alle Tabs geschlossen/neu geladen sind
 });
