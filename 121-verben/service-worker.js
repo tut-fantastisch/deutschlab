@@ -1,7 +1,7 @@
 // ============================================================
 // Verb-Café — Service Worker für Offline-Verfügbarkeit
 // ============================================================
-const CACHE_NAME = "verbcafe-v17";
+const CACHE_NAME = "verbcafe-v18";
 
 const URLS_TO_CACHE = [
   "./",
