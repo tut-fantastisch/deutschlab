@@ -1,6 +1,6 @@
 // Deutsch-Training mit Ella — Erst/Nur Grenzkontrolle
 // Cache-Version bei jeder inhaltlichen Änderung an index.html erhöhen (v1 -> v2 -> ...)
-const CACHE_NAME = 'erst-nur-v1';
+const CACHE_NAME = 'erst-nur-v2';
 const ASSETS = [
   './',
   './index.html',
