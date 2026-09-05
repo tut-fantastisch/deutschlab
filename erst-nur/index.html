@@ -88,7 +88,7 @@
   .theory-btn{
     margin: 20px auto 0; display:inline-flex; align-items:center; gap:8px;
     background: rgba(210,162,76,0.1); border: 1.5px solid rgba(210,162,76,0.45); color: var(--gold);
-    font-family: var(--f-display); font-size:0.82rem; letter-spacing:0.03em;
+    font-family: var(--f-display); font-size:0.95rem; letter-spacing:0.03em;
     padding: 11px 20px; border-radius: 10px; cursor:pointer; transition: all 0.15s ease;
   }
   .theory-btn:hover{ background: var(--gold); color:#241A0C; }
@@ -319,6 +319,18 @@
   .nur-card .rex .de b{ color: var(--nur); }
   .rule-card .rex .ua{ color:#5A4E3A; font-size:0.88rem; font-style:italic; margin-top:2px; }
 
+  .theory-table{
+    width:100%; border-collapse:collapse; margin-top:12px; font-family: var(--f-body);
+  }
+  .theory-table th, .theory-table td{
+    border: 1px solid rgba(43,32,19,0.2); padding: 9px 11px; text-align:left; vertical-align:top; font-size:0.85rem;
+  }
+  .theory-table th{
+    background: rgba(0,0,0,0.04); font-family: var(--f-alt); font-size:0.66rem;
+    letter-spacing:0.05em; text-transform:uppercase; color:#5A4E3A;
+  }
+  .theory-table-note{ color:#5A4E3A; font-style:italic; font-size:0.82rem; }
+
 </style>
 </head>
 <body>
@@ -377,13 +389,13 @@
 <div class="site-footer">
   <div class="footer-top">
     <div class="footer-social">
-      <a class="social-btn" href="#" title="https://t.me/+_r0zgXrkbPZkNjAy" aria-label="Telegram">
+      <a class="social-btn" href="https://t.me/+_r0zgXrkbPZkNjAy" target="_blank" rel="noopener" aria-label="Telegram">
         <svg viewBox="0 0 24 24"><path d="M21.94 4.6 18.6 20.18c-.25 1.1-.9 1.37-1.83.86l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.16 9.39-8.49c.41-.36-.09-.56-.63-.2L6.1 12.9 1.02 11.3c-1.1-.34-1.12-1.1.23-1.63L20.53 3.13c.92-.34 1.72.22 1.41 1.47z"/></svg>
       </a>
-      <a class="social-btn" href="#" title="https://www.instagram.com/tut_fantastisch" aria-label="Instagram">
+      <a class="social-btn" href="https://instagram.com/tut_fantastisch" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.5.5.87 1.06 1.15 1.76.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.76 4.9 4.9 0 0 1-1.76 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.76-1.15A4.9 4.9 0 0 1 2.53 18.4c-.25-.64-.42-1.37-.47-2.43C2.01 14.91 2 14.57 2 11.85s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.28-.7.65-1.26 1.15-1.76a4.9 4.9 0 0 1 1.76-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 1.8c-2.67 0-2.99.01-4.04.06-.87.04-1.34.18-1.65.3-.42.16-.71.35-1.02.66-.31.31-.5.6-.66 1.02-.12.31-.26.78-.3 1.65-.05 1.05-.06 1.37-.06 4.04s.01 2.99.06 4.04c.04.87.18 1.34.3 1.65.16.42.35.71.66 1.02.31.31.6.5 1.02.66.31.12.78.26 1.65.3 1.05.05 1.37.06 4.04.06s2.99-.01 4.04-.06c.87-.04 1.34-.18 1.65-.3.42-.16.71-.35 1.02-.66.31-.31.5-.6.66-1.02.12-.31.26-.78.3-1.65.05-1.05.06-1.37.06-4.04s-.01-2.99-.06-4.04c-.04-.87-.18-1.34-.3-1.65a2.75 2.75 0 0 0-.66-1.02 2.75 2.75 0 0 0-1.02-.66c-.31-.12-.78-.26-1.65-.3-1.05-.05-1.37-.06-4.04-.06zm0 3.5a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 1.8a2.9 2.9 0 1 0 0 5.8 2.9 2.9 0 0 0 0-5.8zm5.88-2a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>
       </a>
-      <a class="social-btn" href="#" title="https://threads.net/@tut_fantastisch" aria-label="Threads">
+      <a class="social-btn" href="https://www.threads.net/@tut_fantastisch" target="_blank" rel="noopener" aria-label="Threads">
         <svg viewBox="0 0 24 24"><path d="M16.5 11.2c-.15-2.9-1.7-4.6-4.4-4.6-1.63 0-3 .68-3.85 1.87l1.36.93c.5-.72 1.24-1.14 2.34-1.14 1.5 0 2.4.87 2.6 2.36-.7-.12-1.5-.17-2.35-.13-2.4.12-3.94 1.4-3.83 3.28.1 1.87 1.85 2.98 3.98 2.87 1.72-.09 2.9-.9 3.5-2.02.46-.86.6-1.94.55-3.06.94.42 1.63 1.03 2 1.85.55 1.2.3 3.13-1.5 4.55-1.55 1.23-3.44 1.77-5.86 1.79-2.68.02-4.75-.85-6.14-2.55C4.5 16 3.83 13.9 3.8 11.15c.03-2.75.7-4.85 2.1-6.4C7.3 3.05 9.37 2.18 12.05 2.16c2.7.02 4.75.9 6.1 2.6.68.85 1.18 1.9 1.5 3.13l-1.65.4c-.26-.98-.65-1.8-1.15-2.42-1-1.25-2.55-1.9-4.75-1.92-2.18.02-3.7.68-4.87 1.94-1.15 1.25-1.7 3.02-1.72 5.26.02 2.23.6 3.98 1.77 5.2 1.18 1.24 2.72 1.87 4.86 1.86 2.1-.02 3.6-.46 4.72-1.35 1.1-.87 1.2-1.9.95-2.46-.17-.4-.5-.72-.98-.98-.02.6-.12 1.13-.32 1.6-.4.9-1.2 1.4-2.35 1.46-1.2.06-2.05-.46-2.1-1.32-.05-.87.75-1.5 2.13-1.57.7-.03 1.4.02 2.06.15z"/></svg>
       </a>
     </div>
@@ -400,7 +412,7 @@
 
     <h3>Datenschutzhinweis</h3>
     <span class="lang-tag">DEUTSCH</span>
-    <p>Verantwortlich für dieses Angebot ist Deutsch-Training mit Ella (Kontakt: <a href="mailto:" title="ella.sprachcoach.de@gmail.com">ella.sprachcoach.de@gmail.com</a>). Diese Seite ist ein kostenloses, statisches Lerntool ohne Registrierung und ohne Erhebung personenbezogener Daten durch den Betreiber.</p>
+    <p>Verantwortlich für dieses Angebot ist Deutsch-Training mit Ella (Kontakt: <a href="mailto:Ella.sprachcoach.de@gmail.com">Ella.sprachcoach.de(at)gmail.com</a>). Diese Seite ist ein kostenloses, statisches Lerntool ohne Registrierung und ohne Erhebung personenbezogener Daten durch den Betreiber.</p>
     <p><strong>Hosting:</strong> Die Seite wird über GitHub Pages ausgeliefert. Beim Aufruf verarbeitet GitHub automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum/Uhrzeit, aufgerufene Datei, Browsertyp), um die Seite sicher bereitzustellen. Diese Verarbeitung liegt im Verantwortungsbereich von GitHub Inc.; Details dazu im GitHub Privacy Statement.</p>
     <p><strong>Cookies &amp; Tracking:</strong> Diese Seite selbst setzt keine Cookies und verwendet keine Analyse- oder Trackingdienste.</p>
     <p><strong>Offline-Speicherung:</strong> Für die Installation als App speichert dein Browser (Service Worker) die statischen Seitendateien lokal zwischen. Dabei werden keine personenbezogenen oder eingegebenen Daten gespeichert.</p>
@@ -409,7 +421,7 @@
 
     <h3>Повідомлення про конфіденційність</h3>
     <span class="lang-tag">УКРАЇНСЬКА</span>
-    <p>Відповідальна за цей ресурс — Deutsch-Training mit Ella (контакт: <a href="mailto:" title="ella.sprachcoach.de@gmail.com">ella.sprachcoach.de@gmail.com</a>). Ця сторінка — безкоштовний статичний навчальний інструмент без реєстрації та без збору персональних даних з боку власника.</p>
+    <p>Відповідальна за цей ресурс — Deutsch-Training mit Ella (контакт: <a href="mailto:Ella.sprachcoach.de@gmail.com">Ella.sprachcoach.de(at)gmail.com</a>). Ця сторінка — безкоштовний статичний навчальний інструмент без реєстрації та без збору персональних даних з боку власника.</p>
     <p><strong>Хостинг:</strong> сторінка розміщена на GitHub Pages. При зверненні GitHub автоматично обробляє технічні дані доступу (IP-адресу, дату/час, запитаний файл, тип браузера) для безпечної роботи сервісу. Ця обробка відбувається в межах відповідальності GitHub Inc.; деталі — у GitHub Privacy Statement.</p>
     <p><strong>Кукі та трекінг:</strong> сама сторінка не встановлює кукі та не використовує аналітичні чи трекінг-сервіси.</p>
     <p><strong>Офлайн-збереження:</strong> для встановлення як застосунку браузер (Service Worker) локально кешує статичні файли сторінки. Персональні чи введені дані при цьому не зберігаються.</p>
@@ -422,12 +434,12 @@
   <div class="privacy-box">
     <button class="privacy-close" id="theoryCloseBtn" aria-label="Schließen">✕</button>
     <h3 style="margin-top:0;">Erst oder nur? — die Logik in Kürze</h3>
-    <p class="theory-intro">Beide werden oft mit „лише" übersetzt — aber sie beantworten unterschiedliche Fragen. <strong>ERST</strong> fragt: <em>wann?</em> <strong>NUR</strong> fragt: <em>wie viel?</em></p>
+    <p class="theory-intro">Beide bedeuten oft „лише" — aber sie haben ganz unterschiedliche Aufgaben:</p>
 
     <div class="rule-card erst-card">
       <span class="rlabel">📍 ERST</span>
-      <div class="rtitle">Zeit und Erwartung</div>
-      <div class="rsub">„nicht früher als …" — es geht darum, wann etwas passiert.</div>
+      <div class="rtitle">Ein Zeit-Wechsel (Vorher nein, ab jetzt ja)</div>
+      <div class="rsub">Fokus: der Moment, ab dem sich etwas ändert. Es drückt aus, dass es nicht früher passiert ist oder passiert.<br>Denkweise: es gibt ein Vorher und ein Nachher.</div>
 
       <div class="rex">
         <div class="de">Der Vertrag ist <b>ERST</b> ab nächstem Monat gültig.</div>
@@ -445,8 +457,8 @@
 
     <div class="rule-card nur-card">
       <span class="rlabel">📍 NUR</span>
-      <div class="rtitle">Menge und Beschränkung</div>
-      <div class="rsub">„nur das und nichts weiter" — es geht um den Umfang, nicht um den Zeitpunkt.</div>
+      <div class="rtitle">Ein Türsteher (Das hier ja, alles andere nein)</div>
+      <div class="rsub">Fokus: es schließt alle Alternativen aus. Das kann eine Zahl sein, aber genauso ein bestimmter Tag, eine Person oder ein Grund.<br>Denkweise: es bleibt ausschließlich bei dieser einen Sache.</div>
 
       <div class="rex">
         <div class="de">Ich habe <b>NUR</b> eine Stunde Zeit heute.</div>
@@ -462,7 +474,28 @@
       </div>
     </div>
 
-    <p style="margin-top:16px; font-size:0.85rem; color:#5A4E3A;"><strong>Schnelltest:</strong> Lässt sich die Lücke mit „wann?" beantworten → ERST. Lässt sie sich mit „wie viel / wie lange?" beantworten → NUR.</p>
+    <div class="rule-card" style="border-left:6px solid var(--gold);">
+      <span class="rlabel" style="background:var(--gold); color:#241A0C;">⚡ DER SCHNELLTEST</span>
+      <table class="theory-table">
+        <thead>
+          <tr><th>Situation</th><th>Welches Wort?</th><th>Beispiel</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>„Aha, vorher war es anders!"</td>
+            <td><b style="color:var(--erst);">ERST</b></td>
+            <td>Ich habe <b style="color:var(--erst);">erst</b> heute Zeit.<br><span class="theory-table-note">(Gestern hatte ich keine Zeit.)</span></td>
+          </tr>
+          <tr>
+            <td>„Nur dieser eine Fall zählt!"</td>
+            <td><b style="color:var(--nur);">NUR</b></td>
+            <td>Ich habe <b style="color:var(--nur);">nur</b> heute Zeit.<br><span class="theory-table-note">(Morgen und übermorgen habe ich keine Zeit.)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:16px; font-size:0.85rem; color:#5A4E3A;"><strong>Kurz gesagt:</strong> ERST schaut auf den Zeitverlauf (wann die Veränderung passiert). NUR grenzt ab (was übrig bleibt).</p>
   </div>
 </div>
 
