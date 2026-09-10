@@ -21,16 +21,21 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tut-fantastisch.github.io/deutschlab/121-verben/">
 <meta property="og:title" content="☕️ Verb-Café">
-  <meta property="og:image" content="https://tut-fantastisch.github.io/deutschlab/121-verben/icon-192.png">
 <meta property="og:description" content="121 starke (unregelmäßige) deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten. Неправильні дієслова у німецькій короче 🤓">
+<meta property="og:image" content="https://tut-fantastisch.github.io/deutschlab/121-verben/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Verb-Café — 121 starke deutsche Verben, serviert nach Vokalwechsel">
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta property="og:site_name" content="Deutsch-Training mit Ella">
 
 <!-- Twitter Card (Summary ohne Bild) -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Verb-Café — Deutsch-Training mit Ella">
 <meta name="twitter:description" content="121 starke und unregelmäßige deutsche Verben, gruppiert nach Vokalwechsel. Flipkarten mit Präteritum, Partizip II, Perfekt und ukrainischer Übersetzung.">
+<meta name="twitter:image" content="https://tut-fantastisch.github.io/deutschlab/121-verben/og-image.png">
 
 <!-- Selbst gehostete Schriften statt Google-Fonts-CDN (Datenschutz: keine IP-Übertragung an Google) -->
 <style>
@@ -1973,7 +1978,7 @@ const GROUPS = [
   {
     "id": "a-ie-a",
     "name": "Fallen-Serie",
-    "pattern": "a/ä → ie/i → a",
+    "pattern": "a/ä/au → ie/i → a/au",
     "verbs": [
       {
         "inf": "fallen",
@@ -2569,29 +2574,157 @@ prevBtn.addEventListener("click", (e) => { e.stopPropagation(); goPrev(); });
 nextBtn.addEventListener("click", (e) => { e.stopPropagation(); goNext(); });
 
 // ===== Aussprache: Infinitiv, Präteritum & Partizip II nacheinander vorlesen =====
+// Engine-Logik übernommen aus einem anderen, bereits bewährten Tool:
+// entscheidend ist voiceParams() — pro Stimmentyp eigene rate/pitch, statt
+// einer pauschalen rate für alle. Genau diese Kombi (feste rate 0.85 +
+// kein explizites pitch) hatte bei Apples "Compact"-Stimme den verzerrten,
+// zu hohen Klang verursacht.
 let speakToken = 0;
+let germanVoice = null;
+let voicesReady = false;
+let voiceLoadAttempts = 0;
+const MAX_VOICE_ATTEMPTS = 40;
+
+const ua = navigator.userAgent;
+const isIOSDevice = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+const isSafariEngine = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS|OPR|Edg/.test(ua);
+const isBlinkEngine = !!window.chrome || /OPR|Edg/.test(ua);
+
+function voiceType(v){
+  if (!v) return "other";
+  const n = v.name.toLowerCase();
+  if (/enhanced|premium|neural/i.test(v.name) && /^de/i.test(v.lang)) return "apple-premium";
+  if (v.localService && (isIOSDevice || isSafariEngine) && !n.includes("google") && !n.includes("microsoft")) return "apple-standard";
+  if (n.includes("google")) return "google";
+  if (n.includes("microsoft") || /hedda|stefan|katja/i.test(v.name)) return "microsoft";
+  return "other";
+}
+
+function voiceParams(v){
+  switch (voiceType(v)) {
+    case "apple-premium": return { rate: 1.0, pitch: 1.0 };
+    case "apple-standard": return { rate: 0.92, pitch: 1.0 }; // nicht 0.85 — zu langsam macht Apples Compact-Stimme verzerrt/hoch
+    case "google": return { rate: 0.88, pitch: 1.0 };
+    case "microsoft": return { rate: 0.90, pitch: 1.0 };
+    default: return { rate: 0.90, pitch: 1.0 };
+  }
+}
+
+function pickGermanVoice(voices){
+  if (!voices.length) return null;
+  const PREFERRED = [
+    "Yannick", "Jana", "Markus", "Anna (Enhanced)", "Petra (Enhanced)",
+    "Google Deutsch", "Google Deutsch (Deutschland)",
+    "Microsoft Katja Online (Natural) - German (Germany)",
+    "Microsoft Conrad Online (Natural) - German (Germany)",
+    "Microsoft Katja - German (Germany)", "Microsoft Stefan - German (Germany)",
+    "Microsoft Hedda - German (Germany)", "Anna", "Petra"
+  ];
+  for (const name of PREFERRED) {
+    const v = voices.find(v => v.name === name);
+    if (v) return v;
+  }
+  const de = voices.filter(v => /^de/i.test(v.lang));
+  if (!de.length) return voices.find(v => v.localService) || voices[0] || null;
+  let v;
+  v = de.find(v => /enhanced|premium|neural/i.test(v.name)); if (v) return v;
+  v = de.find(v => /google/i.test(v.name)); if (v) return v;
+  v = de.find(v => /microsoft/i.test(v.name)); if (v) return v;
+  v = de.find(v => v.lang === "de-DE" && v.localService); if (v) return v;
+  v = de.find(v => v.lang === "de-DE"); if (v) return v;
+  return de[0];
+}
+
+function tryLoadVoices(){
+  if (!("speechSynthesis" in window)) return;
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length > 0) {
+    germanVoice = pickGermanVoice(voices);
+    voicesReady = true;
+    return;
+  }
+  voiceLoadAttempts++;
+  if (voiceLoadAttempts < MAX_VOICE_ATTEMPTS) {
+    setTimeout(tryLoadVoices, 150); // Stimmenliste lädt bei Safari/iOS teils erst nach ein paar hundert ms
+  } else {
+    voicesReady = true; // aufgeben, ohne Stimme weitermachen (Browser nimmt dann Systemstandard)
+  }
+}
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => { if (!voicesReady) tryLoadVoices(); };
+  tryLoadVoices();
+  if (isBlinkEngine) {
+    // Bekannter Chrome-Bug: speechSynthesis "friert ein" bei längeren/mehreren
+    // Utterances ohne Interaktion — regelmäßiges pause/resume hält sie am Leben.
+    setInterval(() => {
+      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+      }
+    }, 14000);
+  }
+}
+
+let speechWatchdog = null;
+function startSpeechWatchdog(){
+  clearTimeout(speechWatchdog);
+  speechWatchdog = setTimeout(() => {
+    if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+  }, 7000);
+}
+
 function speakVerbForms(verb){
   if (!("speechSynthesis" in window)) return;
-  window.speechSynthesis.cancel();
   const myToken = ++speakToken;
-  audioBtn.classList.add("speaking");
 
   const [, ...partWords] = verb.part.split(" ");
   const partizip = partWords.join(" ");
   const forms = [verb.inf, verb.pret, partizip];
 
-  let i = 0;
-  function speakNext(){
+  function speakOne(word, onDone){
+    const p = voiceParams(germanVoice);
+    const utter = new SpeechSynthesisUtterance(word);
+    utter.lang = "de-DE";
+    if (germanVoice) { try { utter.voice = germanVoice; } catch (e) {} }
+    utter.rate = p.rate;
+    utter.pitch = p.pitch;
+    utter.volume = 1.0;
+    utter.onend = () => { clearTimeout(speechWatchdog); onDone(); };
+    utter.onerror = (e) => {
+      clearTimeout(speechWatchdog);
+      if (e.error && e.error !== "interrupted" && e.error !== "canceled") console.warn("[Speech] error:", e.error, word);
+      onDone(); // Wort überspringen statt komplett abzubrechen
+    };
+    try {
+      window.speechSynthesis.speak(utter);
+      if (isBlinkEngine) startSpeechWatchdog();
+    } catch (err) {
+      console.warn("[Speech] speak() threw:", err);
+      onDone();
+    }
+  }
+
+  function playNext(i){
     if (myToken !== speakToken) return; // wurde von einer neuen Anfrage überholt
     if (i >= forms.length) { audioBtn.classList.remove("speaking"); return; }
-    const utter = new SpeechSynthesisUtterance(forms[i]);
-    utter.lang = "de-DE";
-    utter.rate = 0.85;
-    utter.onend = () => { i++; setTimeout(speakNext, 220); };
-    utter.onerror = () => { audioBtn.classList.remove("speaking"); };
-    window.speechSynthesis.speak(utter);
+    speakOne(forms[i], () => setTimeout(() => playNext(i + 1), 220));
   }
-  speakNext();
+
+  function begin(){
+    window.speechSynthesis.cancel();
+    audioBtn.classList.add("speaking");
+    playNext(0);
+  }
+
+  // Läuft schon etwas, erst sauber abbrechen lassen (Timing je nach Engine
+  // unterschiedlich toleriert — Chrome/Blink braucht etwas mehr Luft).
+  if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+    window.speechSynthesis.cancel();
+    setTimeout(begin, isBlinkEngine ? 100 : 30);
+  } else {
+    begin();
+  }
 }
 
 audioBtn.addEventListener("click", (e) => {
